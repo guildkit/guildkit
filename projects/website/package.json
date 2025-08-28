@@ -2,8 +2,12 @@
   "name": "accessible-astro-starter",
   "description": "An Accessible Starter Theme for Astro including several accessibility features and tools to help you build faster.",
   "version": "4.1.1",
-  "author": "Incluud",
-  "license": "MIT",
+  "license": "UNLICENSED",
+  "author": "Jumpei Ogawa (https://phanective.org)",
+  "contributors": [
+    "Incluud (https://incluud.dev)",
+    "Other accessible-astro-starter contributors before 2025/07/05 (https://github.com/incluud/accessible-astro-starter/graphs/contributors)"
+  ],
   "type": "module",
   "homepage": "https://accessible-astro-starter.incluud.dev/",
   "scripts": {

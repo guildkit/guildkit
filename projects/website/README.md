@@ -102,3 +102,9 @@ We want to express our heartfelt gratitude to everyone who contributes to making
 Together, we're not just building documentation or components – we're creating a more inclusive and accessible web for everyone. Every contribution, whether it's code, documentation, bug reports, or feedback, helps move us closer to this goal. ✨
 
 Remember: Accessibility is not a feature, it's a fundamental right. Thank you for being part of this journey!
+
+## Copyright & Credits
+
+Copyright &copy; Jumpei Ogawa all rights reserved
+
+This website is based on [accessible-astro-starter](https://github.com/incluud/accessible-astro-starter) licensed under [MIT](./docs/legal/LICENSE-accessible-astro-starter.txt).
