@@ -10,9 +10,9 @@
       "dom"
     ],
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@assets/*": ["src/assets/*"]
+      "@components/*": [ "src/components/*" ],
+      "@layouts/*": [ "src/layouts/*" ],
+      "@assets/*": [ "src/assets/*" ]
     }
   }
 }

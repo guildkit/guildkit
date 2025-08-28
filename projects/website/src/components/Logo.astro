@@ -1,21 +1,20 @@
 ---
-import { Image } from 'astro:assets'
-import logo from '../assets/img/logo.svg'
+import { Image } from "astro:assets";
+import logo from "../assets/img/logo.svg";
 
 /**
  * Logo Component
- *
  * @description Logo description
  */
-interface Props {
+type Props = {
   /**
    * Whether to load the image eagerly or lazily
    * @default 'eager'
    */
-  loading?: 'eager' | 'lazy'
-}
+  loading?: "eager" | "lazy";
+};
 
-const { loading = 'eager' }: Props = Astro.props
+const { loading = "eager" }: Props = Astro.props;
 ---
 
 <a href="/" class="flex items-center gap-2 !no-underline">

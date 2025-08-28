@@ -1,26 +1,25 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Icon } from "astro-icon/components";
 
 /**
  * ExternalLink Component
- *
  * @description ExternalLink description
  */
-interface Props {
+type Props = {
   /**
    * Additional classes to apply to the ExternalLink
    */
-  class?: string
+  class?: string;
   /**
    * The URL to link to
    */
-  href: string
-}
+  href: string;
+};
 
-const { class: className, href } = Astro.props
+const { class: className, href } = Astro.props;
 ---
 
-<a href={href} class:list={[className, 'external-link']} target="_blank" rel="noopener noreferrer">
+<a href={href} class:list={[ className, "external-link" ]} target="_blank" rel="noopener noreferrer">
   <slot />
   <Icon name="lucide:external-link" />
   <span class="sr-only">Opens in a new tab</span>

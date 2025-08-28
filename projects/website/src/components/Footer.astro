@@ -1,14 +1,13 @@
 ---
-import CallToAction from './CallToAction.astro'
-import ExternalLink from './ExternalLink.astro'
-import Logo from './Logo.astro'
+import CallToAction from "./CallToAction.astro";
+import ExternalLink from "./ExternalLink.astro";
+import Logo from "./Logo.astro";
 
 /**
  * Footer Component
- *
  * @description A component that displays the footer of the website
  */
-const currentYear = new Date().getFullYear()
+const currentYear = new Date().getFullYear();
 ---
 
 <footer>
@@ -45,13 +44,13 @@ const currentYear = new Date().getFullYear()
             <ExternalLink href="https://web.dev/articles/focus">Focus Management</ExternalLink>
           </li>
           <li>
-            <ExternalLink href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML"
-              >Semantic HTML Guide</ExternalLink
+            <ExternalLink href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML">Semantic HTML Guide
+            </ExternalLink
             >
           </li>
           <li>
-            <ExternalLink href="https://www.tpgi.com/screen-reader-user-survey-results/"
-              >Screen Reader Survey</ExternalLink
+            <ExternalLink href="https://www.tpgi.com/screen-reader-user-survey-results/">Screen Reader Survey
+            </ExternalLink
             >
           </li>
         </ul>
@@ -59,10 +58,7 @@ const currentYear = new Date().getFullYear()
       <div class="flex flex-col gap-4">
         <Logo loading="lazy" />
         <p class="leading-[1.75]">
-          Tip: always test for screen reader support. Press <kbd>⌘</kbd> + <kbd>F5</kbd> to start VoiceOver or <kbd
-            >Win</kbd
-          >
-          + <kbd>Ctrl</kbd> + <kbd>Enter</kbd> for Narrator.
+          Tip: always test for screen reader support. Press <kbd>⌘</kbd> + <kbd>F5</kbd> to start VoiceOver or <kbd>Win</kbd> + <kbd>Ctrl</kbd> + <kbd>Enter</kbd> for Narrator.
         </p>
       </div>
     </div>
@@ -74,7 +70,9 @@ const currentYear = new Date().getFullYear()
       </p>
       <p>
         Made with ❤️ by <a href="https://github.com/markteekman">Mark Teekman</a>. Part of <a
-          href="https://www.incluud.dev">Incluud</a
+          href="https://www.incluud.dev"
+        >Incluud
+        </a
         >.
       </p>
     </div>

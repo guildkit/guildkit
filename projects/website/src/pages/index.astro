@@ -1,11 +1,11 @@
 ---
-import DefaultLayout from '@layouts/DefaultLayout.astro'
-import Hero from '@components/Hero.astro'
-import Feature from '@components/Feature.astro'
-import Counter from '@components/Counter.astro'
-import ContentMedia from '@components/ContentMedia.astro'
-import ExternalLink from '@components/ExternalLink.astro'
-import { Accordion, AccordionItem, Avatar, AvatarGroup } from 'accessible-astro-components'
+import { Accordion, AccordionItem, Avatar, AvatarGroup } from "accessible-astro-components";
+import DefaultLayout from "@layouts/DefaultLayout.astro";
+import Hero from "@components/Hero.astro";
+import Feature from "@components/Feature.astro";
+import Counter from "@components/Counter.astro";
+import ContentMedia from "@components/ContentMedia.astro";
+import ExternalLink from "@components/ExternalLink.astro";
 ---
 
 <DefaultLayout title="Home">
@@ -50,9 +50,7 @@ import { Accordion, AccordionItem, Avatar, AvatarGroup } from 'accessible-astro-
     <h2>Accessible components</h2>
     <p class="text-2xl">
       This theme provides plenty of tried and tested Accessible Astro Components. Some are native to this theme and a
-      lot of others are integrated using a <ExternalLink href="https://github.com/incluud/accessible-astro-components"
-        >separate package</ExternalLink
-      >. They'll get you up and running in building an accessible solution for your visitors.
+      lot of others are integrated using a <ExternalLink href="https://github.com/incluud/accessible-astro-components">separate package</ExternalLink>. They'll get you up and running in building an accessible solution for your visitors.
     </p>
   </ContentMedia>
   <ContentMedia imgSrc="/wcag-compliant.webp" reverseImg={true}>
@@ -112,9 +110,7 @@ import { Accordion, AccordionItem, Avatar, AvatarGroup } from 'accessible-astro-
               To make custom components accessible, focus on these key aspects: use semantic HTML where possible,
               implement proper keyboard support, add appropriate ARIA attributes, manage focus when needed, and ensure
               adequate color contrast. Always test with screen readers and keyboard navigation. Consider using
-              established design patterns from the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/"
-                >ARIA Authoring Practices Guide</a
-              >.
+              established design patterns from the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/">ARIA Authoring Practices Guide</a>.
             </p>
           </AccordionItem>
         </Accordion>
