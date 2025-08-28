@@ -9,6 +9,9 @@
       "esnext",
       "dom"
     ],
+    "types": [
+      "@cloudflare/workers-types"
+    ],
     "paths": {
       "@components/*": [ "src/components/*" ],
       "@layouts/*": [ "src/layouts/*" ],

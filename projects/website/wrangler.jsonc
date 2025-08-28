@@ -1,0 +1,34 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  "name": "guildkit-website",
+  "compatibility_date": "2025-09-25",
+  "compatibility_flags": [ "nodejs_compat" ],
+  "placement": {
+    "mode": "smart"
+  },
+
+  "assets": {
+    "directory": "./dist"
+  },
+
+  // Runtime environment variables
+  "env": {
+    "production": {
+      "vars": {
+        "NODE_ENV": "production",
+        "SERVER_ENV": "production"
+      },
+    },
+    "staging": {
+      "vars": {
+        "SERVER_ENV": "staging"
+      }
+    }
+  },
+
+  // Build environment variables
+  "vars": {
+    "NODE_VERSION": 24
+  }
+}
