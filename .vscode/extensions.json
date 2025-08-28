@@ -3,6 +3,7 @@
     "dbaeumer.vscode-eslint",
     "EditorConfig.EditorConfig",
 
+    "astro-build.astro-vscode",
     "csstools.postcss",
     "bradlc.vscode-tailwindcss",
     "Prisma.prisma",
