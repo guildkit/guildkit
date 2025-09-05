@@ -34,7 +34,14 @@ const generateCurrencyEnum = async () => {
   const currencies = xml.ISO_4217.CcyTbl.CcyNtry
     .map(({ CtryNm, CcyNm, Ccy }) => ({
       name: CcyNm,
-      country: CtryNm,
+      // Remove contents in parenthesis and after comma
+      // because they are too redundant and/or sometimes politically sensitive.
+      // e.g. "TANZANIA, UNITED REPUBLIC OF" → "TANZANIA"
+      // e.g. "NETHERLANDS (THE)" → "NETHERLANDS"
+      country: CtryNm
+        .split("(")[0]
+        .split(",")[0]
+        .trim(),
       code: Ccy,
     })).filter((currency) => !!currency.code)
     .filter(dedupeFileter((currency1, currency2) => currency1.code === currency2.code))
