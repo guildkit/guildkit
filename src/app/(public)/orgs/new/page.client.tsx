@@ -30,9 +30,9 @@ export default function NewOrgPageClient(): ReactElement {
   const [ state, formAction, pending ] = useActionState(createOrganization, {});
   const { formErrors, fieldErrors } = state.errors ?? {};
 
-  const currencyTags: Tag[] = currencies.map((currencyCode) => ({
-    id: currencyCode,
-    text: currencyCode,
+  const currencyTags: Tag[] = currencies.map(({ code, name }) => ({
+    id: code,
+    text: name,
     className: "",
   }));
 

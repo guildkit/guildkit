@@ -129,7 +129,7 @@ export const auth = betterAuth({
               type: "string[]",
               required: true,
               validator: {
-                input: z.array(z.enum(currencies)),
+                input: z.array(z.enum(currencies.map((currency) => currency.code))),
               },
             },
             emails: {
