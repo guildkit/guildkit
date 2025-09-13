@@ -29,6 +29,8 @@ pnpm dev
 
 Now GuildKit will be served via http://localhost:3000.
 
+Min.io's dashboard is also available via http://localhost:9001.
+
 ### Wording conventions
 
 - organization: The organization (i.e. company in most cases) to hire the candidate(s).

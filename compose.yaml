@@ -20,5 +20,23 @@ services:
       interval: 1s
       timeout: 1m
 
+  storage:
+    image: minio/minio:latest
+    restart: always
+    environment:
+      MINIO_ROOT_USER: guildkit
+      MINIO_ROOT_PASSWORD: guildkit
+    ports:
+      - "9000:9000" # API
+      - "9001:9001" # Admin console
+    command: [ "server", "/data", "--console-address", ":9001" ]
+    volumes:
+      - guildkit-storage:/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 1s
+      timeout: 1m
+
 volumes:
   guildkit-db: {}
+  guildkit-storage: {}

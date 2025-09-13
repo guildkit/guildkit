@@ -8,6 +8,12 @@ DATABASE_URL = "postgresql://guildkit:guildkit@localhost:5432/guildkit"
 BETTER_AUTH_URL = "http://localhost:3000"
 BETTER_AUTH_SECRET = "REPLACE_ME_ON_PRODUCTION"
 
+# Storage config (Not required in local environment)
+#STORAGE_BUCKET = "guildkit" # Recommended
+#AWS_ACCESS_KEY_ID = "" # Required
+#AWS_SECRET_ACCESS_KEY = "" # Required
+#CLOUDFLARE_ACCOUNT_ID = "" # Required for Cloudflare R2
+
 GOOGLE_CLIENT_ID = "REPLACE_ME_ON_PRODUCTION"
 GOOGLE_CLIENT_SECRET = "REPLACE_ME_ON_PRODUCTION"
 GITHUB_CLIENT_ID = "REPLACE_ME_ON_PRODUCTION"
