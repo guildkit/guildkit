@@ -1,5 +1,5 @@
 import { env } from "node:process";
-import { S3Client, type S3ClientConfig } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, type S3ClientConfig } from "@aws-sdk/client-s3";
 import { config } from "./configs.ts";
 
 const { platform: storagePlatform, bucket: configFileBucket, accountId: configFileAccountId, ...storageConfig } = config.storage;
@@ -32,5 +32,21 @@ const s3Config: S3ClientConfig = {
 };
 
 export const storage = new S3Client(s3Config);
+
+/**
+ *
+ * @param destPath - path to put given file
+ * @param file - file object to put
+ * @returns Path for logo including bucket name
+ */
+export const putObject = async (destPath: string, file: File) => {
+  await storage.send(new PutObjectCommand({
+    Bucket: bucketName,
+    Key: destPath,
+    Body: Buffer.from(await file.arrayBuffer()),
+  }));
+
+  return `/${ bucketName }/${ destPath }`;
+};
 
 export const logoDirName = "org-logos";
