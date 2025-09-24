@@ -9,6 +9,7 @@ const config: GuildKitConfig = {
   } : {
     platform: "cloudflare",
   },
+  maxLogoSizeMiB: 8,
 };
 
 export default config;

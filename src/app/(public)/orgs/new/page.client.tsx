@@ -10,17 +10,20 @@ import {
 import { TextField } from "@/components/generic/fields/TextField.tsx";
 import { ArrayField } from "@/components/generic/fields/ArrayField.tsx";
 import { TagField } from "@/components/generic/fields/TagField.tsx";
+import { ImageField } from "@/components/generic/fields/ImageField.tsx";
 import { Button } from "@/components/generic/ButtonLink.tsx";
 import { createOrganization } from "@/lib/actions/organizations.ts";
 import {
   orgAboutSchema,
   orgAddressSchema,
   orgEmailSchema,
+  orgLogoSchema,
   orgNameSchema,
   orgSlugSchema,
   orgUrlSchema,
 } from "@/lib/validation/organization.ts";
 import { currencies } from "@/intermediate/currencies.ts";
+import publicConfigs from "@/intermediate/public-configs.json";
 import type { Tag } from "react-tag-input";
 
 export default function NewOrgPageClient(): ReactElement {
@@ -92,6 +95,16 @@ export default function NewOrgPageClient(): ReactElement {
             className="mb-6"
           />
         </div>
+
+        <ImageField
+          label="Company Logo"
+          description="Logo should be a square."
+          name="logo"
+          maxSizeMiB={publicConfigs.maxLogoSizeMiB}
+          validator={orgLogoSchema}
+          errorMessages={fieldErrors?.logo}
+          className="mb-6"
+        />
       </div>
 
       <TextField

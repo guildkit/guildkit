@@ -10,6 +10,7 @@ import {
   type ChangeEventHandler,
 } from "react";
 import Image from "next/image";
+import publicConfigs from "@/intermediate/public-configs.json";
 import {
   commonClasses,
   errorClasses,
@@ -34,7 +35,7 @@ export const ImageField = ({
   name,
   validator,
   accept = "image/*",
-  maxSizeMiB = 5,
+  maxSizeMiB = publicConfigs.maxLogoSizeMiB,
   errorMessages: serverSideErrorMessages,
   className,
   ...formProps

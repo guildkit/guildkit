@@ -12,6 +12,9 @@ if not ("SERVER_ENV" in $env) {
   exit 1
 }
 
+# Generate config for frontend
+mise prepare:config-publicize
+
 # Generate DB Schemas: Currency codes
 mise prepare:currencies
 
