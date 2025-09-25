@@ -2,17 +2,17 @@
 import { ClientRouter } from "astro:transitions";
 import "../styles/tailwind.css";
 import "../assets/scss/index.scss";
-import SiteMeta from "../components/SiteMeta.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-const {
-  title = "Accessible Astro",
-  description = "A starter project with accessibility features using Astro static site builder. Contains accessible landmarks, skip links, a dark mode color scheme, better focus outline and keyboard menu navigation.",
-  url = Astro.site,
-  image = "social-preview-image.png",
-  author = "Incluud",
-} = Astro.props;
+type Props = {
+  /** The title of the page */
+  title?: string;
+  /** The description of the page */
+  description?: string;
+};
+
+const { title, description } = Astro.props;
 ---
 
 <html lang="en" dir="ltr">
@@ -20,9 +20,23 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta property="og:title" content={title} />
+    { description && (
+      <>
+        <meta name="description" content={description} />
+        <meta property="og:description" content={description} />
+      </>
+    )}
+    <meta name="author" content="Jumpei Ogawa" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.site?.href} />
+    <meta property="og:image" content={`${ Astro.site?.href }/opengraph.png`} />
 
-    <SiteMeta title={title} description={description.substring(0, 100)} url={url} image={image} author={author} />
+    <!-- TODO Twitter card -->
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Enable Astro View Transitions for all browsers -->
     <ClientRouter />
