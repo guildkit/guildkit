@@ -9,7 +9,7 @@
   transition: text-decoration, text-underline-offset, text-decoration-color, text-decoration-thickness;
   transition-duration: var(--animation-speed-fast);
   transition-timing-function: var(--cubic-bezier);
-  text-decoration: underline;
+  text-decoration-line: underline;
   text-decoration-style: solid;
   text-decoration-color: $color;
   text-decoration-thickness: $thickness;

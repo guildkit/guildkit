@@ -1,6 +1,7 @@
 ---
 import { DarkMode, SkipLink } from "accessible-astro-components";
 import { Icon } from "astro-icon/components";
+import ExternalLink from "@components/ExternalLink.astro";
 import Navigation from "../components/Navigation.astro";
 ---
 
@@ -8,10 +9,10 @@ import Navigation from "../components/Navigation.astro";
   <SkipLink />
   <Navigation>
     <li class="menu-item type-icon animate-rotate">
-      <a href="https://github.com/incluud/accessible-astro-starter">
+      <ExternalLink href="https://github.com/guildkit/guildkit">
         <Icon name="lucide:github" />
         <span class="sr-only">Go to the GitHub page</span>
-      </a>
+      </ExternalLink>
     </li>
     <li class="menu-item type-icon animate-rotate">
       <DarkMode>
