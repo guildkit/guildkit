@@ -14,15 +14,20 @@ type Props = {
    * The URL to link to
    */
   href: string;
+  newTabIcon?: boolean;
 };
 
-const { class: className, href } = Astro.props;
+const { class: className, href, newTabIcon = true } = Astro.props;
 ---
 
 <a href={href} class:list={[ className, "external-link" ]} target="_blank" rel="noopener">
   <slot />
-  <Icon name="lucide:external-link" />
-  <span class="sr-only">Opens in a new tab</span>
+  {newTabIcon && (
+    <>
+      <Icon name="lucide:external-link" />
+      <span class="sr-only">Opens in a new tab</span>
+    </>
+  )}
 </a>
 
 <style>
