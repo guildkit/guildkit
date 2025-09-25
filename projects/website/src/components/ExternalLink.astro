@@ -19,7 +19,7 @@ type Props = {
 const { class: className, href } = Astro.props;
 ---
 
-<a href={href} class:list={[ className, "external-link" ]} target="_blank" rel="noopener noreferrer">
+<a href={href} class:list={[ className, "external-link" ]} target="_blank" rel="noopener">
   <slot />
   <Icon name="lucide:external-link" />
   <span class="sr-only">Opens in a new tab</span>
