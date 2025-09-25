@@ -31,12 +31,10 @@ const { title, description, url, image, author = "Mark Teekman" } = Astro.props;
 const subtitle = "Accessible Astro Starter";
 ---
 
-<!-- general meta -->
 <meta name="title" content={`${ title } - ${ subtitle }`} />
 <meta name="description" content={description} />
 <meta name="author" content={author} />
 
-<!-- open graph -->
 <meta property="og:title" content={`${ title } - ${ subtitle }`} />
 <meta property="og:description" content={description} />
 <meta property="og:type" content="website" />
@@ -45,5 +43,4 @@ const subtitle = "Accessible Astro Starter";
 
 <!-- twitter card -->
 
-<!-- page title -->
 <title>{title} - {subtitle}</title>
