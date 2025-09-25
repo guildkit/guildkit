@@ -34,7 +34,6 @@ import Logo from "./Logo.astro";
     if (!mainNav) return
 
     const mainMenu = mainNav.querySelector('ul') as HTMLUListElement | null
-    const dropdownMenus = [...document.querySelectorAll('.has-dropdown button')] as HTMLButtonElement[]
 
     // functions
     const setActiveMenuItem = (): void => {
@@ -56,52 +55,12 @@ import Logo from "./Logo.astro";
       })
     }
 
-    const isOutOfViewport = (element: Element): boolean => {
-      const elementBounds = element.getBoundingClientRect()
-      return elementBounds.right > (window.innerWidth || document.documentElement.clientWidth)
-    }
-
-    const openDropdownMenu = (dropdownMenu: HTMLButtonElement): void => {
-      const dropdownList = dropdownMenu.parentNode?.querySelector('ul') as HTMLUListElement | null
-      if (!dropdownList) return
-
-      dropdownMenu.classList.add('show')
-      dropdownMenu.setAttribute('aria-expanded', 'true')
-
-      if (isOutOfViewport(dropdownList)) {
-        dropdownList.style.left = 'auto'
-      }
-    }
-
-    const closeDropdownMenu = (dropdownMenu: HTMLButtonElement): void => {
-      dropdownMenu.classList.remove('show')
-      dropdownMenu.setAttribute('aria-expanded', 'false')
-    }
-
-    const closeAllDropdownMenus = (): void => {
-      for (let i = 0; i < dropdownMenus.length; i++) {
-        closeDropdownMenu(dropdownMenus[i])
-      }
-    }
-
-    const toggleDropdownMenu = (event: MouseEvent): void => {
-      const target = event.target as HTMLButtonElement
-      if (target.getAttribute('aria-expanded') === 'false') {
-        closeAllDropdownMenus()
-        openDropdownMenu(target)
-      } else {
-        closeDropdownMenu(target)
-      }
-    }
-
     // execution
     mainMenu &&
       mainMenu.addEventListener('keydown', (event: KeyboardEvent) => {
         const element = event.target as Element
         const currentMenuItem = element.closest('li')
         const menuItems = [...mainMenu.querySelectorAll('.menu-item')] as HTMLLIElement[]
-        const currentDropdownMenu = element.closest('.has-dropdown button') as HTMLButtonElement | null
-        const currentDropdownMenuItem = element.closest('.has-dropdown li') as HTMLLIElement | null
         const currentIndex = currentMenuItem ? menuItems.findIndex((item) => item === currentMenuItem) : -1
 
         const key = event.key
@@ -127,68 +86,6 @@ import Logo from "./Logo.astro";
           targetItem = menuItems[0]
         }
 
-        if (currentDropdownMenu) {
-          const nextElement = currentDropdownMenu.nextElementSibling as Element | null
-          if (nextElement) {
-            const firstDropdownItem = nextElement.querySelector('li')
-
-            if (key === 'ArrowDown') {
-              event.preventDefault()
-              openDropdownMenu(currentDropdownMenu)
-              targetItem = firstDropdownItem
-            }
-          }
-
-          if (key === 'Escape') {
-            closeDropdownMenu(currentDropdownMenu)
-          }
-        }
-
-        if (currentDropdownMenuItem) {
-          const currentDropdownList = currentDropdownMenuItem.parentNode as Element | null
-          if (currentDropdownList) {
-            const dropdownMenuItems = [...currentDropdownList.querySelectorAll('li')] as HTMLLIElement[]
-            const currentIndex = dropdownMenuItems.findIndex((item) => item === currentDropdownMenuItem)
-
-            if (key === 'ArrowDown') {
-              event.preventDefault()
-
-              if (dropdownMenuItems.indexOf(currentDropdownMenuItem) === dropdownMenuItems.length - 1) {
-                targetItem = dropdownMenuItems[0]
-              } else {
-                targetItem = dropdownMenuItems[currentIndex + 1]
-              }
-            }
-
-            if (key === 'ArrowUp') {
-              event.preventDefault()
-
-              if (dropdownMenuItems.indexOf(currentDropdownMenuItem) === 0) {
-                targetItem = dropdownMenuItems[dropdownMenuItems.length - 1]
-              } else {
-                targetItem = dropdownMenuItems[currentIndex - 1]
-              }
-            }
-
-            if (key === 'Escape') {
-              const currentDropdownMenu = currentDropdownList.previousElementSibling as HTMLButtonElement | null
-              if (currentDropdownMenu) {
-                targetItem = currentDropdownMenu.parentElement
-                closeAllDropdownMenus()
-              }
-            }
-
-            if (key === 'Tab') {
-              const currentDropdownMenu = currentDropdownList.previousElementSibling as HTMLButtonElement | null
-              if (currentDropdownMenu) {
-                if (dropdownMenuItems.indexOf(currentDropdownMenuItem) === dropdownMenuItems.length - 1) {
-                  closeDropdownMenu(currentDropdownMenu)
-                }
-              }
-            }
-          }
-        }
-
         if (targetItem) {
           const focusableElement = targetItem.querySelector('a, button, input') as HTMLElement | null
           if (focusableElement) {
@@ -197,18 +94,7 @@ import Logo from "./Logo.astro";
         }
       })
 
-    dropdownMenus &&
-      dropdownMenus.forEach((dropdownMenu) => {
-        dropdownMenu.addEventListener('click', toggleDropdownMenu as EventListener)
-      })
-
     setActiveMenuItem()
-    window.addEventListener('click', (event: MouseEvent) => {
-      const element = event.target as Element
-      if (!element.hasAttribute('aria-haspopup') && !element.classList.contains('submenu-item')) {
-        closeAllDropdownMenus()
-      }
-    })
   })
 </script>
 
@@ -282,9 +168,7 @@ import Logo from "./Logo.astro";
         a:hover,
         a:focus-visible,
         .is-active,
-        button[aria-expanded='true'],
-        .has-dropdown > button:hover,
-        .has-dropdown > button:focus-visible {
+        button[aria-expanded='true'] {
           text-decoration: underline;
           text-decoration-style: wavy;
           text-decoration-thickness: 1px;
@@ -336,64 +220,6 @@ import Logo from "./Logo.astro";
         display: block;
         padding: var(--space-2xs) 0;
         inline-size: 100%;
-      }
-    }
-
-    .has-dropdown {
-      position: relative;
-
-      > button {
-        display: flex;
-        align-items: center;
-        gap: var(--space-4xs);
-        margin-block-start: -1px;
-
-        svg {
-          transition: all var(--animation-speed-instant) var(--cubic-bezier);
-        }
-
-        &.show {
-          svg {
-            scale: -1;
-          }
-        }
-      }
-
-      ul {
-        display: none;
-        position: absolute;
-        flex-direction: column;
-        gap: var(--space-2xs);
-        translate: 0 1rem;
-        opacity: 0;
-        z-index: 100;
-        inset-block-start: 125%;
-        inset-inline-end: 0;
-        inset-inline-start: 0;
-        box-shadow: var(--elevation-4);
-        border: 2px solid var(--border-color-subtle);
-        border-radius: var(--radius-l);
-        background-color: var(--background-color);
-        padding: var(--space-m);
-        min-inline-size: 275px;
-
-        @media (prefers-reduced-motion: no-preference) {
-          transition-behavior: allow-discrete;
-          transition-duration: var(--animation-speed-fast);
-          transition-property: display, opacity, translate;
-          transition-timing-function: var(--cubic-bezier);
-        }
-      }
-
-      > button.show ~ ul {
-        display: flex;
-        translate: 0;
-        opacity: 1;
-
-        @starting-style {
-          translate: 0 1rem;
-          opacity: 0;
-        }
       }
     }
 
