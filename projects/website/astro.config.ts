@@ -7,7 +7,10 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   compressHTML: true,
-  site: "https://accessible-astro-starter.incluud.dev",
+  site: "https://guildkit.net",
+
+  trailingSlash: "always",
+
   integrations: [
     mdx(),
     icon(),
@@ -18,7 +21,9 @@ export default defineConfig({
       preprocessorOptions: {
         scss: {
           logger: {
-            warn: () => {},
+            warn: (message) => {
+              console.warn(message);
+            },
           },
         },
       },
