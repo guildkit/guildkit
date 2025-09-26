@@ -41,7 +41,7 @@ import Logo from "./Logo.astro";
       const currentPathname = window.location.pathname
 
       mobileDesktopMenus.forEach((menu) => {
-        const menuItems = [...menu.querySelectorAll('a:not([rel*="external"])')] as HTMLAnchorElement[]
+        const menuItems = menu.querySelectorAll<HTMLAnchorElement>('a:not([rel*="external"])')
 
         menuItems.forEach((menuItem) => {
           if (currentPathname.includes(menuItem.pathname.replaceAll('/', '')) && menuItem.textContent !== 'Home') {
@@ -60,7 +60,7 @@ import Logo from "./Logo.astro";
       mainMenu.addEventListener('keydown', (event: KeyboardEvent) => {
         const element = event.target as Element
         const currentMenuItem = element.closest('li')
-        const menuItems = [...mainMenu.querySelectorAll('.menu-item')] as HTMLLIElement[]
+        const menuItems = Array.from(mainMenu.querySelectorAll('.menu-item'))
         const currentIndex = currentMenuItem ? menuItems.findIndex((item) => item === currentMenuItem) : -1
 
         const key = event.key
