@@ -25,10 +25,5 @@
         "SERVER_ENV": "staging"
       }
     }
-  },
-
-  // Build environment variables
-  "vars": {
-    "NODE_VERSION": 24
   }
 }
