@@ -2,14 +2,25 @@
 
 ## Development
 
-Clone this theme locally and run any of the following commands in your terminal:
+Run `mise install` first:
 
-| Command           | Action                                       |
-| :---------------- | :------------------------------------------- |
-| `npm install`     | Installs dependencies                        |
-| `npm run dev`     | Starts local dev server at `localhost:4321`  |
-| `npm run build`   | Build your production site to `./dist/`      |
-| `npm run preview` | Preview your build locally, before deploying |
+```shell
+mise install
+```
+
+Then run `mise dev` to run the local server and open http://localhost:4321.
+
+Other supported dev commands:
+
+| Command         | Action                                       |
+| :-------------- | :------------------------------------------- |
+| `mise install`  | Installs Node.js and npm dependencies        |
+| `mise dev`      | Starts local dev server at `localhost:4321`  |
+| `mise build`    | Build your production site to `./dist/`      |
+| `mise lint`     | Run typecheck by `tsc` and lint by ESLint    |
+| `mise fix`      | Autofix ESLint errors and warnings           |
+| `mise clean`    | Cleanup gitignore'd files except for .env    |
+| `mise refresh`  | Cleanup gitignore'd files, upgrade pnpm, recreate lock files and reinstall npm dependencies |
 
 ## Copyright & Credits
 
