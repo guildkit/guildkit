@@ -1,5 +1,4 @@
 import { randomUUID } from "node:crypto";
-import "dotenv/config";
 import { eq, type InferInsertModel } from "drizzle-orm";
 import { db } from "./db.ts";
 import { member, user as userTable, organization as organizationTable } from "./schema/better-auth.ts";

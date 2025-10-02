@@ -32,7 +32,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "dayjs": "^1.11.11",
-    "dotenv": "^17.2.2",
     "drizzle-kit": "^0.31.4",
     "drizzle-seed": "^0.3.1",
     "eslint": "^9.35.0",
