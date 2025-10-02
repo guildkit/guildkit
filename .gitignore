@@ -37,6 +37,9 @@ tmp/
 logs/
 *.log
 
+# mise
+mise.local.toml
+
 # dotenv
 .env
 .env.*

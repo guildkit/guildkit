@@ -1,0 +1,14 @@
+# On local development machines, this file should be renamed to mise.local.toml.
+
+[env]
+NODE_ENV = "development"
+SERVER_ENV = "development"
+DATABASE_URL = "postgresql://guildkit:guildkit@localhost:5432/guildkit"
+# Base URL of the app
+BETTER_AUTH_URL = "http://localhost:3000"
+BETTER_AUTH_SECRET = "REPLACE_ME_ON_PRODUCTION"
+
+GOOGLE_CLIENT_ID = "REPLACE_ME_ON_PRODUCTION"
+GOOGLE_CLIENT_SECRET = "REPLACE_ME_ON_PRODUCTION"
+GITHUB_CLIENT_ID = "REPLACE_ME_ON_PRODUCTION"
+GITHUB_CLIENT_SECRET = "REPLACE_ME_ON_PRODUCTION"

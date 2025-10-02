@@ -1,6 +1,5 @@
 const scriptDirPath = path self | path dirname
 const projectRootPath = $scriptDirPath | path join ".." | path expand
-const dotEnvPath = $projectRootPath | path join ".env" | path expand
 
 def type [cmd] {
   return (0 < (which $cmd | length))
@@ -17,12 +16,8 @@ def --wrapped container [ ...args ] {
   }
 }
 
-if ($dotEnvPath | path exists) {
-  open --raw $dotEnvPath | from toml | load-env
-}
-
 if not ("SERVER_ENV" in $env) {
-  print "[ERROR] The environment variable SERVER_ENV is missing. If you are on your local machine, copy .env.example to .env, or set `SERVER_ENV=development` manually."
+  print "[ERROR] The environment variable SERVER_ENV is missing. If you are on your local machine, copy mise.local.example.toml to mise.local.toml, or set `SERVER_ENV=development` manually."
   exit 1
 }
 
