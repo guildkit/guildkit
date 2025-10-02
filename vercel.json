@@ -3,7 +3,7 @@
 
   "framework": "nextjs",
 
-  "installCommand": "pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm build",
-  "devCommand": "pnpm dev"
+  "installCommand": "dnf install -y 'dnf-command(config-manager)' && dnf config-manager --add-repo https://mise.jdx.dev/rpm/mise.repo && dnf install -y mise && mise install",
+  "buildCommand": "mise build",
+  "devCommand": "mise dev"
 }
