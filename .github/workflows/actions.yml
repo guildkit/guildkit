@@ -26,6 +26,7 @@ jobs:
           - 24
     env:
       SERVER_ENV: development
+      MISE_NODE_VERSION: ${{ matrix.node-version }} # Override Node.js version over mise.toml
       DATABASE_URL: "postgresql://guildkit:guildkit@localhost:5432/guildkit?sslmode=disable"
       BETTER_AUTH_URL: "http://localhost:3000"
       # On the build process, the credentials can be dummy
@@ -39,17 +40,13 @@ jobs:
         run: sudo apt remove -y podman
 
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
-      - name: Use Node.js v${{ matrix.node-version }}
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2.4.4
         with:
-          node-version: ${{ matrix.node-version }}
-          check-latest: true
-          cache: pnpm
+          install: true
+          cache: true
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      # TODO - run: pnpm test
+      - run: mise build
+      # TODO - run: mise test
 
   lint:
     runs-on: ubuntu-latest
@@ -69,16 +66,12 @@ jobs:
         run: sudo apt remove -y podman
 
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
-      - name: Use Node.js v22
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2.4.4
         with:
-          node-version: 22
-          check-latest: true
-          cache: pnpm
+          install: true
+          cache: true
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run lint
+      - run: mise lint
 
   publish:
     needs:
@@ -100,15 +93,13 @@ jobs:
         run: sudo apt remove -y podman
 
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
-      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+      - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2.4.4
         with:
-          node-version: 22
-          check-latest: true
+          install: true
+          cache: true
 
-      - run: pnpm install
-      - run: pnpm run build
+      - run: mise build
 
       - name: Set npm auth token
         run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_AUTH_TOKEN}}" > ~/.npmrc
-      - run: pnpm run release
+      - run: mise release
