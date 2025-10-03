@@ -1,3 +1,58 @@
 [tools]
 node = { version = "24" }
 "npm:nushell" = "latest"
+
+[tasks]
+  [tasks.dev]
+  depends = [ "prepare" ]
+  run = "next dev"
+
+  [tasks.start]
+  run = "next start"
+
+  [tasks.db]
+  run = "psql --username=guildkit --dbname=guildkit --host=localhost --port=5432"
+
+  [tasks.build]
+  depends = [ "prepare" ]
+  run = "next build"
+  env = { NODE_ENV = "production" }
+
+  [tasks.lint]
+  depends = [ "prepare" ]
+  run = [
+    "tsc --noEmit",
+    "eslint"
+  ]
+
+  [tasks.fix]
+  depends = [ "prepare" ]
+  run = "eslint --fix"
+
+  [tasks.clean]
+  run = [{ task = "clean:*" }]
+
+  [tasks.refresh]
+  depends = [ "clean" ]
+  run = [
+    "rm --force ./pnpm-lock.yaml",
+    "corepack enable",
+    "corepack up",
+    "mise install",
+  ]
+
+[hooks]
+postinstall = [
+  "corepack enable",
+  "pnpm install --frozen-lockfile",
+]
+
+[env]
+_.path = "./node_modules/.bin"
+
+[settings]
+jobs = 8
+
+# Required for hooks as of 2025.10
+# https://mise.jdx.dev/hooks.html
+experimental = true
