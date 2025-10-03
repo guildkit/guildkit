@@ -5,16 +5,8 @@
   "license": "SEE LICENSE IN LICENSE.md",
   "type": "module",
   "scripts": {
-    "dev": "pnpm sync && next dev",
-    "start": "next start",
-    "db": "psql --username=guildkit --dbname=guildkit --host=localhost --port=5432",
     "resetdb": "nu ./scripts/scripts.nu resetdb",
     "resetdb-demo": "jiti ./scripts/resetdb-demo.ts && drizzle-kit migrate && jiti ./scripts/seed.ts",
-    "build": "pnpm sync && next build",
-    "lint": "pnpm sync && tsc --noEmit && eslint",
-    "fix": "pnpm sync && eslint --fix",
-    "clean": "git clean -dX --exclude=\"!.env\" --force",
-    "refresh": "pnpm run clean && rm --force ./pnpm-lock.yaml && corepack up && pnpm install",
     "sync": "nu ./scripts/scripts.nu sync",
     "prepare": "nu ./scripts/scripts.nu sync --seed"
   },
