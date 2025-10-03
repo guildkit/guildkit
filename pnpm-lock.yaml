@@ -66,9 +66,6 @@ importers:
       dayjs:
         specifier: ^1.11.11
         version: 1.11.18
-      dotenv:
-        specifier: ^17.2.2
-        version: 17.2.3
       drizzle-kit:
         specifier: ^0.31.4
         version: 0.31.5
@@ -87,9 +84,6 @@ importers:
       neonctl:
         specifier: ^2.14.0
         version: 2.15.0
-      nushell:
-        specifier: ^0.107.0
-        version: 0.107.0
       postcss:
         specifier: ^8.4.23
         version: 8.5.6
@@ -928,46 +922,6 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
-
-  '@nushell/darwin-arm64@0.107.0':
-    resolution: {integrity: sha512-mKUkbOWtpal2pt/RRpAunOtQbaf2aPQZNNNr8q+AB5hx/qQEmb7Jc2MVkw4R+QhhKsgk/j0TSCp68FzeR01aFA==}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@nushell/darwin-x64@0.107.0':
-    resolution: {integrity: sha512-HkWhwuFBIhxhtyfFHylMs+Jr+kF1glZV9EUjoeUAVEQHEQbTY0f/AQ12iu2Ur+X745ZeS5qBYsyFG2PwhSB1Hw==}
-    cpu: [x64]
-    os: [darwin]
-
-  '@nushell/linux-arm64@0.107.0':
-    resolution: {integrity: sha512-Bvp6QuSuMNqZMtNGV603ox8ASDwKojbpY9LgWnrK1NLKieQs+EuwhuvKsbuUOfO289wNDa6iF+yaq16Uadz4ZA==}
-    cpu: [arm64]
-    os: [linux]
-
-  '@nushell/linux-arm@0.107.0':
-    resolution: {integrity: sha512-qzYwt+gZB7qN060y0hKAcCzck6fX6y09Ac+Vi/qjZDbxp1h6DuZMSvs+aJosV4A8+2NSrbSc+UorA3p4pFrmBw==}
-    cpu: [arm]
-    os: [linux]
-
-  '@nushell/linux-riscv64@0.107.0':
-    resolution: {integrity: sha512-o5nAMulksc6QPEjByqcN3ByQuO4oKdEZHD51Uo0liBqtsGzgzqy8JWYhcBvYoBqfrTfLbUh4+QWQFDA2ZO0z3A==}
-    cpu: [riscv64]
-    os: [linux]
-
-  '@nushell/linux-x64@0.107.0':
-    resolution: {integrity: sha512-osfPeXxbhlNnuD5+D6z+jLHCLyPHvgYZxQE4azvupseX3ya2e4vNadotjskAObqEPwS3edq/merkFii80dtbsA==}
-    cpu: [x64]
-    os: [linux]
-
-  '@nushell/windows-arm64@0.107.0':
-    resolution: {integrity: sha512-PFzGwfE/UttlR4lWsH6Aj0cfaza0fnF4P976Z+mBz/6BQ81+HPwIDNiMWFSCL0fTYi4iElSqOoZHOzm2aKey/Q==}
-    cpu: [arm64]
-    os: [win32]
-
-  '@nushell/windows-x64@0.107.0':
-    resolution: {integrity: sha512-akj1flMeDNuG8fZuAotHw1PIVyyCYOafWrC+pL32mfSV72q8Y0QpigreDehwJbw17szcXwPmG08c2uGP/gmWZw==}
-    cpu: [x64]
-    os: [win32]
 
   '@peculiar/asn1-android@2.5.0':
     resolution: {integrity: sha512-t8A83hgghWQkcneRsgGs2ebAlRe54ns88p7ouv8PW2tzF1nAW4yHcL4uZKrFpIU+uszIRzTkcCuie37gpkId0A==}
@@ -2928,11 +2882,6 @@ packages:
   node-releases@2.0.23:
     resolution: {integrity: sha512-cCmFDMSm26S6tQSDpBCg/NR8NENrVPhAJSf+XbxBG4rPFaaonlEoE9wHQmun+cls499TQGSb7ZyPBRlzgKfpeg==}
 
-  nushell@0.107.0:
-    resolution: {integrity: sha512-K/aUrFtdQKyOxsob0j5qkYpAie9Ng3xKlfEE8YfDnnPX2S1NiFmn/0fO+NOE7N79zaqa8zYBqTo1O850W639JQ==}
-    engines: {node: '>=20.0.0', pnpm: '>=9'}
-    hasBin: true
-
   nypm@0.6.2:
     resolution: {integrity: sha512-7eM+hpOtrKrBDCh7Ypu2lJ9Z7PNZBdi/8AT3AX8xoCj43BBVHD0hPSTEvMtkMpfs8FCqBGhxB+uToIQimA111g==}
     engines: {node: ^14.16.0 || >=16.10.0}
@@ -4455,30 +4404,6 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
-
-  '@nushell/darwin-arm64@0.107.0':
-    optional: true
-
-  '@nushell/darwin-x64@0.107.0':
-    optional: true
-
-  '@nushell/linux-arm64@0.107.0':
-    optional: true
-
-  '@nushell/linux-arm@0.107.0':
-    optional: true
-
-  '@nushell/linux-riscv64@0.107.0':
-    optional: true
-
-  '@nushell/linux-x64@0.107.0':
-    optional: true
-
-  '@nushell/windows-arm64@0.107.0':
-    optional: true
-
-  '@nushell/windows-x64@0.107.0':
-    optional: true
 
   '@peculiar/asn1-android@2.5.0':
     dependencies:
@@ -6533,17 +6458,6 @@ snapshots:
       whatwg-url: 5.0.0
 
   node-releases@2.0.23: {}
-
-  nushell@0.107.0:
-    optionalDependencies:
-      '@nushell/darwin-arm64': 0.107.0
-      '@nushell/darwin-x64': 0.107.0
-      '@nushell/linux-arm': 0.107.0
-      '@nushell/linux-arm64': 0.107.0
-      '@nushell/linux-riscv64': 0.107.0
-      '@nushell/linux-x64': 0.107.0
-      '@nushell/windows-arm64': 0.107.0
-      '@nushell/windows-x64': 0.107.0
 
   nypm@0.6.2:
     dependencies:
