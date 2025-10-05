@@ -46,6 +46,10 @@ node = { version = "24" }
     "mise install",
   ]
 
+  # TODO disabled until GA
+  #[tasks.release]
+  #run = "npm publish --access public --non-interactive"
+
 [hooks]
 postinstall = [
   "corepack enable",
