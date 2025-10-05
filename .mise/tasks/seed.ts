@@ -1,8 +1,10 @@
-import { exit } from "node:process";
+#!/usr/bin/env -S pnpm exec jiti
+
+import { env, exit } from "node:process";
 import dayjs from "dayjs";
-import { db } from "../src/lib/db/db.ts";
-import { job } from "../src/lib/db/schema/job.ts";
-import { insertOrganizations, insertUsers, type OrgWithRecruiters, type UserWithProps } from "../src/lib/db/helpers.ts";
+import { db } from "../../src/lib/db/db.ts";
+import { job } from "../../src/lib/db/schema/job.ts";
+import { insertOrganizations, insertUsers, type OrgWithRecruiters, type UserWithProps } from "../../src/lib/db/helpers.ts";
 import type { InferInsertModel } from "drizzle-orm";
 
 const candidates: UserWithProps[] = [
@@ -273,6 +275,11 @@ const initialJobs: InferInsertModel<typeof job>[] = [
     employer: initialOrgWangsheng.id,
   },
 ];
+
+if (env.SERVER_ENV !== "development" && env.SERVER_ENV !== "demo" && env.SERVER_ENV !== "demo-preview") {
+  console.info("Seeding are only allowed when SERVER_ENV is development, demo, or demo-preview. Seeding skipped.");
+  exit(0);
+}
 
 const userExists = Boolean(await db.query.user.findFirst());
 const jobExists = Boolean(await db.query.job.findFirst());

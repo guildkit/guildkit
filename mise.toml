@@ -50,6 +50,8 @@ node = { version = "24" }
 postinstall = [
   "corepack enable",
   "pnpm install --frozen-lockfile",
+  "mise run prepare",
+  "mise run seed"
 ]
 
 [env]

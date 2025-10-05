@@ -1,7 +1,11 @@
+#!/usr/bin/env -S pnpm exec jiti
+
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { deduplicate, trimLines } from "@phanect/utils";
 import { XMLParser } from "fast-xml-parser";
+
+const projectRoot = join(import.meta.dirname, "../../..");
 
 const generateCurrencyEnum = async () => {
   type SixGroupIsoCurrencyList = {
@@ -32,7 +36,7 @@ const generateCurrencyEnum = async () => {
       .sort((codeA, codeB) => codeA > codeB ? 1 : -1)
   );
 
-  const intermediateDirPath = join(import.meta.dirname, "../src/intermediate");
+  const intermediateDirPath = join(projectRoot, "src/intermediate");
 
   await mkdir(intermediateDirPath, { recursive: true });
   await writeFile(
