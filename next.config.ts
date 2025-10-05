@@ -1,4 +1,3 @@
-import { nextCookies } from "better-auth/next-js";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -8,10 +7,6 @@ const nextConfig: NextConfig = {
       new URL("https://tmp.guildkit.net/**"),
     ],
   },
-
-  plugins: [
-    nextCookies(), // this plugin has to be the last plugin in the array
-  ],
 
   experimental: {
     serverActions: {
