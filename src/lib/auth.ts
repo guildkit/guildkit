@@ -1,6 +1,7 @@
 import { env } from "node:process";
 import { betterAuth } from "better-auth";
 import { admin as adminPlugin, organization } from "better-auth/plugins";
+import { nextCookies } from "better-auth/next-js";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
@@ -167,6 +168,7 @@ export const auth = betterAuth({
       ac: adminAc,
       roles: adminRoles,
     }),
+    nextCookies(), // this plugin has to be the last plugin in the array
   ],
   socialProviders: {
     google: {
