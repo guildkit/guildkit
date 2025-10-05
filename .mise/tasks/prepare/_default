@@ -1,5 +1,9 @@
-const scriptDirPath = path self | path dirname
-const projectRootPath = $scriptDirPath | path join ".." | path expand
+#!/usr/bin/env nu
+
+#MISE description="Prepare after `mise install`. Build intermediate files and initialize local DBs."
+
+const tasksDirPath = path self | path dirname | path join ".."
+const projectRootPath = $tasksDirPath | path join "../.." | path expand
 
 def type [cmd] {
   return (0 < (which $cmd | length))
@@ -28,17 +32,16 @@ def "main resetdb" [] {
   main sync --seed
 }
 
-def "main sync" [--seed] {
   # Generate DB Schemas: Currency codes
-  pnpm jiti ($scriptDirPath | path join "scripts-sync-currency.ts")
+mise prepare:currencies
 
   # Generate DB Schemas: BetterAuth
   ## Requires to properly load auth.ts which imports the generated BetterAuth schema.
-  cp ($scriptDirPath | path join "fixtures/barrel-dummy.ts") ($projectRootPath | path join "src/lib/db/schema/index.ts")
+  cp ($tasksDirPath | path join "_fixtures/barrel-dummy.ts") ($projectRootPath | path join "src/lib/db/schema/index.ts")
   pnpx @better-auth/cli generate --yes --output="./src/lib/db/schema/better-auth.ts" # relative path from project root
 
   # Generate barrel file for schemas
-  pnpm jiti ($scriptDirPath | path join "scripts-sync-barrel.ts")
+mise prepare:barrel
 
   if ($isLocal) {
     container compose up -d --wait
@@ -48,11 +51,3 @@ def "main sync" [--seed] {
 
   pnpm drizzle-kit generate
   pnpm drizzle-kit migrate
-
-  if (($isLocal or $env.SERVER_ENV == "demo-preview") and $seed) {
-    pnpm jiti ./scripts/seed.ts
-  }
-}
-
-# Required to run subcommands
-def main [] {}
