@@ -13,6 +13,11 @@ node = { version = "24" }
   [tasks.db]
   run = "psql --username=guildkit --dbname=guildkit --host=localhost --port=5432"
 
+  [tasks.resetdb-demo]
+  depends = [ "resetdb-demo:step1" ]
+  run = "drizzle-kit migrate"
+  depends_post = [ "seed" ]
+
   [tasks.build]
   depends = [ "prepare" ]
   run = "next build"
