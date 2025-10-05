@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "resetdb": "nu ./scripts/scripts.nu resetdb",
-    "resetdb-demo": "jiti ./scripts/resetdb-demo.ts && drizzle-kit migrate && jiti ./scripts/seed.ts",
     "sync": "nu ./scripts/scripts.nu sync",
     "prepare": "nu ./scripts/scripts.nu sync --seed"
   },
