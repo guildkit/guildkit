@@ -2,8 +2,7 @@ import { exit } from "node:process";
 import dayjs from "dayjs";
 import { db } from "../src/lib/db/db.ts";
 import { job } from "../src/lib/db/schema/job.ts";
-import { organization } from "../src/lib/db/schema/better-auth.ts";
-import { insertUsers, type UserWithProps } from "../src/lib/db/helpers.ts";
+import { insertOrganizations, insertUsers, type OrgWithRecruiters, type UserWithProps } from "../src/lib/db/helpers.ts";
 import type { InferInsertModel } from "drizzle-orm";
 
 const candidates: UserWithProps[] = [
@@ -80,11 +79,7 @@ const recruiterZhongli = {
   },
 } as const satisfies UserWithProps;
 
-type InitialOrg = InferInsertModel<typeof organization> & {
-  recruiters: UserWithProps[];
-};
-
-const initialOrgYaedo: InitialOrg = {
+const initialOrgYaedo: OrgWithRecruiters = {
   id: "yph",
   slug: "yaedo",
   name: "Yae Publishing House, K.K.",
@@ -97,7 +92,7 @@ const initialOrgYaedo: InitialOrg = {
   recruiters: [ recruiterYae ],
 };
 
-const initialOrgShogunate: InitialOrg = {
+const initialOrgShogunate: OrgWithRecruiters = {
   id: "kanjou",
   slug: "kanjou",
   name: "Kanjou Commission, The Shogunate of Inazuma",
@@ -114,7 +109,7 @@ const initialOrgShogunate: InitialOrg = {
   recruiters: [ recruiterRaiden, recruiterHiiragi ],
 };
 
-const initialOrgWangsheng: InitialOrg = {
+const initialOrgWangsheng: OrgWithRecruiters = {
   id: "wangsheng",
   slug: "wangsheng",
   name: "Wangsheng Funeral Parlor",
@@ -290,28 +285,13 @@ if (alreadySeeded) {
 
 // Allow N+1 problems for the readability
 await db.transaction(async (tx) => {
-  await insertUsers(candidates);
+  await insertUsers(candidates, tx);
 
-  for (const org of [ initialOrgYaedo, initialOrgShogunate, initialOrgWangsheng ]) {
-    await tx.insert(organization).values({
-      ...org,
-    });
-  }
+  await insertOrganizations([
+    initialOrgYaedo,
+    initialOrgShogunate,
+    initialOrgWangsheng,
+  ], tx);
 
-  await insertUsers([
-    ...initialOrgYaedo.recruiters.map((recruiter) => ({
-      ...recruiter,
-      recruitsFor: [ initialOrgYaedo.id ],
-    })),
-    ...initialOrgShogunate.recruiters.map((recruiter) => ({
-      ...recruiter,
-      recruitsFor: [ initialOrgShogunate.id ],
-    })),
-    ...initialOrgWangsheng.recruiters.map((recruiter) => ({
-      ...recruiter,
-      recruitsFor: [ initialOrgWangsheng.id ],
-    })),
-  ]);
+  await tx.insert(job).values(initialJobs);
 });
-
-await db.insert(job).values(initialJobs);

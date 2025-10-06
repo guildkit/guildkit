@@ -1,43 +1,36 @@
+import { randomUUID } from "node:crypto";
 import "dotenv/config";
 import { eq, type InferInsertModel } from "drizzle-orm";
 import { db } from "./db.ts";
-import { user as userTable } from "./schema/better-auth.ts";
+import { member, user as userTable, organization as organizationTable } from "./schema/better-auth.ts";
 import { userProps } from "./schema/user.ts";
-import { organizationsAndRecruitersRelationTable } from "./schema/relations.ts";
+
+type Transaction = Parameters<Parameters<typeof db.transaction>[0]>[0];
 
 export type UserWithProps = Omit<InferInsertModel<typeof userTable>, "propsId" | "recruitsFor"> & {
   props: InferInsertModel<typeof userProps>;
   recruitsFor?: string[];
 };
 
-export const insertUsers = async (users: UserWithProps | UserWithProps[]) => {
+export const insertUsers = async (users: UserWithProps | UserWithProps[], tx: Transaction) => {
   const usersWithProps = Array.isArray(users) ? users : [ users ];
+  const newUserIds: string[] = [];
 
   // TODO Fix N+1 problem
-  await db.transaction(async (tx) => {
-    for (const userWithProps of usersWithProps) {
-      const { props, recruitsFor: orgIds = [], ...userWithoutProps } = userWithProps;
+  for (const userWithProps of usersWithProps) {
+    const { props, ...userWithoutProps } = userWithProps;
 
-      const [{ propsId }] = await tx.insert(userProps).values(props).returning({ propsId: userProps.id });
+    const [{ propsId }] = await tx.insert(userProps).values(props).returning({ propsId: userProps.id });
 
-      if (0 < orgIds.length) {
-        tx.insert(organizationsAndRecruitersRelationTable).values(orgIds.map((orgId) => ({
-          organizationId: orgId,
-          recruiterId: userWithoutProps.id,
-        }))).onConflictDoNothing({
-          target: [
-            organizationsAndRecruitersRelationTable.organizationId,
-            organizationsAndRecruitersRelationTable.recruiterId,
-          ],
-        });
-      }
+    const [{ id: newUserId }] = await tx.insert(userTable).values({
+      ...userWithoutProps,
+      propsId: propsId,
+    }).returning({ id: userTable.id });
 
-      await tx.insert(userTable).values({
-        ...userWithoutProps,
-        propsId: propsId,
-      });
-    }
-  });
+    newUserIds.push(newUserId);
+  }
+
+  return newUserIds;
 };
 
 export const updateUserProps = (user: InferInsertModel<typeof userTable>) => {
@@ -50,4 +43,32 @@ export const updateUserProps = (user: InferInsertModel<typeof userTable>) => {
       .set(...values)
       .where(eq(userProps.id, user.propsId)),
   };
+};
+
+export type OrgWithRecruiters = InferInsertModel<typeof organizationTable> & {
+  recruiters: UserWithProps[];
+};
+
+export const insertOrganizations = async (organizations: OrgWithRecruiters | OrgWithRecruiters[], tx: Transaction) => {
+  const orgsWithRecruiters = Array.isArray(organizations) ? organizations : [ organizations ];
+
+  // TODO Fix N+1 problem
+  for (const orgWithRecruiters of orgsWithRecruiters) {
+    const { recruiters = [], ...org } = orgWithRecruiters;
+
+    const [{ id: orgId }] = await tx.insert(organizationTable).values(org).returning({ id: organizationTable.id });
+
+    const newRecruiterIds = (0 < recruiters.length) ? await insertUsers(recruiters, tx) : [];
+
+    if (0 < newRecruiterIds.length) {
+      await tx.insert(member).values(
+        newRecruiterIds.map((newRecruiterId) => ({
+          organizationId: orgId,
+          userId: newRecruiterId,
+          id: randomUUID(),
+          createdAt: new Date(),
+        }))
+      );
+    }
+  }
 };
