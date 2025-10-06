@@ -12,8 +12,6 @@ if not ("SERVER_ENV" in $env) {
   exit 1
 }
 
-let isLocal = ($env.SERVER_ENV == "development")
-
 # Generate DB Schemas: Currency codes
 mise prepare:currencies
 
@@ -25,7 +23,7 @@ pnpx @better-auth/cli generate --yes --output="./src/lib/db/schema/better-auth.t
 # Generate barrel file for schemas
 mise prepare:barrel
 
-if ($isLocal) {
+if ($env.SERVER_ENV == "development") {
   container compose up -d --wait
 } else if ($env.SERVER_ENV == "demo-preview") {
   pnpm neon branches reset $"preview/($env.VERCEL_GIT_COMMIT_REF)" --parent --project-id=($env.NEON_PROJECT_ID)
