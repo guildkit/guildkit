@@ -2,23 +2,10 @@
 
 #MISE description="Prepare after `mise install`. Build intermediate files and initialize local DBs."
 
+use ../_libs *
+
 const tasksDirPath = path self | path dirname | path join ".."
 const projectRootPath = $tasksDirPath | path join "../.." | path expand
-
-def type [cmd] {
-  return (0 < (which $cmd | length))
-}
-
-def --wrapped container [ ...args ] {
-  if (type podman) {
-    (podman ...$args)
-  } else if (type docker) {
-    (docker ...$args)
-  } else {
-    print "[ERROR] Neither Docker nor Podman are found. Please install one of them."
-    exit 1
-  }
-}
 
 if not ("SERVER_ENV" in $env) {
   print "[ERROR] The environment variable SERVER_ENV is missing. If you are on your local machine, copy mise.local.example.toml to mise.local.toml, or set `SERVER_ENV=development` manually."
@@ -26,11 +13,6 @@ if not ("SERVER_ENV" in $env) {
 }
 
 let isLocal = ($env.SERVER_ENV == "development")
-
-def "main resetdb" [] {
-  container compose down --rmi local --volumes --remove-orphans
-  main sync --seed
-}
 
   # Generate DB Schemas: Currency codes
 mise prepare:currencies
