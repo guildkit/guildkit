@@ -28,7 +28,7 @@ importers:
         version: 19.2.0(react@19.2.0)
       react-tag-input:
         specifier: ^6.10.6
-        version: 6.10.6(react-dnd-html5-backend@16.0.1)(react-dnd@16.0.1(@types/node@24.6.2)(@types/react@19.2.0)(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 6.10.6(react-dnd-html5-backend@16.0.1)(react-dnd@16.0.1(@types/node@24.7.0)(@types/react@19.2.0)(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
     devDependencies:
       '@better-auth/cli':
         specifier: ^1.3.10
@@ -38,7 +38,7 @@ importers:
         version: 15.5.4
       '@phanect/configs':
         specifier: latest
-        version: 2025.8.22(@types/node@24.6.2)(typescript@5.9.3)
+        version: 2025.8.22(@types/node@24.7.0)(typescript@5.9.3)
       '@phanect/lint':
         specifier: latest
         version: 2025.8.30(@typescript-eslint/parser@8.45.0(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1))(next@15.5.4(@babel/core@7.28.4)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
@@ -52,8 +52,8 @@ importers:
         specifier: ^4.1.13
         version: 4.1.14
       '@types/node':
-        specifier: ^24.5.0
-        version: 24.6.2
+        specifier: ^24.7.0
+        version: 24.7.0
       '@types/pg':
         specifier: ^8.15.4
         version: 8.15.5
@@ -1181,8 +1181,8 @@ packages:
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
 
-  '@types/node@24.6.2':
-    resolution: {integrity: sha512-d2L25Y4j+W3ZlNAeMKcy7yDsK425ibcAOO2t7aPTz6gNMH0z2GThtwENCDc0d/Pw9wgyRqE5Px1wkV7naz8ang==}
+  '@types/node@24.7.0':
+    resolution: {integrity: sha512-IbKooQVqUBrlzWTi79E8Fw78l8k1RNtlDDNWsFZs7XonuQSJ8oNYfEeclhprUldXISRMLzBpILuKgPlIxm+/Yw==}
 
   '@types/pg@8.15.5':
     resolution: {integrity: sha512-LF7lF6zWEKxuT3/OR8wAZGzkg4ENGXFNyiV/JeOt9z5B+0ZVwbql9McqX5c/WStFq1GaGso7H1AzP/qSzmlCKQ==}
@@ -3516,8 +3516,8 @@ packages:
   uncrypto@0.1.3:
     resolution: {integrity: sha512-Ql87qFHB3s/De2ClA9e0gsnS6zXG27SkTiSJwjCc9MebbfapQfuPzumMIUMi38ezPZVNFcHI9sUIepeQfw8J8Q==}
 
-  undici-types@7.13.0:
-    resolution: {integrity: sha512-Ov2Rr9Sx+fRgagJ5AX0qvItZG/JKKoBRAVITs1zk7IqZGTJUwgUr7qoYBpWwakpWilTZFM98rG/AFRocu10iIQ==}
+  undici-types@7.14.0:
+    resolution: {integrity: sha512-QQiYxHuyZ9gQUIrmPo3IA+hUl4KYk8uSA7cHrcKd/l3p1OTpZcM0Tbp9x7FAtXdAYhlasd60ncPpgu6ihG6TOA==}
 
   unrs-resolver@1.11.1:
     resolution: {integrity: sha512-bSjt9pjaEBnNiGgc9rUiHGKv5l4/TGzDmYw3RhnkJGtLhbnnA/5qJj7x3dNDCRx/PJxu774LlH8lCOlB4hEfKg==}
@@ -4501,9 +4501,9 @@ snapshots:
       tslib: 2.8.1
       tsyringe: 4.10.0
 
-  '@phanect/configs@2025.8.22(@types/node@24.6.2)(typescript@5.9.3)':
+  '@phanect/configs@2025.8.22(@types/node@24.7.0)(typescript@5.9.3)':
     dependencies:
-      '@types/node': 24.6.2
+      '@types/node': 24.7.0
       typescript: 5.9.3
 
   '@phanect/lint-react@2025.8.30(eslint@9.37.0(jiti@2.6.1))(next@15.5.4(@babel/core@7.28.4)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))':
@@ -4712,7 +4712,7 @@ snapshots:
 
   '@types/better-sqlite3@7.6.13':
     dependencies:
-      '@types/node': 24.6.2
+      '@types/node': 24.7.0
 
   '@types/debug@4.1.12':
     dependencies:
@@ -4732,19 +4732,19 @@ snapshots:
 
   '@types/ms@2.1.0': {}
 
-  '@types/node@24.6.2':
+  '@types/node@24.7.0':
     dependencies:
-      undici-types: 7.13.0
+      undici-types: 7.14.0
 
   '@types/pg@8.15.5':
     dependencies:
-      '@types/node': 24.6.2
+      '@types/node': 24.7.0
       pg-protocol: 1.10.3
       pg-types: 2.2.0
 
   '@types/prompts@2.4.9':
     dependencies:
-      '@types/node': 24.6.2
+      '@types/node': 24.7.0
       kleur: 3.0.3
 
   '@types/react-dom@19.2.0(@types/react@19.2.0)':
@@ -6720,7 +6720,7 @@ snapshots:
     dependencies:
       dnd-core: 16.0.1
 
-  react-dnd@16.0.1(@types/node@24.6.2)(@types/react@19.2.0)(react@19.2.0):
+  react-dnd@16.0.1(@types/node@24.7.0)(@types/react@19.2.0)(react@19.2.0):
     dependencies:
       '@react-dnd/invariant': 4.0.2
       '@react-dnd/shallowequal': 4.0.2
@@ -6729,7 +6729,7 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       react: 19.2.0
     optionalDependencies:
-      '@types/node': 24.6.2
+      '@types/node': 24.7.0
       '@types/react': 19.2.0
 
   react-dom@19.2.0(react@19.2.0):
@@ -6739,13 +6739,13 @@ snapshots:
 
   react-is@16.13.1: {}
 
-  react-tag-input@6.10.6(react-dnd-html5-backend@16.0.1)(react-dnd@16.0.1(@types/node@24.6.2)(@types/react@19.2.0)(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  react-tag-input@6.10.6(react-dnd-html5-backend@16.0.1)(react-dnd@16.0.1(@types/node@24.7.0)(@types/react@19.2.0)(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       '@types/lodash-es': 4.17.12
       classnames: 2.3.3
       lodash-es: 4.17.21
       react: 19.2.0
-      react-dnd: 16.0.1(@types/node@24.6.2)(@types/react@19.2.0)(react@19.2.0)
+      react-dnd: 16.0.1(@types/node@24.7.0)(@types/react@19.2.0)(react@19.2.0)
       react-dnd-html5-backend: 16.0.1
       react-dom: 19.2.0(react@19.2.0)
 
@@ -7193,7 +7193,7 @@ snapshots:
 
   uncrypto@0.1.3: {}
 
-  undici-types@7.13.0: {}
+  undici-types@7.14.0: {}
 
   unrs-resolver@1.11.1:
     dependencies:
