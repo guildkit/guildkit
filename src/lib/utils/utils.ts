@@ -1,5 +1,5 @@
 /**
- * Convert megabytes to bytes
+ * Convert mebibytes (MiB) to bytes
  * @param mib - size in MiB
  * @returns size in byte
  */
