@@ -35,3 +35,5 @@ if ($env.SERVER_ENV == "development") {
 
 pnpm drizzle-kit generate
 pnpm drizzle-kit migrate
+
+print "\n\n" # `drizzle-kit migrate` does not add trailing line breaks.
