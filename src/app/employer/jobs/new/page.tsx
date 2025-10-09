@@ -1,6 +1,7 @@
 "use client";
 
 import { startTransition, useActionState, type FormEvent, type ReactElement } from "react";
+import Form from "next/form";
 import { createJob } from "@/lib/actions/jobs.ts";
 import { Button } from "@/components/generic/ButtonLink.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
@@ -40,7 +41,7 @@ export default function NewJobPage(): ReactElement {
         </div>
       ))}
 
-      <form action={formAction} onSubmit={onSubmit}>
+      <Form action={formAction} onSubmit={onSubmit}>
         <Field
           type="text"
           label="Title"
@@ -117,7 +118,7 @@ export default function NewJobPage(): ReactElement {
         >
           {isCreatingJob ? "Creating..." : "Create Job"}
         </Button>
-      </form>
+      </Form>
     </section>
   );
 }
