@@ -1,5 +1,6 @@
 "use client";
 
+import Form from "next/form";
 import {
   startTransition,
   useActionState,
@@ -43,7 +44,7 @@ export default function NewJobPageClient({ activeOrg }: Props): ReactElement {
         </div>
       ))}
 
-      <form action={formAction} onSubmit={onSubmit}>
+      <Form action={formAction} onSubmit={onSubmit}>
         <Field
           type="text"
           label="Title"
@@ -120,7 +121,7 @@ export default function NewJobPageClient({ activeOrg }: Props): ReactElement {
         >
           {isCreatingJob ? "Creating..." : "Create Job"}
         </Button>
-      </form>
+      </Form>
     </section>
   );
 }
