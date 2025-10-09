@@ -7,7 +7,7 @@ export const jobSchema = z.object({
   description: z.string().trim().min(4),
   applicationUrl: z.string().url(),
   location: z.string().trim().min(2),
-  salary: z.number().positive(),
+  salary: z.coerce.number<number>().positive(),
   currency: z.enum(currency.enumValues),
   salaryPer: z.enum(salaryPer.enumValues),
   recruiterId: z.string(),
