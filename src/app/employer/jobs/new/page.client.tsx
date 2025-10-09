@@ -9,7 +9,6 @@ import {
 import { Button } from "@/components/generic/ButtonLink.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
 import { createJob } from "@/lib/actions/jobs.ts";
-import { useActiveOrganization } from "@/lib/auth/client.ts";
 import {
   jobApplicationUrlSchema,
   jobDescriptionSchema,
@@ -19,16 +18,15 @@ import {
   jobTitleSchema,
 } from "@/lib/validations/job.ts";
 
-export default function NewJobPageClient(): ReactElement {
-  const [ state, formAction, isCreatingJob ] = useActionState(createJob, {});
-  const { data: activeOrg } = useActiveOrganization();
-  const { formErrors, fieldErrors } = state.errors ?? {};
+type Props = {
+  activeOrg: {
+    name: string;
+  };
+};
 
-  if (!activeOrg) {
-    // This error should not happen because active organization is set
-    // in `databaseHooks.session.create` of betterAuth instanciation in src/lib/auth.ts
-    throw new Error("You don't belong to any organization. Error code: GK-P683B");
-  }
+export default function NewJobPageClient({ activeOrg }: Props): ReactElement {
+  const [ state, formAction, isCreatingJob ] = useActionState(createJob, {});
+  const { formErrors, fieldErrors } = state.errors ?? {};
 
   const onSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
