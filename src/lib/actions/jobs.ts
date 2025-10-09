@@ -15,7 +15,7 @@ export const createJob = async (_initialState: ActionState<Job>, formData: FormD
     const {
       success,
       error,
-      data,
+      data: validatedNewJob,
     } = jobSchema.safeParse({
       title: formData.get("title"),
       description: formData.get("description"),
@@ -31,11 +31,8 @@ export const createJob = async (_initialState: ActionState<Job>, formData: FormD
       };
     }
 
-    const { expiresAt, ...validatedNewJob } = data;
-
     const [ createdJob ] = await db.insert(jobTable).values({
       ...validatedNewJob,
-      expiresAt: new Date(expiresAt),
       employer: session.activeOrganizationId,
     }).returning({ id: jobTable.id });
 
