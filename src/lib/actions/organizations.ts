@@ -7,7 +7,7 @@ import { redirect, RedirectType } from "next/navigation";
 import { flattenError } from "zod";
 import { auth } from "@/lib/auth.ts";
 import { logoDirName, putObject } from "@/lib/storage.ts";
-import { orgSchema, type Organization } from "@/lib/validation/organization.ts";
+import { orgSchema, type Organization } from "@/lib/validations/organization.ts";
 import type { ActionState } from "@/lib/types.ts";
 
 const uploadLogo = async (logoFile: File) => {

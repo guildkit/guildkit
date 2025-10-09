@@ -5,7 +5,7 @@ import { redirect, unauthorized } from "next/navigation";
 import { requireAuthAs } from "@/lib/auth/server.ts";
 import { db } from "@/lib/db/db.ts";
 import { job as jobTable } from "@/lib/db/schema/job.ts";
-import { jobSchema, type Job } from "@/lib/validation/job.validation.ts";
+import { jobSchema, type Job } from "@/lib/validations/job.ts";
 
 type CreateJobState = {
   errors?: Partial<Record<keyof Job, string[] | undefined>>;
