@@ -10,7 +10,6 @@ export const jobSchema = z.object({
   salary: z.coerce.number<number>().positive("Salary must be a positive number."),
   currency: z.enum(currency.enumValues, "Please set available currency code. (e.g. \"USD\" for US Dollar)"),
   salaryPer: z.enum(salaryPer.enumValues),
-  recruiterId: z.string(),
   expiresAt: z.date("Please enter a valid date."),
 });
 
