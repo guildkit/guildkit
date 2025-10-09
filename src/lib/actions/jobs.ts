@@ -2,27 +2,32 @@
 
 import { and, eq } from "drizzle-orm";
 import { redirect, unauthorized } from "next/navigation";
+import { flattenError } from "zod";
 import { requireAuthAs } from "@/lib/auth/server.ts";
 import { db } from "@/lib/db/db.ts";
 import { job as jobTable } from "@/lib/db/schema/job.ts";
 import { jobSchema, type Job } from "@/lib/validations/job.ts";
+import type { ActionState } from "@/lib/types.ts";
 
-type CreateJobState = {
-  errors?: Partial<Record<keyof Job, string[] | undefined>>;
-};
-
-export const createJob = async (_initialState: CreateJobState, formData: FormData): Promise<CreateJobState> => {
+export const createJob = async (_initialState: ActionState<Job>, formData: FormData): Promise<ActionState<Job>> => {
   const { err, session } = await requireAuthAs("recruiter");
 
   if (err) {
     unauthorized();
   }
 
-  const { error, success, data: validatedNewJob } = jobSchema.safeParse(formData);
+  const { error, success, data: validatedNewJob } = jobSchema.safeParse({
+    title: formData.get("title"),
+    description: formData.get("description"),
+    applicationUrl: formData.get("applicationUrl"),
+    location: formData.get("location"),
+    salary: formData.get("salary"),
+    expiresAt: formData.getAll("expiresAt"),
+  });
 
   if (!success) {
     return {
-      errors: error.flatten().fieldErrors,
+      errors: flattenError(error),
     };
   }
 
