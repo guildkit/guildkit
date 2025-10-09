@@ -139,10 +139,8 @@ const initialJobs: InferInsertModel<typeof job>[] = [
       - Web frontend development for our ebook store (Svelte)
       - Backend development for our ebook store (Hono + Cloudflare Workers)
       - Mobile app development for our ebook store (React Native)
-      ...
-    `.trim(),
-    requirements: `
-      # Required
+
+      # Requirements
 
       - One year or more experience in TypeScript development
       - Two years or more experience in JavaScript or altJS (e.g. TypeScript, Elm, CoffeeScript)
@@ -167,16 +165,16 @@ const initialJobs: InferInsertModel<typeof job>[] = [
       # Responsibilities
 
       You will be responsible for the infrastructure administration and the site reliability engineering for our online ebook store.
-      ...
-    `.trim(),
-    requirements: `
-      # Required
+
+      # Requirements
+
+      ## Required
 
       - Two year or more experience as an SRE or an infrastructure engineer.
       - One year or more experience in the production Docker server administration
       - One year or more experience in Infrastructure as Code tools such as Terraform and Ansible
 
-      # Nice to have
+      ## Nice to have
 
       - Experience in Node.js server administration
     `.trim(),
@@ -197,14 +195,14 @@ const initialJobs: InferInsertModel<typeof job>[] = [
 
       - Marketing for our ebook store
       - Marketers management
-      ...
-    `.trim(),
-    requirements: `
-      # Required
+
+      # Requirements
+
+      ## Required
 
       - Two year or more experience as a digital marketer in B2C field
 
-      # Nice to have
+      ## Nice to have
 
       - Basic understandings for HTML
     `.trim(),
@@ -225,14 +223,14 @@ const initialJobs: InferInsertModel<typeof job>[] = [
 
       - Development for the Shogunate's internal accounting systems (The Kanjou-kei)
       - Vendor management for the Shogunate's internal accounting systems (The Kanjou-kei)
-      ...
-    `.trim(),
-    requirements: `
-      # Required
+
+      # Requirements
+
+      ## Required
 
       - Two or more experience in Java
 
-      # Nice to have
+      ## Nice to have
 
       - Experience in vendor management
     `.trim(),
@@ -252,15 +250,15 @@ const initialJobs: InferInsertModel<typeof job>[] = [
       # Responsibilities
 
       - Create and maintain our websites
-      ...
-    `.trim(),
-    requirements: `
-      # Required
+
+      # Requirements
+
+      ## Required
 
       - Two or more experience in web design
       - Two or more experience in HTML and CSS
 
-      # Nice to have
+      ## Nice to have
 
       - Experience in JavaScript
       - Experience in SEO

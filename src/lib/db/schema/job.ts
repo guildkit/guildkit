@@ -23,7 +23,6 @@ export const job = pgTable("job", {
   id: uuid().primaryKey().notNull().defaultRandom(),
   title: text().notNull(),
   description: text().notNull(),
-  requirements: text().notNull(),
   applicationUrl: text().notNull(),
   location: text().notNull(),
   salary: integer().notNull(),
