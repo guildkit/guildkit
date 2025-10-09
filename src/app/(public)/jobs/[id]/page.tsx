@@ -2,7 +2,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Link } from "@/components/generic/ButtonLink.tsx";
 import { db } from "@/lib/db/db.ts";
-import { parseString } from "@/lib/helpers/parseString.ts";
 import type { ReactElement } from "react";
 
 type Props = {
@@ -24,7 +23,6 @@ export default async function JobPage({ params }: Props): Promise<ReactElement> 
       salaryPer: true,
       currency: true,
       applicationUrl: true,
-      requirements: true,
       createdAt: true,
       updatedAt: true,
     },
@@ -82,18 +80,6 @@ export default async function JobPage({ params }: Props): Promise<ReactElement> 
         <p>
           {job.description}
         </p>
-      </section>
-
-      <section className="mb-5">
-        <h3 className="text-2xl font-bold text-gray-800 mb-2">Requirements</h3>
-        <ul className="list-disc ml-8">
-          {parseString(job.requirements).map((requirement, index) => {
-            if (requirement) {
-              return <li key={index}>{requirement}</li>;
-            }
-            return null;
-          })}
-        </ul>
       </section>
 
       <section className="mt-8">
