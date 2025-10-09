@@ -5,7 +5,7 @@ import { headers } from "next/headers";
 import { redirect, RedirectType } from "next/navigation";
 import { flattenError } from "zod";
 import { APIError } from "better-auth";
-import { orgSchema, type Organization } from "@/lib/validation/organization.ts";
+import { orgSchema, type Organization } from "@/lib/validations/organization.ts";
 import { auth } from "@/lib/auth.ts";
 import { logoDirName, putObject } from "@/lib/storage.ts";
 import type { ActionState } from "@/lib/types.ts";

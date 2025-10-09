@@ -21,7 +21,7 @@ import {
   orgNameSchema,
   orgSlugSchema,
   orgUrlSchema,
-} from "@/lib/validation/organization.ts";
+} from "@/lib/validations/organization.ts";
 import { currencies } from "@/intermediate/currencies.ts";
 import publicConfigs from "@/intermediate/public-configs.json";
 import type { Tag } from "react-tag-input";
