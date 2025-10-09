@@ -17,6 +17,7 @@ import {
 export default function NewJobPage(): ReactElement {
   const [ state, formAction, isCreatingJob ] = useActionState(createJob, {});
   const { data: activeOrg } = useActiveOrganization();
+  const { formErrors, fieldErrors } = state.errors ?? {};
 
   if (!activeOrg) {
     // This error should not happen because active organization is set
@@ -27,6 +28,13 @@ export default function NewJobPage(): ReactElement {
   return (
     <section className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold flex justify-center mb-5">Create a new job for {activeOrg.name}</h1>
+
+      {formErrors?.map((formError) => (
+        <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-md">
+          <p className="text-red-800">{formError}</p>
+        </div>
+      ))}
+
       <form action={formAction}>
         <Field
           type="text"
@@ -34,7 +42,7 @@ export default function NewJobPage(): ReactElement {
           placeholder="Job Title"
           name="title"
           validator={jobTitleSchema}
-          errorMessages={state.errors?.title}
+          errorMessages={fieldErrors?.title}
           required
           className="mb-6"
         />
@@ -45,7 +53,7 @@ export default function NewJobPage(): ReactElement {
           placeholder="Job Description"
           name="description"
           validator={jobDescriptionSchema}
-          errorMessages={state.errors?.description}
+          errorMessages={fieldErrors?.description}
           required
           className="mb-6"
         />
@@ -56,7 +64,7 @@ export default function NewJobPage(): ReactElement {
           placeholder="https://yourcompany.com/careers/1"
           name="applicationUrl"
           validator={jobApplicationUrlSchema}
-          errorMessages={state.errors?.applicationUrl}
+          errorMessages={fieldErrors?.applicationUrl}
           required
           className="mb-6"
         />
@@ -68,7 +76,7 @@ export default function NewJobPage(): ReactElement {
             placeholder="Remote"
             name="location"
             validator={jobLocationSchema}
-            errorMessages={state.errors?.location}
+            errorMessages={fieldErrors?.location}
             required
             className="mb-6"
           />
@@ -80,7 +88,7 @@ export default function NewJobPage(): ReactElement {
             step="100"
             name="salary"
             validator={jobSalarySchema}
-            errorMessages={state.errors?.salary}
+            errorMessages={fieldErrors?.salary}
             required
             className="mb-6"
           />
@@ -91,7 +99,7 @@ export default function NewJobPage(): ReactElement {
           label="Deadline"
           name="expiresAt"
           validator={jobExpiresAtSchema}
-          errorMessages={state.errors?.expiresAt}
+          errorMessages={fieldErrors?.expiresAt}
           required
           className="mb-6"
         />
