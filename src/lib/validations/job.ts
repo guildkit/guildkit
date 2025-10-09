@@ -9,7 +9,10 @@ export const jobLocationSchema = z.string().trim().min(2, "Location must be at l
 export const jobSalarySchema = z.coerce.number<number>().positive("Salary must be a positive number.");
 export const jobCurrencySchema = z.enum(currency.enumValues);
 export const jobSalaryPerSchema = z.enum(salaryPer.enumValues);
-export const jobExpiresAtSchema = z.date("Please enter a valid date.");
+export const jobExpiresAtSchema = z.preprocess(
+  (dateInput) => typeof dateInput === "string" ? new Date(Date.parse(dateInput)) : dateInput,
+  z.date("Please enter a valid date.")
+);
 
 export const jobSchema = z.object({
   title: jobTitleSchema,
