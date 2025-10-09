@@ -23,7 +23,7 @@ import {
   orgNameSchema,
   orgSlugSchema,
   orgUrlSchema,
-} from "@/lib/validation/organization.ts";
+} from "@/lib/validations/organization.ts";
 import type { Tag } from "react-tag-input";
 
 export default function NewOrgPageClient(): ReactElement {
