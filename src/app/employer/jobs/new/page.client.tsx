@@ -20,18 +20,12 @@ export default function NewJobPageClient(): ReactElement {
   const { data: activeOrg } = useActiveOrganization();
   const { formErrors, fieldErrors } = state.errors ?? {};
 
-  if (!activeOrg) {
-    // This error should not happen because active organization is set
-    // in `databaseHooks.session.create` of betterAuth instanciation in src/lib/auth.ts
-    throw new Error("You don't belong to any organization. Error code: GK-P683B");
-  }
-
   const onSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     startTransition(() => formAction(new FormData(evt.currentTarget)));
   };
 
-  return (
+  return activeOrg ? (
     <section className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold flex justify-center mb-5">Create a new job for {activeOrg.name}</h1>
 
@@ -120,5 +114,7 @@ export default function NewJobPageClient(): ReactElement {
         </Button>
       </Form>
     </section>
+  ) : (
+    <p>Loading...</p>
   );
 }
