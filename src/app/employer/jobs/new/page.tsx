@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth.ts";
+import type { Currency } from "@/lib/types.ts";
 import NewJobPageClient from "./page.client.tsx";
 import type { ReactElement } from "react";
 
@@ -19,6 +20,7 @@ export default async function NewJobPage(): Promise<ReactElement> {
     <NewJobPageClient
       activeOrg={{
         name: activeOrg.name,
+        currencies: activeOrg.currencies as Currency[],
       }}
     />
   );
