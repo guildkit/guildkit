@@ -26,11 +26,10 @@ export const createJob = async (_initialState: CreateJobState, formData: FormDat
     };
   }
 
-  const { expiresAt, ...validatedNewJob } = jobValidation.data;
+  const validatedNewJob = jobValidation.data;
 
   const [ createdJob ] = await db.insert(jobTable).values({
     ...validatedNewJob,
-    expiresAt: new Date(expiresAt),
     employer: session.activeOrganizationId,
   }).returning({ id: jobTable.id });
 

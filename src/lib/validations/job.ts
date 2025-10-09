@@ -10,7 +10,10 @@ export const jobSchema = z.object({
   salary: z.coerce.number<number>().positive("Salary must be a positive number."),
   currency: z.enum(currency.enumValues, "Please set available currency code. (e.g. \"USD\" for US Dollar)"),
   salaryPer: z.enum(salaryPer.enumValues),
-  expiresAt: z.date("Please enter a valid date."),
+  expiresAt: z.preprocess(
+    (dateInput) => typeof dateInput === "string" ? new Date(Date.parse(dateInput)) : dateInput,
+    z.date("Please enter a valid date.")
+  ),
 });
 
 export type Job = z.infer<typeof jobSchema>;
