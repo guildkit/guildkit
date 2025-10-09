@@ -3,10 +3,10 @@ import { currency } from "@/lib/db/schema/currencies.ts";
 import { salaryPer } from "@/lib/db/schema/job.ts";
 
 export const jobSchema = z.object({
-  title: z.string().min(2),
-  description: z.string().min(4),
+  title: z.string().trim().min(2),
+  description: z.string().trim().min(4),
   applicationUrl: z.string().url(),
-  location: z.string().min(2),
+  location: z.string().trim().min(2),
   salary: z.number().positive(),
   currency: z.enum(currency.enumValues),
   salaryPer: z.enum(salaryPer.enumValues),
