@@ -22,7 +22,6 @@ export const jobSchema = z.object({
   salary: jobSalarySchema,
   currency: jobCurrencySchema,
   salaryPer: jobSalaryPerSchema,
-  recruiterId: z.string(),
   expiresAt: jobExpiresAtSchema,
 });
 
