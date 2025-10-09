@@ -63,30 +63,6 @@ export default function NewJobPage(): ReactElement {
         </div>
 
         <div className="mb-6">
-          <label className="block w-full" htmlFor="requirements">
-            <span className="font-bold block mb-2">
-              Requirements <span className="text-red-400">*</span>
-            </span>
-            <span className="text-sm text-gray-500 block mb-2">
-              (Separate using &quot;&semi;&quot; for better formatting)
-            </span>
-            <textarea
-              className={`block w-full px-3 py-3 border rounded-md text-base transition-all duration-150 ease-in-out focus:outline-none focus:border-blue-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.1)] min-h-[100px] resize-y ${
-                state.errors?.requirements ? "border-red-600 shadow-[0_0_0_3px_rgba(220,38,38,0.1)]" : "border-gray-300"
-              }`}
-              placeholder="Requirement 1; Requirement 2; Requirement 3; etc"
-              name="requirements"
-              id="requirements"
-            />
-          </label>
-          {state.errors?.requirements && (
-            <small className="text-red-600 text-sm block mt-1">
-              {state.errors?.requirements.map((errMsg) => <p>{errMsg}</p>)}
-            </small>
-          )}
-        </div>
-
-        <div className="mb-6">
           <label className="block w-full" htmlFor="applicationUrl">
             <span className="font-bold block mb-2">
               Application URL <span className="text-red-400">*</span>
