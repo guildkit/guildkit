@@ -1,6 +1,11 @@
 "use client";
 
-import { useActionState, type ReactElement } from "react";
+import {
+  startTransition,
+  useActionState,
+  type FormEvent,
+  type ReactElement,
+} from "react";
 import { Button } from "@/components/generic/ButtonLink.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
 import { createJob } from "@/lib/actions/jobs.ts";
@@ -25,6 +30,11 @@ export default function NewJobPage(): ReactElement {
     throw new Error("You don't belong to any organization. Error code: GK-P683B");
   }
 
+  const onSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    startTransition(() => formAction(new FormData(evt.currentTarget)));
+  };
+
   return (
     <section className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold flex justify-center mb-5">Create a new job for {activeOrg.name}</h1>
@@ -35,7 +45,7 @@ export default function NewJobPage(): ReactElement {
         </div>
       ))}
 
-      <form action={formAction}>
+      <form action={formAction} onSubmit={onSubmit}>
         <Field
           type="text"
           label="Title"
