@@ -5,33 +5,26 @@ import {
   useState,
   type ChangeEventHandler,
   type ComponentProps,
-  type HTMLInputTypeAttribute,
   type ReactElement,
 } from "react";
 import { commonClasses, errorClasses, ErrorMessage, FieldHeadings, validClasses, type CommonFieldProps } from "./FieldCommons.tsx";
 import type { ZodType } from "zod";
 
-type Props<T extends (Omit<HTMLInputTypeAttribute, "number"> | "textarea")> = CommonFieldProps & {
-  type: T;
+type Props = CommonFieldProps & Omit<ComponentProps<"input">, "type"> & {
   validator?: ZodType;
-} & (
-  T extends "textarea"
-    ? ComponentProps<T>
-    : Omit<ComponentProps<"input">, "type">
-);
+};
 
-export const Field = <T extends (HTMLInputTypeAttribute | "textarea")>({
-  type,
+export const NumberField = ({
   label,
   description,
   required = false,
   name,
-  autoComplete = "on",
+  autoComplete = "off",
   validator,
   className,
   errorMessages: serverSideErrorMessages,
   ...formProps
-}: Props<T>): ReactElement<Props<T>> => {
+}: Props): ReactElement => {
   const [ errorMessage, setErrorMessage ] = useState<string>(serverSideErrorMessages?.[0] ?? "");
 
   useEffect(() => {
@@ -60,26 +53,15 @@ export const Field = <T extends (HTMLInputTypeAttribute | "textarea")>({
         name={name}
       />
 
-      {type === "textarea" ? (
-        <textarea
-          id={name}
-          name={name}
-          className={`${ commonClasses } ${ errorMessage ? errorClasses : validClasses } min-h-[100px] resize-y`}
-          autoComplete={autoComplete}
-          onChange={onChange}
-          {...formProps as ComponentProps<"textarea">}
-        />
-      ) : (
-        <input
-          type={type}
-          id={name}
-          name={name}
-          className={commonClasses + " " + (errorMessage ? errorClasses : validClasses)}
-          autoComplete={autoComplete}
-          onChange={onChange}
-          {...formProps as ComponentProps<"input">}
-        />
-      )}
+      <input
+        type="number"
+        id={name}
+        name={name}
+        className={commonClasses + " " + (errorMessage ? errorClasses : validClasses)}
+        autoComplete={autoComplete}
+        onChange={onChange}
+        {...formProps as ComponentProps<"input">}
+      />
 
       <ErrorMessage>
         {errorMessage}
