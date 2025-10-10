@@ -15,7 +15,7 @@ import {
   jobExpiresAtSchema,
 } from "@/lib/validations/job.ts";
 
-export default function NewJobPage(): ReactElement {
+export default function NewJobPageClient(): ReactElement {
   const [ state, formAction, isCreatingJob ] = useActionState(createJob, {});
   const { data: activeOrg } = useActiveOrganization();
   const { formErrors, fieldErrors } = state.errors ?? {};
