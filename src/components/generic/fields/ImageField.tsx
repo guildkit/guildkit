@@ -223,7 +223,7 @@ export const ImageField = ({
       </div>
 
       {
-        serverSideErrorMessages ? (
+        (serverSideErrorMessages && 0 < serverSideErrorMessages.length) ? (
           <ErrorMessage>
             {serverSideErrorMessages.join(" ")}
           </ErrorMessage>

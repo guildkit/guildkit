@@ -31,7 +31,7 @@ export const Field = <T extends (HTMLInputTypeAttribute | "textarea")>({
   errorMessages: serverSideErrorMessages,
   ...formProps
 }: Props<T>): ReactElement<Props<T>> => {
-  const [ errorMessage, setErrorMessage ] = useState<string>(serverSideErrorMessages?.[0] ?? "");
+  const [ errorMessage, setErrorMessage ] = useState<string>("");
 
   const onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (evt) => {
     if (!validator) {
@@ -77,7 +77,7 @@ export const Field = <T extends (HTMLInputTypeAttribute | "textarea")>({
       )}
 
       <ErrorMessage>
-        {errorMessage}
+        {serverSideErrorMessages?.[0] ?? errorMessage}
       </ErrorMessage>
     </div>
   );
