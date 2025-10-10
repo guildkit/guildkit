@@ -22,7 +22,6 @@ import {
   orgSlugSchema,
   orgUrlSchema,
 } from "@/lib/validations/organization.ts";
-import { currencies } from "@/intermediate/currencies.ts";
 import publicConfigs from "@/intermediate/public-configs.json";
 import type { Tag } from "react-tag-input";
 
@@ -30,7 +29,7 @@ export default function NewOrgPageClient(): ReactElement {
   const [ state, formAction, pending ] = useActionState(createOrganization, {});
   const { formErrors, fieldErrors } = state.errors ?? {};
 
-  const currencyTags: Tag[] = currencies.map((currencyCode) => ({
+  const currencyTags: Tag[] = publicConfigs.currencies.map((currencyCode) => ({
     id: currencyCode,
     text: currencyCode,
     className: "",
