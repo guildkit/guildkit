@@ -9,9 +9,9 @@ import {
 } from "react";
 import { Button } from "@/components/generic/ButtonLink.tsx";
 import { ArrayField } from "@/components/generic/fields/ArrayField.tsx";
+import { Field } from "@/components/generic/fields/Field.tsx";
 import { ImageField } from "@/components/generic/fields/ImageField.tsx";
 import { TagField } from "@/components/generic/fields/TagField.tsx";
-import { TextField } from "@/components/generic/fields/TextField.tsx";
 import { currencies } from "@/intermediate/currencies.ts";
 import publicConfigs from "@/intermediate/public-configs.json";
 import { createOrganization } from "@/lib/actions/organizations.ts";
@@ -57,7 +57,7 @@ export default function NewOrgPageClient(): ReactElement {
         </div>
       ))}
 
-      <TextField
+      <Field
         type="text"
         label="Organization Name"
         placeholder="Your Company Name"
@@ -71,7 +71,7 @@ export default function NewOrgPageClient(): ReactElement {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div className="flex flex-col">
-          <TextField
+          <Field
             type="text"
             label="Organization Slug"
             description="Used in URLs. Lowercase letters, numbers, and hyphens only"
@@ -83,7 +83,7 @@ export default function NewOrgPageClient(): ReactElement {
             className="mb-6"
           />
 
-          <TextField
+          <Field
             type="url"
             label="Website URL"
             placeholder="https://yourcompany.com"
@@ -107,7 +107,7 @@ export default function NewOrgPageClient(): ReactElement {
         />
       </div>
 
-      <TextField
+      <Field
         type="textarea"
         label="About"
         placeholder="Tell us about your organization..."

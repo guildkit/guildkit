@@ -19,7 +19,7 @@ type Props<T extends (HTMLInputTypeAttribute | "textarea")> = CommonFieldProps &
     : Omit<ComponentProps<"input">, "type">
 );
 
-export const TextField = <T extends (HTMLInputTypeAttribute | "textarea")>({
+export const Field = <T extends (HTMLInputTypeAttribute | "textarea")>({
   type,
   label,
   description,
