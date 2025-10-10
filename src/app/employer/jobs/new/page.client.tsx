@@ -18,6 +18,7 @@ import {
   jobSalarySchema,
   jobTitleSchema,
 } from "@/lib/validations/job.ts";
+import { NumberField } from "@/components/generic/fields/NumberField.tsx";
 import { TagField } from "@/components/generic/fields/TagField.tsx";
 import type { Currency } from "@/lib/types.ts";
 import type { Tag } from "react-tag-input";
@@ -100,8 +101,7 @@ export default function NewJobPageClient({ activeOrg }: Props): ReactElement {
             className="mb-6"
           />
 
-          <Field
-            type="number"
+          <NumberField
             label="Salary"
             placeholder="800000"
             step="100"

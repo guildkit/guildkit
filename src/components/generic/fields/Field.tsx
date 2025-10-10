@@ -11,7 +11,7 @@ import {
 import { commonClasses, errorClasses, ErrorMessage, FieldHeadings, validClasses, type CommonFieldProps } from "./FieldCommons.tsx";
 import type { ZodType } from "zod";
 
-type Props<T extends (HTMLInputTypeAttribute | "textarea")> = CommonFieldProps & {
+type Props<T extends (Omit<HTMLInputTypeAttribute, "number"> | "textarea")> = CommonFieldProps & {
   type: T;
   validator?: ZodType;
 } & (
