@@ -9,6 +9,7 @@ const config: GuildKitConfig = {
   } : {
     platform: "cloudflare",
   },
+  currencies: [ "JPY", "KRW", "USD" ],
   maxLogoSizeMiB: 8,
 };
 

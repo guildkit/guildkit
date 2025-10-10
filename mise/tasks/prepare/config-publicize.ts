@@ -7,6 +7,7 @@ import { config } from "../../../src/lib/configs.ts";
 const intermediateDirPath = join(import.meta.dirname, "../../../src/intermediate");
 
 const publicConfigStr = JSON.stringify({
+  currencies: config.currencies,
   maxLogoSizeMiB: config.maxLogoSizeMiB,
 }, undefined, 2);
 

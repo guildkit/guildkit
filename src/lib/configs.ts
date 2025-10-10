@@ -1,3 +1,4 @@
+import type { Currency } from "@/lib/types.ts";
 import userConfig from "../../guildkit.config.ts";
 import type { S3ClientConfig } from "@aws-sdk/client-s3";
 
@@ -39,10 +40,12 @@ type AwsS3OrCustomConfig = BaseStorageConfig & {
 
 export type GuildKitConfig = {
   storage: CloudflareR2Config | MinioConfig | DevStorageConfig | AwsS3OrCustomConfig;
+  currencies: Currency[];
   maxLogoSizeMiB?: number;
 };
 
 export const config: Required<GuildKitConfig> = {
   storage: userConfig.storage,
+  currencies: userConfig.currencies,
   maxLogoSizeMiB: userConfig.maxLogoSizeMiB ?? 5,
 };

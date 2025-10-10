@@ -12,7 +12,6 @@ import { ArrayField } from "@/components/generic/fields/ArrayField.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
 import { ImageField } from "@/components/generic/fields/ImageField.tsx";
 import { TagField } from "@/components/generic/fields/TagField.tsx";
-import { currencies } from "@/intermediate/currencies.ts";
 import publicConfigs from "@/intermediate/public-configs.json";
 import { createOrganization } from "@/lib/actions/organizations.ts";
 import {
@@ -30,7 +29,7 @@ export default function NewOrgPageClient(): ReactElement {
   const [ state, formAction, pending ] = useActionState(createOrganization, {});
   const { formErrors, fieldErrors } = state.errors ?? {};
 
-  const currencyTags: Tag[] = currencies.map((currencyCode) => ({
+  const currencyTags: Tag[] = publicConfigs.currencies.map((currencyCode) => ({
     id: currencyCode,
     text: currencyCode,
     className: "",
