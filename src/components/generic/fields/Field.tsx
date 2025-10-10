@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  useEffect,
   useState,
   type ChangeEventHandler,
   type ComponentProps,
@@ -32,6 +33,10 @@ export const Field = <T extends (HTMLInputTypeAttribute | "textarea")>({
   ...formProps
 }: Props<T>): ReactElement<Props<T>> => {
   const [ errorMessage, setErrorMessage ] = useState<string>("");
+
+  useEffect(() => {
+    setErrorMessage(serverSideErrorMessages?.[0] ?? "");
+  }, [ serverSideErrorMessages ]);
 
   const onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (evt) => {
     if (!validator) {

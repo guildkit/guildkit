@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import {
+  useEffect,
   useRef,
   useState,
   type ChangeEventHandler,
@@ -153,6 +154,10 @@ export const ImageField = ({
     evt.stopPropagation();
     clearImage();
   };
+
+  useEffect(() => {
+    setErrorMessage(serverSideErrorMessages?.[0] ?? "");
+  }, [ serverSideErrorMessages ]);
 
   return (
     <div className={className}>
