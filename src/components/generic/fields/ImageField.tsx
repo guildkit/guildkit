@@ -3,6 +3,7 @@
 import {
   useState,
   useRef,
+  useEffect,
   type DragEventHandler,
   type MouseEventHandler,
   type ReactElement,
@@ -153,6 +154,10 @@ export const ImageField = ({
     evt.stopPropagation();
     clearImage();
   };
+
+  useEffect(() => {
+    setErrorMessage(serverSideErrorMessages?.[0] ?? "");
+  }, [ serverSideErrorMessages ]);
 
   return (
     <div className={className}>
