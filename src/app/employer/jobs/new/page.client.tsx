@@ -5,7 +5,6 @@ import Form from "next/form";
 import { createJob } from "@/lib/actions/jobs.ts";
 import { Button } from "@/components/generic/ButtonLink.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
-import { useActiveOrganization } from "@/lib/auth/client.ts";
 import {
   jobTitleSchema,
   jobDescriptionSchema,
@@ -15,9 +14,14 @@ import {
   jobExpiresAtSchema,
 } from "@/lib/validations/job.ts";
 
-export default function NewJobPageClient(): ReactElement {
+type Props = {
+  activeOrg: {
+    name: string;
+  };
+};
+
+export default function NewJobPageClient({ activeOrg }: Props): ReactElement {
   const [ state, formAction, isCreatingJob ] = useActionState(createJob, {});
-  const { data: activeOrg } = useActiveOrganization();
   const { formErrors, fieldErrors } = state.errors ?? {};
 
   const onSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -25,7 +29,7 @@ export default function NewJobPageClient(): ReactElement {
     startTransition(() => formAction(new FormData(evt.currentTarget)));
   };
 
-  return activeOrg ? (
+  return (
     <section className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold flex justify-center mb-5">Create a new job for {activeOrg.name}</h1>
 
@@ -114,7 +118,5 @@ export default function NewJobPageClient(): ReactElement {
         </Button>
       </Form>
     </section>
-  ) : (
-    <p>Loading...</p>
   );
 }
