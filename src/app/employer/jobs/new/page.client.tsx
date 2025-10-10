@@ -89,29 +89,27 @@ export default function NewJobPageClient({ activeOrg }: Props): ReactElement {
           className="mb-6"
         />
 
-        <div className="grid grid-cols-2 gap-6 mb-6">
-          <Field
-            type="text"
-            label="Location"
-            placeholder="Remote"
-            name="location"
-            validator={jobLocationSchema}
-            errorMessages={fieldErrors?.location}
-            required
-            className="mb-6"
-          />
+        <Field
+          type="text"
+          label="Location"
+          placeholder="Remote"
+          name="location"
+          validator={jobLocationSchema}
+          errorMessages={fieldErrors?.location}
+          required
+          className="mb-6"
+        />
 
-          <NumberField
-            label="Salary"
-            placeholder="800000"
-            step="100"
-            name="salary"
-            validator={jobSalarySchema}
-            errorMessages={fieldErrors?.salary}
-            required
-            className="mb-6"
-          />
-        </div>
+        <NumberField
+          label="Salary"
+          placeholder="800000"
+          step="100"
+          name="salary"
+          validator={jobSalarySchema}
+          errorMessages={fieldErrors?.salary}
+          required
+          className="mb-6"
+        />
 
         {currencyTags.length === 1 ? (
           <input type="hidden" name="currency" value={currencyTags[0].id} />
