@@ -35,7 +35,7 @@ export default function NewJobPageClient({ activeOrg }: Props): ReactElement {
   };
 
   return (
-    <section className="max-w-4xl mx-auto px-4 py-8">
+    <section className="w-full max-w-3xl px-4 py-8">
       <h1 className="text-2xl font-bold flex justify-center mb-5">Create a new job for {activeOrg.name}</h1>
 
       {formErrors?.map((formError) => (
