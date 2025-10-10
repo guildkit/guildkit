@@ -2,7 +2,7 @@
 
 import { useActionState, type ReactElement } from "react";
 import { Button } from "@/components/generic/ButtonLink.tsx";
-import { TextField } from "@/components/generic/fields/TextField.tsx";
+import { Field } from "@/components/generic/fields/Field.tsx";
 import { createJob } from "@/lib/actions/jobs.ts";
 import { useActiveOrganization } from "@/lib/auth/client.ts";
 import {
@@ -28,7 +28,7 @@ export default function NewJobPage(): ReactElement {
     <section className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold flex justify-center mb-5">Create a new job for {activeOrg.name}</h1>
       <form action={formAction}>
-        <TextField
+        <Field
           type="text"
           label="Title"
           placeholder="Job Title"
@@ -39,7 +39,7 @@ export default function NewJobPage(): ReactElement {
           className="mb-6"
         />
 
-        <TextField
+        <Field
           type="textarea"
           label="Description"
           placeholder="Job Description"
@@ -50,7 +50,7 @@ export default function NewJobPage(): ReactElement {
           className="mb-6"
         />
 
-        <TextField
+        <Field
           type="url"
           label="Application URL"
           placeholder="https://yourcompany.com/careers/1"
@@ -62,7 +62,7 @@ export default function NewJobPage(): ReactElement {
         />
 
         <div className="grid grid-cols-2 gap-6 mb-6">
-          <TextField
+          <Field
             type="text"
             label="Location"
             placeholder="Remote"
@@ -73,7 +73,7 @@ export default function NewJobPage(): ReactElement {
             className="mb-6"
           />
 
-          <TextField
+          <Field
             type="number"
             label="Salary"
             placeholder="800000"
@@ -86,7 +86,7 @@ export default function NewJobPage(): ReactElement {
           />
         </div>
 
-        <TextField
+        <Field
           type="date"
           label="Deadline"
           name="expiresAt"
