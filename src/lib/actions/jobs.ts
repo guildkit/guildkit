@@ -22,7 +22,7 @@ export const createJob = async (_initialState: ActionState<Job>, formData: FormD
     applicationUrl: formData.get("applicationUrl"),
     location: formData.get("location"),
     salary: formData.get("salary"),
-    expiresAt: formData.getAll("expiresAt"),
+    expiresAt: formData.get("expiresAt"),
   });
 
   if (!success) {
