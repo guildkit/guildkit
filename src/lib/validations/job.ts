@@ -7,7 +7,7 @@ export const jobDescriptionSchema = z.string().trim().min(4, "Job description mu
 export const jobApplicationUrlSchema = z.url("Please enter a valid URL.");
 export const jobLocationSchema = z.string().trim().min(2, "Location must be at least 2 characters.");
 export const jobSalarySchema = z.coerce.number<number>().positive("Salary must be a positive number.");
-export const jobCurrencySchema = z.enum(currency.enumValues);
+export const jobCurrencySchema = z.enum(currency.enumValues); // TODO organization.currencies に限定する TODO エラーメッセージ書く
 export const jobSalaryPerSchema = z.enum(salaryPer.enumValues);
 export const jobExpiresAtSchema = z.preprocess(
   (dateInput) => typeof dateInput === "string" ? new Date(Date.parse(dateInput)) : dateInput,
