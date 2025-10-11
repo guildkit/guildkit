@@ -116,6 +116,7 @@ export const ArrayField = ({
           </div>
         ))}
 
+        {/* TODO 新規作成ボタン押下時にエラーメッセージが正しく表示されるかテスト */}
         {serverSideErrorMessages && 0 < serverSideErrorMessages.length && serverSideErrorMessages.map((msg, i) => (
           <ErrorMessage key={i}>
             {msg}

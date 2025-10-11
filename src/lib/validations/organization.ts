@@ -32,7 +32,7 @@ export const orgAboutSchema = z.string().trim().optional();
 export const orgUrlSchema = z.url("Please enter a valid URL.");
 export const orgEmailSchema = z.email({ error: "Please enter a valid email here. Some legacy emails by Japanese mobile carriers may not be acceptable." });
 export const orgAddressSchema = z.string().trim().min(4, "Address must be at least 4 characters.");
-export const orgCurrencySchema = z.enum(currency.enumValues);
+export const orgCurrencySchema = z.enum(currency.enumValues); // TODO guildkit.config.ts で指定されている currencies 以外が使えないようにする。TODO エラーメッセージ書く
 
 export const orgSchema = z.object({
   name: orgNameSchema,

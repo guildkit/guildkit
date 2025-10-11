@@ -155,6 +155,7 @@ export const ImageField = ({
     clearImage();
   };
 
+  // TODO test
   useEffect(() => {
     setErrorMessage(serverSideErrorMessages?.[0] ?? "");
   }, [ serverSideErrorMessages ]);
