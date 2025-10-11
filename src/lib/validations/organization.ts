@@ -32,6 +32,8 @@ export const orgAboutSchema = z.string().trim().optional();
 export const orgUrlSchema = z.url("Please enter a valid URL.");
 export const orgEmailSchema = z.email({ error: "Please enter a valid email here. Some legacy emails by Japanese mobile carriers may not be acceptable." });
 export const orgAddressSchema = z.string().trim().min(4, "Address must be at least 4 characters.");
+// TODO show the list of available currency code in the error message
+// TODO guildkit.config.ts で指定されている currencies 以外が使えないようにする。
 export const orgCurrencySchema = z.enum(currency.enumValues, "Please set available currency code. (e.g. \"USD\" for US Dollar)");
 
 export const orgSchema = z.object({

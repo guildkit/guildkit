@@ -10,6 +10,7 @@ import { jobSchema, type Job } from "@/lib/validations/job.ts";
 import type { ActionState } from "@/lib/types.ts";
 
 export const createJob = async (_initialState: ActionState<Job>, formData: FormData): Promise<ActionState<Job>> => {
+  console.log("form", formData);
   const { err, session } = await requireAuthAs("recruiter");
 
   if (err) {
@@ -28,6 +29,7 @@ export const createJob = async (_initialState: ActionState<Job>, formData: FormD
   });
 
   if (!success) {
+    console.log("!tetete", flattenError(error));
     return {
       errors: flattenError(error),
     };

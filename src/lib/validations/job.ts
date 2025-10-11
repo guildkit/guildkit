@@ -7,6 +7,8 @@ export const jobDescriptionSchema = z.string().trim().min(4, "Job description mu
 export const jobApplicationUrlSchema = z.url("Please enter a valid URL.");
 export const jobLocationSchema = z.string().trim().min(2, "Location must be at least 2 characters.");
 export const jobSalarySchema = z.coerce.number<number>().positive("Salary must be a positive number.");
+// TODO organization.currencies に限定する
+// TODO show the list of available currency code in the error message
 export const jobCurrencySchema = z.enum(currency.enumValues, "Please set available currency code. (e.g. \"USD\" for US Dollar)");
 export const jobSalaryPerSchema = z.enum(salaryPer.enumValues, "Please set a valid salary period. (e.g. \"hour\", \"day\", \"week\", \"month\", \"year\")");
 export const jobExpiresAtSchema = z.preprocess(
