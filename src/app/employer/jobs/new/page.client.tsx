@@ -19,9 +19,7 @@ import {
   jobTitleSchema,
 } from "@/lib/validations/job.ts";
 import { NumberField } from "@/components/generic/fields/NumberField.tsx";
-import { TagField } from "@/components/generic/fields/TagField.tsx";
 import type { Currency } from "@/lib/types.ts";
-import type { Tag } from "react-tag-input";
 
 type Props = {
   activeOrg: {
@@ -33,12 +31,6 @@ type Props = {
 export default function NewJobPageClient({ activeOrg }: Props): ReactElement {
   const [ state, formAction, isCreatingJob ] = useActionState(createJob, {});
   const { formErrors, fieldErrors } = state.errors ?? {};
-
-  const currencyTags: Tag[] = activeOrg.currencies.map((currencyCode) => ({
-    id: currencyCode,
-    text: currencyCode,
-    className: "",
-  }));
 
   const onSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -105,25 +97,13 @@ export default function NewJobPageClient({ activeOrg }: Props): ReactElement {
           placeholder="800000"
           step="100"
           name="salary"
+          currencies={activeOrg.currencies}
+          defaultCurrency={activeOrg.currencies[0]}
           validator={jobSalarySchema}
           errorMessages={fieldErrors?.salary}
           required
           className="mb-6"
         />
-
-        {currencyTags.length === 1 ? (
-          <input type="hidden" name="currency" value={currencyTags[0].id} />
-        ) : ( // TODO Consider replacing this TagField with a combobox
-          <TagField
-            label="Payment Currency"
-            tags={currencyTags}
-            name="currency"
-            errorMessages={fieldErrors?.currency}
-            required
-            maxTags={1}
-            className="mb-6"
-          />
-        )}
 
         <Field
           type="date"
