@@ -49,8 +49,8 @@ importers:
         specifier: latest
         version: 2025.8.30(eslint@9.37.0(jiti@2.6.1))(next@15.5.4(@babel/core@7.28.4)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
       '@phanect/utils':
-        specifier: ^1.5.0
-        version: 1.5.0
+        specifier: ^2.0.0
+        version: 2.0.0
       '@tailwindcss/postcss':
         specifier: ^4.1.13
         version: 4.1.14
@@ -1154,9 +1154,9 @@ packages:
       typescript:
         optional: true
 
-  '@phanect/utils@1.5.0':
-    resolution: {integrity: sha512-o/Bh2E80rAM9fzuAFSHehxBsuui1sl63X1NtABW5/JV79WGSVAHDd5L6FqDOGCLyVwe6rzl+T9qrJoVwNpwV1Q==}
-    engines: {node: '>=18.x', npm: '>=10.x'}
+  '@phanect/utils@2.0.0':
+    resolution: {integrity: sha512-rLUccOjo7it8l0BR98jZMR50OZAlXTNm6pQEvlbngnRR/svW470NUhdCCscv/s0WFy1y6UdV5TK8LlXOhCDDUw==}
+    engines: {node: ^20.11.0 || ^22.16.0 || >=24.0.0, pnpm: '>=10.x'}
 
   '@pkgr/core@0.2.9':
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
@@ -5396,7 +5396,7 @@ snapshots:
       - supports-color
       - vitest
 
-  '@phanect/utils@1.5.0': {}
+  '@phanect/utils@2.0.0': {}
 
   '@pkgr/core@0.2.9': {}
 

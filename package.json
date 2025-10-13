@@ -20,7 +20,7 @@
     "@phanect/configs": "latest",
     "@phanect/lint": "latest",
     "@phanect/lint-react": "latest",
-    "@phanect/utils": "^1.5.0",
+    "@phanect/utils": "^2.0.0",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^24.5.0",
     "@types/pg": "^8.15.4",
