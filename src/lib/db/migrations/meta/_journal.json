@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1755856771690,
-      "tag": "0000_large_king_bedlam",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1758675930863,
-      "tag": "0001_talented_wendigo",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1758680884010,
-      "tag": "0002_material_maestro",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1759730824672,
-      "tag": "0003_faithful_guardsmen",
+      "when": 1760757739713,
+      "tag": "0000_strong_grey_gargoyle",
       "breakpoints": true
     }
   ]

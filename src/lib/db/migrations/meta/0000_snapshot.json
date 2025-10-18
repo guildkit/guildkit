@@ -1,5 +1,5 @@
 {
-  "id": "8033cbb0-4b37-4f56-acea-27cbd4e1a079",
+  "id": "8645c5b4-ab08-4843-a137-3a344382ad61",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -78,7 +78,8 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
@@ -283,7 +284,7 @@
           "name": "slug",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "logo": {
           "name": "logo",
@@ -303,11 +304,35 @@
           "primaryKey": false,
           "notNull": false
         },
-        "props_id": {
-          "name": "props_id",
-          "type": "integer",
+        "url": {
+          "name": "url",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "addresses": {
+          "name": "addresses",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "currencies": {
+          "name": "currencies",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "emails": {
+          "name": "emails",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "about": {
+          "name": "about",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -319,6 +344,13 @@
           "nullsNotDistinct": false,
           "columns": [
             "slug"
+          ]
+        },
+        "organization_url_unique": {
+          "name": "organization_url_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "url"
           ]
         }
       },
@@ -352,7 +384,8 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
@@ -447,7 +480,8 @@
           "name": "email_verified",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": false
         },
         "image": {
           "name": "image",
@@ -459,13 +493,15 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "role": {
           "name": "role",
@@ -477,7 +513,8 @@
           "name": "banned",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": false
         },
         "ban_reason": {
           "name": "ban_reason",
@@ -496,12 +533,6 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
-        },
-        "recruits_for": {
-          "name": "recruits_for",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
@@ -552,13 +583,15 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
@@ -588,12 +621,6 @@
         },
         "description": {
           "name": "description",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "requirements": {
-          "name": "requirements",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -678,77 +705,6 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.orgProps": {
-      "name": "orgProps",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "about": {
-          "name": "about",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "url": {
-          "name": "url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "emails": {
-          "name": "emails",
-          "type": "text[]",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "addresses": {
-          "name": "addresses",
-          "type": "text[]",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "currencies": {
-          "name": "currencies",
-          "type": "Currency[]",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "orgProps_url_unique": {
-          "name": "orgProps_url_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "url"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "public.jobsAndCandidatesRelation": {
       "name": "jobsAndCandidatesRelation",
       "schema": "",
@@ -809,76 +765,15 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.organizationAndRecruiterRelation": {
-      "name": "organizationAndRecruiterRelation",
-      "schema": "",
-      "columns": {
-        "organizationId": {
-          "name": "organizationId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "recruiterId": {
-          "name": "recruiterId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "organizationAndRecruiterRelation_organizationId_organization_id_fk": {
-          "name": "organizationAndRecruiterRelation_organizationId_organization_id_fk",
-          "tableFrom": "organizationAndRecruiterRelation",
-          "tableTo": "organization",
-          "columnsFrom": [
-            "organizationId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "organizationAndRecruiterRelation_recruiterId_user_id_fk": {
-          "name": "organizationAndRecruiterRelation_recruiterId_user_id_fk",
-          "tableFrom": "organizationAndRecruiterRelation",
-          "tableTo": "user",
-          "columnsFrom": [
-            "recruiterId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "organizationAndRecruiterRelation_organizationId_recruiterId_pk": {
-          "name": "organizationAndRecruiterRelation_organizationId_recruiterId_pk",
-          "columns": [
-            "organizationId",
-            "recruiterId"
-          ]
-        }
-      },
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "public.userProps": {
       "name": "userProps",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "text",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "type": {
           "name": "type",
