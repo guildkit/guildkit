@@ -1,9 +1,10 @@
-"use client";
+"use server";
 
 import Image from "next/image";
-import { Button, Link } from "@/components/generic/ButtonLink.tsx";
+import { Link } from "@/components/generic/ButtonLink.tsx";
 import { TopBar } from "@/components/generic/TopBar.tsx";
-import { useActiveOrganization, useSignOut } from "@/lib/auth/client.ts";
+import { SignOutButton } from "@/components/SignOutButton.tsx";
+import { useActiveOrganization } from "@/lib/auth/client.ts";
 import type { ReactElement } from "react";
 import type { UserType } from "@/lib/db/schema/user.ts";
 
@@ -12,7 +13,6 @@ type Props = {
 };
 
 export const Nav = ({ for: userType }: Props): ReactElement => {
-  const { signOut } = useSignOut();
   const { data: activeOrg } = useActiveOrganization();
 
   return (
@@ -56,7 +56,7 @@ export const Nav = ({ for: userType }: Props): ReactElement => {
           {userType === "guest" ? (
             <Link href="/auth" theme="button-deep">Log in <span className="after:content-['|'] after:text-gray-500"></span> Sign up</Link>
           ) : (
-            <Button theme="button-pale" onClick={() => void signOut()}>Log out</Button>
+            <SignOutButton />
           )}
         </div>
       </nav>
