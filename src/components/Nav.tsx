@@ -1,19 +1,26 @@
-"use client";
+"use server";
 
+import { headers } from "next/headers";
 import Image from "next/image";
-import { Button, Link } from "@/components/generic/ButtonLink.tsx";
+import { Link } from "@/components/generic/ButtonLink.tsx";
 import { TopBar } from "@/components/generic/TopBar.tsx";
-import { useActiveOrganization, useSignOut } from "@/lib/auth/client.ts";
-import type { ReactElement } from "react";
+import { SignOutButton } from "@/components/SignOutButton.tsx";
+import { auth } from "@/lib/auth.ts";
 import type { UserType } from "@/lib/db/schema/user.ts";
 
 type Props = {
   for: UserType | "guest";
 };
 
-export const Nav = ({ for: userType }: Props): ReactElement => {
-  const { signOut } = useSignOut();
-  const { data: activeOrg } = useActiveOrganization();
+export const Nav = async ({ for: userType }: Props) => {
+  const activeOrg = (userType === "recruiter" || userType === "administrative")
+    ? await auth.api.getFullOrganization({
+      query: {
+        membersLimit: 1,
+      },
+      headers: await headers(),
+    })
+    : undefined;
 
   return (
     <>
@@ -35,28 +42,26 @@ export const Nav = ({ for: userType }: Props): ReactElement => {
           <span>GuildKit</span>
         </Link>
         <div className="flex items-center gap-4">
-          {(userType === "recruiter" || userType === "administrative") && (
-            activeOrg ? (
-              <>
-                <Link href="/employer/jobs" theme="none" className="mr-8 font-bold">
-                  Dashboard
-                </Link>
-                <Link href={`/orgs/${ activeOrg.slug }`}>
-                  {activeOrg.name}
-                </Link>
-              </>
-            ) : (
-              <p>
-                <Link href="/orgs/new" theme="linktext">Create your company</Link><br />
-                or ask your boss to invite
-              </p>
-            )
+          { activeOrg ? (
+            <>
+              <Link href="/employer/jobs" theme="none" className="mr-8 font-bold">
+                Dashboard
+              </Link>
+              <Link href={`/orgs/${ activeOrg.slug }`}>
+                {activeOrg.name}
+              </Link>
+            </>
+          ) : (
+            <p>
+              <Link href="/orgs/new" theme="linktext">Create your company</Link><br />
+              or ask your boss to invite
+            </p>
           )}
 
           {userType === "guest" ? (
             <Link href="/auth" theme="button-deep">Log in <span className="after:content-['|'] after:text-gray-500"></span> Sign up</Link>
           ) : (
-            <Button theme="button-pale" onClick={() => void signOut()}>Log out</Button>
+            <SignOutButton />
           )}
         </div>
       </nav>
