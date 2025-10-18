@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { eq, type InferInsertModel } from "drizzle-orm";
 import { db } from "./db.ts";
-import { member, user as userTable, organization as organizationTable } from "./schema/better-auth.ts";
+import { member, organization as organizationTable, user as userTable } from "./schema/better-auth.ts";
 import { userProps } from "./schema/user.ts";
 
 type Transaction = Parameters<Parameters<typeof db.transaction>[0]>[0];

@@ -1,15 +1,15 @@
 "use client";
 
+import Image from "next/image";
 import {
-  useState,
   useRef,
+  useState,
+  type ChangeEventHandler,
   type DragEventHandler,
   type MouseEventHandler,
   type ReactElement,
   type RefObject,
-  type ChangeEventHandler,
 } from "react";
-import Image from "next/image";
 import publicConfigs from "@/intermediate/public-configs.json";
 import {
   commonClasses,

@@ -1,5 +1,5 @@
 import { env } from "node:process";
-import { S3Client, PutObjectCommand, type S3ClientConfig } from "@aws-sdk/client-s3";
+import { PutObjectCommand, S3Client, type S3ClientConfig } from "@aws-sdk/client-s3";
 import { config } from "./configs.ts";
 
 const { platform: storagePlatform, bucket: configFileBucket, accountId: configFileAccountId, ...storageConfig } = config.storage;

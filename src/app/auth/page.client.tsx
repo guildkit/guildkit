@@ -1,7 +1,7 @@
 "use client";
 
-import { signInWith } from "@/lib/auth/client.ts";
 import { Button } from "@/components/generic/ButtonLink.tsx";
+import { signInWith } from "@/lib/auth/client.ts";
 import type { ReactElement } from "react";
 
 export const Client = (): ReactElement => (

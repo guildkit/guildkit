@@ -1,6 +1,6 @@
-import { defineConfig } from "eslint/config";
 import { core } from "@phanect/lint";
 import { nextjs } from "@phanect/lint-react";
+import { defineConfig } from "eslint/config";
 
 const configs = defineConfig([
   {

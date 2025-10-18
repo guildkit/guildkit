@@ -1,14 +1,14 @@
 import { env } from "node:process";
 import { betterAuth } from "better-auth";
-import { admin as adminPlugin, organization } from "better-auth/plugins";
-import { nextCookies } from "better-auth/next-js";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { z } from "zod";
+import { nextCookies } from "better-auth/next-js";
+import { admin as adminPlugin, organization } from "better-auth/plugins";
 import { eq } from "drizzle-orm";
+import { z } from "zod";
 import { adminAc, adminRoles, recruiterAc, recruiterRoles } from "./auth/roles.ts";
 import { db } from "./db/db.ts";
-import * as schema from "./db/schema/index.ts";
 import { currencies } from "../intermediate/currencies.ts";
+import * as schema from "./db/schema/index.ts";
 
 if (
   !env.GOOGLE_CLIENT_ID

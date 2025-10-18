@@ -1,8 +1,8 @@
 import { randomUUID } from "node:crypto";
-import { relations, type InferSelectModel, type InferEnum } from "drizzle-orm";
+import { relations, type InferEnum, type InferSelectModel } from "drizzle-orm";
 import {
-  pgTable,
   pgEnum,
+  pgTable,
   text,
 } from "drizzle-orm/pg-core";
 import { user } from "./better-auth.ts";

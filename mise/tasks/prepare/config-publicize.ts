@@ -1,7 +1,7 @@
 #!/usr/bin/env -S pnpm exec jiti
 
-import { join } from "node:path";
 import { mkdir, writeFile } from "node:fs/promises";
+import { join } from "node:path";
 import { config } from "../../../src/lib/configs.ts";
 
 const intermediateDirPath = join(import.meta.dirname, "../../../src/intermediate");
