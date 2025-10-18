@@ -24,14 +24,15 @@ const getUserType = async (params: Promise<unknown>) => {
 
 export default async function SignUpPage({ params }: Props): Promise<ReactElement> {
   const userType = await getUserType(params);
-  const { user } = await requireAuthAs("any", { allowUsersWithoutType: true });
 
   if (!userType) {
     throw new Error("Invalid user type. Must be 'candidate' or 'recruiter'.");
   }
 
-  if (!user) {
-    throw new Error("User not authenticated.");
+  const { err, user } = await requireAuthAs("any", { allowUsersWithoutType: true });
+
+  if (err) {
+    throw err;
   }
 
   if (user.props.type) {

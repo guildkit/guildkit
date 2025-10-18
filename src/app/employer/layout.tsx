@@ -11,22 +11,10 @@ type Props = {
 };
 
 export default async function EmployerLayout({ children }: Props): Promise<ReactElement> {
-  try {
-    // TODO Do not run `requireAuthAs()` twice in pages (e.g. src/app/employer/jobs/page.tsx) and here
-    const { user } = await requireAuthAs("recruiter");
+  // TODO Do not run `requireAuthAs()` twice in pages (e.g. src/app/employer/jobs/page.tsx) and here
+  const { err, user } = await requireAuthAs("recruiter");
 
-    return (
-      <>
-        <Nav for={user.props.type ?? "guest"} />
-        <div className="flex justify-center w-full">
-          <Sidebar />
-          <main className="flex flex-col items-center gap-4 w-full">
-            {children}
-          </main>
-        </div>
-      </>
-    );
-  } catch (err) {
+  if (err) {
     if (err instanceof GuildKitError && err.code === "RECRUITER_WITHOUT_ORGS") {
       return (
         <>
@@ -46,4 +34,16 @@ export default async function EmployerLayout({ children }: Props): Promise<React
       throw err;
     }
   }
+
+  return (
+    <>
+      <Nav for={user.props.type ?? "guest"} />
+      <div className="flex justify-center w-full">
+        <Sidebar />
+        <main className="flex flex-col items-center gap-4 w-full">
+          {children}
+        </main>
+      </div>
+    </>
+  );
 }
