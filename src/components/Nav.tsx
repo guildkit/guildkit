@@ -1,16 +1,23 @@
+import { headers } from "next/headers";
 import Image from "next/image";
 import { Link } from "@/components/generic/ButtonLink.tsx";
 import { TopBar } from "@/components/generic/TopBar.tsx";
 import { SignOutButton } from "@/components/SignOutButton.tsx";
-import { useActiveOrganization } from "@/lib/auth/client.ts";
+import { auth } from "@/lib/auth.ts";
 import type { UserType } from "@/lib/db/schema/user.ts";
 
 type Props = {
   for: UserType | "guest";
 };
 
-export const Nav = ({ for: userType }: Props) => {
-  const { data: activeOrg } = useActiveOrganization();
+export const Nav = async ({ for: userType }: Props) => {
+  const isRecruiter = userType === "recruiter" || userType === "administrative";
+  const activeOrg = isRecruiter && await auth.api.getFullOrganization({
+    query: {
+      membersLimit: 0,
+    },
+    headers: await headers(),
+  });
 
   return (
     <>
@@ -32,7 +39,7 @@ export const Nav = ({ for: userType }: Props) => {
           <span>GuildKit</span>
         </Link>
         <div className="flex items-center gap-4">
-          {(userType === "recruiter" || userType === "administrative") && (
+          { isRecruiter && (
             activeOrg ? (
               <>
                 <Link href="/employer/jobs" theme="none" className="mr-8 font-bold">
