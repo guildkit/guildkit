@@ -3,7 +3,12 @@
 import { env, exit } from "node:process";
 import dayjs from "dayjs";
 import { db } from "../../src/lib/db/db.ts";
-import { insertOrganizations, insertUsers, type OrgWithRecruiters, type UserWithProps } from "../../src/lib/db/helpers.ts";
+import {
+  insertOrganizations,
+  insertUsers,
+  type OrgWithRecruiters,
+  type UserWithProps,
+} from "../../src/lib/db/helpers.ts";
 import { job } from "../../src/lib/db/schema/job.ts";
 import type { InferInsertModel } from "drizzle-orm";
 
