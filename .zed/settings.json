@@ -1,0 +1,84 @@
+{
+  "languages": {
+    "TypeScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      // Disable default formatter
+      "formatter": {
+        "external": {
+          "command": ":"
+        }
+      }
+    },
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      // Disable default formatter
+      "formatter": {
+        "external": {
+          "command": ":"
+        }
+      }
+    },
+    "TSX": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      // Disable default formatter
+      "formatter": {
+        "external": {
+          "command": ":"
+        }
+      }
+    },
+    "JSON": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      // Disable default formatter
+      "formatter": {
+        "external": {
+          "command": ":"
+        }
+      }
+    },
+    "JSONC": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      // Disable default formatter
+      "formatter": {
+        "external": {
+          "command": ":"
+        }
+      }
+    },
+    "TOML": {
+      "auto_indent": false
+    }
+  },
+  "lsp": {
+    "eslint": {
+      "settings": {
+        "codeActionOnSave": {
+          "rules": [
+            "import/order",
+            "@stylistic/array-bracket-spacing",
+            "@stylistic/arrow-parens",
+            "@stylistic/quotes",
+            "@stylistic/quote-props",
+            "@stylistic/semi",
+            "@stylistic/space-before-blocks",
+            "@stylistic/space-before-function-paren",
+            "@stylistic/space-in-parens"
+          ]
+        }
+      }
+    }
+  },
+  "prettier": {
+    "allowed": false
+  }
+}
