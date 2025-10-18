@@ -3,14 +3,13 @@ import { Link } from "@/components/generic/ButtonLink.tsx";
 import { TopBar } from "@/components/generic/TopBar.tsx";
 import { SignOutButton } from "@/components/SignOutButton.tsx";
 import { useActiveOrganization } from "@/lib/auth/client.ts";
-import type { ReactElement } from "react";
 import type { UserType } from "@/lib/db/schema/user.ts";
 
 type Props = {
   for: UserType | "guest";
 };
 
-export const Nav = ({ for: userType }: Props): ReactElement => {
+export const Nav = ({ for: userType }: Props) => {
   const { data: activeOrg } = useActiveOrganization();
 
   return (
