@@ -1,18 +1,26 @@
 "use server";
 
+import { headers } from "next/headers";
 import Image from "next/image";
 import { Link } from "@/components/generic/ButtonLink.tsx";
 import { TopBar } from "@/components/generic/TopBar.tsx";
 import { SignOutButton } from "@/components/SignOutButton.tsx";
-import { useActiveOrganization } from "@/lib/auth/client.ts";
+import { auth } from "@/lib/auth.ts";
 import type { UserType } from "@/lib/db/schema/user.ts";
 
 type Props = {
   for: UserType | "guest";
 };
 
-export const Nav = ({ for: userType }: Props) => {
-  const { data: activeOrg } = useActiveOrganization();
+export const Nav = async ({ for: userType }: Props) => {
+  const activeOrg = (userType === "recruiter" || userType === "administrative")
+    ? await auth.api.getFullOrganization({
+      query: {
+        membersLimit: 1,
+      },
+      headers: await headers(),
+    })
+    : undefined;
 
   return (
     <>
@@ -34,22 +42,20 @@ export const Nav = ({ for: userType }: Props) => {
           <span>GuildKit</span>
         </Link>
         <div className="flex items-center gap-4">
-          {(userType === "recruiter" || userType === "administrative") && (
-            activeOrg ? (
-              <>
-                <Link href="/employer/jobs" theme="none" className="mr-8 font-bold">
-                  Dashboard
-                </Link>
-                <Link href={`/orgs/${ activeOrg.slug }`}>
-                  {activeOrg.name}
-                </Link>
-              </>
-            ) : (
-              <p>
-                <Link href="/orgs/new" theme="linktext">Create your company</Link><br />
-                or ask your boss to invite
-              </p>
-            )
+          { activeOrg ? (
+            <>
+              <Link href="/employer/jobs" theme="none" className="mr-8 font-bold">
+                Dashboard
+              </Link>
+              <Link href={`/orgs/${ activeOrg.slug }`}>
+                {activeOrg.name}
+              </Link>
+            </>
+          ) : (
+            <p>
+              <Link href="/orgs/new" theme="linktext">Create your company</Link><br />
+              or ask your boss to invite
+            </p>
           )}
 
           {userType === "guest" ? (
