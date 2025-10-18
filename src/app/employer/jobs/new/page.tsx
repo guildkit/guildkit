@@ -1,8 +1,8 @@
 "use client";
 
 import { useActionState, type ReactElement } from "react";
-import { createJob } from "@/lib/actions/jobs.ts";
 import { Button } from "@/components/generic/ButtonLink.tsx";
+import { createJob } from "@/lib/actions/jobs.ts";
 import { useActiveOrganization } from "@/lib/auth/client.ts";
 
 export default function NewJobPage(): ReactElement {

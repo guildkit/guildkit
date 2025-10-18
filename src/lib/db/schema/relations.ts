@@ -1,12 +1,12 @@
 import { relations } from "drizzle-orm";
 import {
   pgTable,
+  primaryKey,
   text,
   uuid,
-  primaryKey,
 } from "drizzle-orm/pg-core";
-import { job } from "./job.ts";
 import { user } from "./better-auth.ts";
+import { job } from "./job.ts";
 
 export const jobsAndUsersRelationTable = pgTable("jobsAndCandidatesRelation", {
   appliedJobId: uuid().notNull().references(() => job.id),

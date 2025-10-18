@@ -4,8 +4,8 @@ import { redirect, unauthorized } from "next/navigation";
 import { auth } from "@/lib/auth.ts";
 import { db } from "@/lib/db/db.ts";
 import { userProps } from "@/lib/db/schema/user.ts";
-import type { User, Organization } from "@/lib/auth/types.ts";
 import { GuildKitError } from "../utils/errors.ts";
+import type { Organization, User } from "@/lib/auth/types.ts";
 
 type Recruiter = Omit<User, "props"> & {
   props: User["props"] & {

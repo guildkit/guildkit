@@ -1,7 +1,7 @@
 "use client";
 
-import { signUpWith } from "@/lib/auth/client.ts";
 import { Button, Link } from "@/components/generic/ButtonLink.tsx";
+import { signUpWith } from "@/lib/auth/client.ts";
 import type { ReactElement } from "react";
 
 export default function SignUpPage(): ReactElement {

@@ -1,14 +1,14 @@
 import { relations, type InferSelectModel } from "drizzle-orm";
 import {
-  pgTable,
-  timestamp,
-  text,
   integer,
-  uuid,
   pgEnum,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
 } from "drizzle-orm/pg-core";
-import { currency } from "./currencies.ts";
 import { organization } from "./better-auth.ts";
+import { currency } from "./currencies.ts";
 import { jobsAndUsersRelationTable } from "./relations.ts";
 import { timeLogs } from "../schema-utils.ts";
 

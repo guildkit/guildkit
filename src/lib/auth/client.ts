@@ -1,11 +1,11 @@
 "use client";
 
+import { adminClient, inferAdditionalFields, inferOrgAdditionalFields, organizationClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
-import { adminClient, organizationClient, inferAdditionalFields, inferOrgAdditionalFields } from "better-auth/client/plugins";
 import { useRouter } from "next/navigation";
 import { adminAc, adminRoles, recruiterAc, recruiterRoles } from "@/lib/auth/roles.ts";
-import type { auth } from "@/lib/auth.ts";
 import type { User } from "@/lib/auth/types.ts";
+import type { auth } from "@/lib/auth.ts";
 
 const { signIn, signOut, organization, useActiveOrganization } = createAuthClient({
   plugins: [

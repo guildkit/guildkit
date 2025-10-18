@@ -1,8 +1,8 @@
-import { notFound } from "next/navigation";
 import Image from "next/image";
-import { db } from "@/lib/db/db.ts";
-import { JobList } from "@/components/JobList.tsx";
+import { notFound } from "next/navigation";
 import { Link } from "@/components/generic/ButtonLink.tsx";
+import { JobList } from "@/components/JobList.tsx";
+import { db } from "@/lib/db/db.ts";
 import type { ReactElement } from "react";
 
 type Props = {

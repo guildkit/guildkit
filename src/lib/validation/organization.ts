@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { currency } from "@/lib/db/schema/currencies.ts";
 import publicConfigs from "@/intermediate/public-configs.json";
+import { currency } from "@/lib/db/schema/currencies.ts";
 import { mibToByte } from "@/lib/utils/utils.ts";
 
 export const orgNameSchema = z.string().trim().min(2, "Organization name must be at least 2 characters.");

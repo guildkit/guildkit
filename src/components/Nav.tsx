@@ -4,8 +4,8 @@ import Image from "next/image";
 import { Button, Link } from "@/components/generic/ButtonLink.tsx";
 import { TopBar } from "@/components/generic/TopBar.tsx";
 import { useActiveOrganization, useSignOut } from "@/lib/auth/client.ts";
-import type { UserType } from "@/lib/db/schema/user.ts";
 import type { ReactElement } from "react";
+import type { UserType } from "@/lib/db/schema/user.ts";
 
 type Props = {
   for: UserType | "guest";

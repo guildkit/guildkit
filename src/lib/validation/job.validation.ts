@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { salaryPer } from "@/lib/db/schema/job.ts";
 import { currency } from "@/lib/db/schema/currencies.ts";
+import { salaryPer } from "@/lib/db/schema/job.ts";
 
 export const jobSchema = z.object({
   title: z.string().min(2),
