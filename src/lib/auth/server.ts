@@ -33,63 +33,73 @@ export const requireAuthAs = async <ExpectedType extends NonNullable<User["props
     return firstOrg;
   };
 
-  const {
-    allowUsersWithoutType = false,
-    allowOrphanRecruiter = false,
-  } = options;
+  try {
+    const {
+      allowUsersWithoutType = false,
+      allowOrphanRecruiter = false,
+    } = options;
 
-  const { user, session } = await getSession({
-    headers: await headers(),
-  }) ?? {};
+    const { user, session } = await getSession({
+      headers: await headers(),
+    }) ?? {};
 
-  //
-  // Error handling
-  //
-  if (!user || !session) {
-    return redirect("/auth");
-  }
+    //
+    // Error handling
+    //
+    if (!user || !session) {
+      return redirect("/auth");
+    }
 
-  if (!user.props.type && !allowUsersWithoutType) {
-    return redirect("/auth/signup");
-  }
+    if (!user.props.type && !allowUsersWithoutType) {
+      return redirect("/auth/signup");
+    }
 
-  if (expectedType !== "any" && expectedType !== user.props.type) {
-    return unauthorized();
-  }
+    if (expectedType !== "any" && expectedType !== user.props.type) {
+      return unauthorized();
+    }
 
-  const firstOrg = await getFirstOrganization(user);
-  const isOrphanRecruiter = !firstOrg;
+    const firstOrg = await getFirstOrganization(user);
+    const isOrphanRecruiter = !firstOrg;
 
-  if (expectedType === "recruiter" && !allowOrphanRecruiter && isOrphanRecruiter) {
-    throw new GuildKitError("You are recruiter who does not belong to any organization. Ask your organization owner to invite, or create a new organization.", {
-      code: "RECRUITER_WITHOUT_ORGS",
-    });
-  }
+    if (expectedType === "recruiter" && !allowOrphanRecruiter && isOrphanRecruiter) {
+      return {
+        err: new GuildKitError("You are recruiter who does not belong to any organization. Ask your organization owner to invite, or create a new organization.", {
+          code: "RECRUITER_WITHOUT_ORGS",
+        }),
+      };
+    }
 
-  //
-  // set active organization if user is a recruiter
-  //
-  if (
-    expectedType === "recruiter" && user.props.type === "recruiter"
+    //
+    // set active organization if user is a recruiter
+    //
+    if (
+      expectedType === "recruiter" && user.props.type === "recruiter"
     && !session.activeOrganizationId && firstOrg
-  ) {
-    await auth.api.setActiveOrganization({
-      body: {
-        organizationId: firstOrg.id,
-      },
-    });
-  }
+    ) {
+      await auth.api.setActiveOrganization({
+        body: {
+          organizationId: firstOrg.id,
+        },
+      });
+    }
 
-  //
-  // Return user & session
-  //
-  return {
-    user: user as ExpectedType extends "recruiter" ? Recruiter : User,
-    session: session as ExpectedType extends "recruiter"
-      ? Omit<typeof session, "activeOrganizationId"> & {
-        activeOrganizationId: NonNullable<typeof session["activeOrganizationId"]>;
-      } : typeof session,
-  };
+    //
+    // Return user & session
+    //
+    return {
+      user: user as ExpectedType extends "recruiter" ? Recruiter : User,
+      session: session as ExpectedType extends "recruiter"
+        ? Omit<typeof session, "activeOrganizationId"> & {
+          activeOrganizationId: NonNullable<typeof session["activeOrganizationId"]>;
+        } : typeof session,
+    };
+  } catch (err) {
+    if (err instanceof Error) {
+      return { err };
+    } else {
+      throw err;
+    }
+  }
 };
 
 export const getSession = async (...args: Parameters<typeof auth.api.getSession>) => {
