@@ -18,15 +18,13 @@ export const createJob = async (_initialState: CreateJobState, formData: FormDat
     unauthorized();
   }
 
-  const jobValidation = jobSchema.safeParse(formData);
+  const { error, success, data: validatedNewJob } = jobSchema.safeParse(formData);
 
-  if (!jobValidation.success) {
+  if (!success) {
     return {
-      errors: jobValidation.error.flatten().fieldErrors,
+      errors: error.flatten().fieldErrors,
     };
   }
-
-  const validatedNewJob = jobValidation.data;
 
   const [ createdJob ] = await db.insert(jobTable).values({
     ...validatedNewJob,
