@@ -9,7 +9,7 @@ export const jobSchema = z.object({
   location: z.string().trim().min(2, "Location must be at least 2 characters."),
   salary: z.coerce.number<number>().positive("Salary must be a positive number."),
   currency: z.enum(currency.enumValues, "Please set available currency code. (e.g. \"USD\" for US Dollar)"),
-  salaryPer: z.enum(salaryPer.enumValues),
+  salaryPer: z.enum(salaryPer.enumValues, "Please set a valid salary period. (e.g. \"hour\", \"day\", \"week\", \"month\", \"year\")"),
   expiresAt: z.preprocess(
     (dateInput) => typeof dateInput === "string" ? new Date(Date.parse(dateInput)) : dateInput,
     z.date("Please enter a valid date.")
