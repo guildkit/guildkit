@@ -1,8 +1,12 @@
 import { randomUUID } from "node:crypto";
 import { eq, type InferInsertModel } from "drizzle-orm";
 import { db } from "./db.ts";
-import { member, organization as organizationTable, user as userTable } from "./schema/better-auth.ts";
 import { userProps } from "./schema/user.ts";
+import {
+  member,
+  organization as organizationTable,
+  user as userTable,
+} from "../../intermediate/better-auth-schema.ts"; // Can't use `@/` since this file isn't managed by Next.js
 
 type Transaction = Parameters<Parameters<typeof db.transaction>[0]>[0];
 
