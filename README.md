@@ -9,7 +9,7 @@ A CMS for job search services
 
 ### Prerequisites
 
-- Node.js v20, v22, or v24
+- Node.js v22 and v24
 - corepack
 - [Podman](https://podman.io)
   - Requires Podman engine only. Podman Desktop is optional.
