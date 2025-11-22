@@ -41,8 +41,8 @@ jobs:
       - name: Remove Podman which does not work well on GitHub Actions
         run: sudo apt-get remove -y podman
 
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: jdx/mise-action@e3d7b8d67a7958d1207f6ed871e83b1ea780e7b0 # v3.3.1
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - uses: jdx/mise-action@d16887ba50704baed7de72bd1e82e04391e4457a # v3.5.0
         with:
           install: true
           cache: true
@@ -63,8 +63,8 @@ jobs:
       - name: Remove Podman which does not work well on GitHub Actions
         run: sudo apt-get remove -y podman
 
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: jdx/mise-action@e3d7b8d67a7958d1207f6ed871e83b1ea780e7b0 # v3.3.1
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - uses: jdx/mise-action@d16887ba50704baed7de72bd1e82e04391e4457a # v3.5.0
         with:
           install: true
           cache: true
@@ -85,8 +85,8 @@ jobs:
       - name: Remove Podman which does not work well on GitHub Actions
         run: sudo apt-get remove -y podman
 
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: jdx/mise-action@e3d7b8d67a7958d1207f6ed871e83b1ea780e7b0 # v3.3.1
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - uses: jdx/mise-action@d16887ba50704baed7de72bd1e82e04391e4457a # v3.5.0
         with:
           install: true
           cache: true
