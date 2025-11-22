@@ -7,9 +7,9 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { organization } from "./better-auth.ts";
 import { currency } from "./currencies.ts";
 import { jobsAndUsersRelationTable } from "./relations.ts";
+import { organization } from "../../../intermediate/better-auth-schema.ts"; // Can't use `@/` since this file isn't managed by Next.js
 import { timeLogs } from "../schema-utils.ts";
 
 export const salaryPer = pgEnum("SalaryPer", [

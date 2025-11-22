@@ -5,8 +5,8 @@ import {
   text,
   uuid,
 } from "drizzle-orm/pg-core";
-import { user } from "./better-auth.ts";
 import { job } from "./job.ts";
+import { user } from "../../../intermediate/better-auth-schema.ts"; // Can't use `@/` since this file isn't managed by Next.js
 
 export const jobsAndUsersRelationTable = pgTable("jobsAndCandidatesRelation", {
   appliedJobId: uuid().notNull().references(() => job.id),
