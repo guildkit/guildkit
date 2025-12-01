@@ -5,8 +5,8 @@
   "license": "SEE LICENSE IN LICENSE.md",
   "type": "module",
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.939.0",
-    "better-auth": "^1.4.1",
+    "@aws-sdk/client-s3": "^3.940.0",
+    "better-auth": "^1.4.4",
     "drizzle-orm": "^0.44.7",
     "next": "^15.5.3",
     "pg": "^8.14.1",
@@ -15,7 +15,7 @@
     "react-tag-input": "^6.10.6"
   },
   "devDependencies": {
-    "@better-auth/cli": "^1.4.1",
+    "@better-auth/cli": "^1.4.4",
     "@next/eslint-plugin-next": "^15.5.3",
     "@phanect/configs": "latest",
     "@phanect/lint": "latest",
