@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@better-auth/cli": "^1.4.1",
-    "@next/eslint-plugin-next": "^15.5.3",
+    "@next/eslint-plugin-next": "^16.0.6",
     "@phanect/configs": "latest",
     "@phanect/lint": "latest",
     "@phanect/lint-react": "latest",
