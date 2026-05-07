@@ -1,10 +1,16 @@
 # AGENTS.md
 
-This file provides guidance to AI agents when working with code in this repository.
+GuildKit is a platform to create your own job platforms.  
+This file provides guidance to AI agents when working with the GuildKit code.
 
 ## Project Structure
 
-GuildKit is a Next.js application. It follows the directory structure of Next.js.
+### Tech stacks
+
+- React 19.x with React Compiler
+- Vite as bundler
+- Prisma 7.x with PostgreSQL
+- 
 
 ### Directory Layout
 
@@ -12,45 +18,6 @@ GuildKit is a Next.js application. It follows the directory structure of Next.js
 guildkit/
 ├── projects/                 # Monorepo root
 │   └── guildkit/             # Main GuildKit application
-│       ├── prisma/           # Database schema and migrations
-│       │   ├── schema.prisma
-│       │   ├── migrations/
-│       │   └── models/
-│       │       ├── better-auth.prisma
-│       │       ├── core.prisma
-│       │       └── currencies.prisma
-│       ├── public/           # Static assets
-│       │   └── vendor/
-│       │       ├── octicons/
-│       │       └── tabler/
-│       ├── src/
-│       │   ├── app/          # Next.js app directory
-│       │   │   ├── (public)/ # Public routes (landing, job listing)
-│       │   │   ├── auth/     # Authentication pages
-│       │   │   ├── employer/ # Employer dashboard
-│       │   │   └── api/      # API routes
-│       │   ├── components/   # React components
-│       │   │   ├── generic/  # Reusable UI components
-│       │   │   │   └── fields/
-│       │   │   ├── JobCard.tsx
-│       │   │   ├── JobEditor.tsx
-│       │   │   └── OrgEditor.tsx
-│       │   ├── devkit/       # CLI tools and utilities
-│       │   │   ├── cli.ts
-│       │   │   ├── config.ts
-│       │   │   └── utils.ts
-│       │   ├── intermediate/ # Intermediate build files
-│       │   │   ├── currencies.ts
-│       │   │   └── public-configs.json
-│       │   └── lib/          # Core business logic
-│       │       ├── auth/     # Authentication utilities
-│       │       ├── prisma/   # Prisma database schema and utilities
-│       │       ├── actions/  # Server actions
-│       │       ├── validations/ # Zod schemas
-│       │       ├── utils/    # Helper utilities
-│       │       ├── styles/   # Global CSS
-│       │       └── types.ts  # TypeScript type definitions
-│       ├── next.config.ts
 │       ├── tsconfig.json
 │       ├── package.json
 │       └── prisma.config.ts
@@ -60,14 +27,6 @@ guildkit/
 ├── pnpm-workspace.yaml      # pnpm workspace configuration
 └── package.json
 ```
-
-### Key Directories
-
-- **projects/guildkit/src/app** - Next.js pages and API routes using app directory
-- **projects/guildkit/src/lib** - Business logic, type definitions, and utilities
-- **projects/guildkit/src/components** - Reusable React components
-- **projects/guildkit/prisma** - Database schema, migrations, and model definitions
-- **projects/guildkit/public** - Static assets and vendor files
 
 ### Architecture Notes
 
