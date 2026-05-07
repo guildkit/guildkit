@@ -23,29 +23,22 @@
     "pg": "^8.14.1",
     "react": "^19.1.1",
     "react-aria-components": "^1.13.0",
-    "react-dom": "^19.1.1",
-    "react-tag-input": "^6.10.6",
-    "tailwind-merge": "^3.4.0",
-    "tailwind-variants": "^3.2.2"
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
     "@better-auth/cli": "1.4.21",
     "@phanect/configs": "latest",
-    "@phanect/utils": "^3.0.0",
     "@tailwindcss/postcss": "^4.1.17",
     "@types/node": "^24.10.0",
     "@types/pg": "^8.15.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "dayjs": "^1.11.19",
     "dotenv": "^17.2.2",
-    "fast-xml-parser": "^5.3.1",
     "jiti": "^2.4.2",
     "postcss": "^8.4.23",
     "prisma": "^7.6.0",
     "tailwindcss": "^4.1.17",
-    "typescript": "^5.0.0",
-    "zod": "^4.1.13"
+    "typescript": "^5.0.0"
   },
   "engines": {
     "node": "24.x"
