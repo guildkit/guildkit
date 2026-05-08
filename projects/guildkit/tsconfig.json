@@ -6,17 +6,15 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "incremental": true,
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable"
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "plugins": [
+      {
+        "name": "next",
+      },
     ],
-    "plugins": [{
-      "name": "next"
-    }],
     "paths": {
-      "@/*": [ "./src/*" ]
-    }
+      "@/*": ["./src/*"],
+    },
   },
 
   "include": [
@@ -30,6 +28,7 @@
   "exclude": [
     "**/node_modules/**",
     "**/build/**",
-    "**/out/**"
-  ]
+    "**/out/**",
+    "src/lib/prisma",
+  ],
 }

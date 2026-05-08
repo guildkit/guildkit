@@ -1,0 +1,10 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/lib/prisma"
+}
+
+// In Prisma 7, the connection URL is configured in prisma.config.ts,
+// not in the schema. See: https://pris.ly/d/config-datasource
+datasource db {
+  provider = "postgresql"
+}

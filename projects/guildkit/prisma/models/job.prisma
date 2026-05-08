@@ -1,0 +1,102 @@
+// ──────────────────────────────────────────────
+// Job-platform domain models
+// ──────────────────────────────────────────────
+
+enum UserRole {
+  JOB_SEEKER
+  EMPLOYER
+  ADMIN
+}
+
+model UserProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      UserRole @default(JOB_SEEKER)
+  bio       String?
+  resumeUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ──────────────────────────────────────────────
+// Company
+// ──────────────────────────────────────────────
+
+model Company {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  logoUrl     String?
+  website     String?
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  jobs        Job[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ──────────────────────────────────────────────
+// Job posting
+// ──────────────────────────────────────────────
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  FREELANCE
+  INTERNSHIP
+}
+
+enum JobStatus {
+  DRAFT
+  PUBLISHED
+  CLOSED
+}
+
+model Job {
+  id           String      @id @default(cuid())
+  title        String
+  description  String
+  requirements String?
+  location     String?
+  remote       Boolean     @default(false)
+  salaryMin    Int?
+  salaryMax    Int?
+  type         JobType     @default(FULL_TIME)
+  status       JobStatus   @default(DRAFT)
+  companyId    String
+  company      Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  postedById   String
+  postedBy     User        @relation(fields: [postedById], references: [id])
+  applications Application[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+// ──────────────────────────────────────────────
+// Job application
+// ──────────────────────────────────────────────
+
+enum ApplicationStatus {
+  PENDING
+  REVIEWED
+  SHORTLISTED
+  REJECTED
+  ACCEPTED
+}
+
+model Application {
+  id          String            @id @default(cuid())
+  jobId       String
+  job         Job               @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  applicantId String
+  applicant   User              @relation(fields: [applicantId], references: [id], onDelete: Cascade)
+  coverLetter String?
+  resumeUrl   String?
+  status      ApplicationStatus @default(PENDING)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@unique([jobId, applicantId])
+}
