@@ -2,11 +2,31 @@
 
 This file provides guidance to AI agents when working with code in this repository.
 
+## Project Overview
+
+GuildKit is a CMS to create job platforms.
+You can create your own job platforms and customize them for their targeted industries and features.
+
 ## Project Structure
 
 GuildKit is a Next.js application. It follows the directory structure of Next.js.
 
-### Directory Layout
+### Technology Stack
+
+- **Framework**: Next.js 16 with App Router
+- **Auth**: better-auth with role-based access control
+  - User Types: `administrative`, `recruiter`, `candidate`
+  - Admin Roles: `gkAdmin` (GuildKit admins), `siteAdmin` (site admins), `none`
+  - **IMPORTANT**: Use `requireAuthAs()` function in `projects/guildkit/src/lib/auth/server.ts` instead of betterAuth's `auth.api.getSession()` to check if the user is authenticated and has the required role. **`auth.api.getSession()` is strictly forbidden in any code base of GuildKit**.
+- **Database**: PostgreSQL with Prisma ORM
+- **Storage**: S3-compatible object storage with [`@aws-sdk/client-s3` npm package](https://www.npmjs.com/package/@aws-sdk/client-s3) as a client library.
+- **Local Development**: Podman Compose, which is compatible with Docker Compose, to run the database and object storage server on the local development machines.
+- **Package Manager**: pnpm instead of npm.
+- **Task Runner**: [mise-en-place](https://mise.jdx.dev) instead of npm scripts. The tasks are defined in mise.toml and the files under .mise/tasks/.
+
+### Directory Structure
+
+This project is a monorepo. Sub-projects are stored under `projects/`
 
 ```
 guildkit/
@@ -69,15 +89,6 @@ guildkit/
 - **projects/guildkit/prisma** - Database schema, migrations, and model definitions
 - **projects/guildkit/public** - Static assets and vendor files
 
-### Architecture Notes
-
-- GuildKit is built as a Next.js-based web application.
-- GuildKit uses [Prisma](https://www.prisma.io/docs/) as the ORM.
-- GuildKit uses an S3-compatible object storage. It uses [`@aws-sdk/client-s3` npm package](https://www.npmjs.com/package/@aws-sdk/client-s3).
-- GuildKit uses Podman Compose, which is compatible with Docker Compose, to run the database and object storage server on the local development machines.
-- GuildKit uses pnpm instead of npm.
-- GuildKit does not use npm scripts. We use [mise-en-place](https://mise.jdx.dev) instead. The tasks are defined in mise.toml and the files under .mise/tasks/.
-
 ## Quick Start
 
 1. `mise install`
@@ -108,3 +119,7 @@ guildkit/
 4. Report the final lint status to the user
 
 This ensures the codebase remains free of TypeScript and lint errors at all times.
+
+### package blocklist
+
+1. **`@cloudflare/workers-types` npm package is strictly forbidden** since it is deprecated.
