@@ -19,3 +19,6 @@ minimumReleaseAgeExclude:
   - next@16.2.6
   # Renovate security update: better-auth@1.6.2
   - better-auth@1.6.2
+  # Astro 6 requires @astrojs/react v6; the only compatible stable was ~5h short of the
+  # 72h window during the Next.js->Astro migration. Safe to drop once it ages past 72h.
+  - "@astrojs/react@6.0.0"
