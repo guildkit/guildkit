@@ -12,6 +12,15 @@ type RequireAuthAsOptions = {
   allowOrphanRecruiter?: boolean;
 };
 
+/**
+ * Check if the user is authenticated and have the specified role.
+ * Returns the authenticated user and session if the check passes, otherwise an error.
+ * @param expectedType - The expected user type to check against.
+ * @param options - Options for the authentication check.
+ * @param options.allowUsersWithoutType - Set true to allow users without a type to pass the check.
+ * @param options.allowOrphanRecruiter - Set true to allow the recruiters which does not belong to any organizations.
+ * @returns - The object with authenticated user and session if the check passes, otherwise thrown `err` object.
+ */
 export const requireAuthAs = async <ExpectedType extends User["type"] | "any">(
   expectedType: ExpectedType,
   options: RequireAuthAsOptions = {},
