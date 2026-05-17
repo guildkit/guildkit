@@ -9,9 +9,11 @@ const configs = defineConfig([
     "./**/dist/**",
     "./**/.vinext/**",
     "./**/.cloudflare/**",
-    "./projects/guildkit/src/intermediate/**",
-    "./projects/guildkit/src/lib/prisma/**",
+    "./**/worker-configuration.d.ts",
+    "./**/.wrangler/**",
+    "./projects/backend/src/lib/prisma/**",
     "./projects/guildkit/src/lib/prisma-node/**",
+    "./projects/shared/src/intermediate/**",
   ]),
 
   ...core,
