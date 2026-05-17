@@ -6,6 +6,8 @@ const configs = defineConfig([
   globalIgnores([
     "./**/node_modules/**",
     "./**/.next/**",
+    "./**/dist/**",
+    "./**/worker-configuration.d.ts",
     "./projects/guildkit/src/intermediate/**",
     "./projects/guildkit/src/lib/prisma/**",
   ]),
@@ -48,6 +50,13 @@ const configs = defineConfig([
     rules: {
       // To allow `//MISE ...`
       "@stylistic/spaced-comment": "off",
+    },
+  },
+
+  {
+    files: [ "projects/backend/**/*.tsx" ],
+    rules: {
+      "@next/next/no-head-element": "off",
     },
   },
 ]);
