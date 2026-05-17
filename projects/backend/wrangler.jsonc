@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+
+  "name": "guildkit-backend",
+
+  "assets": {
+    "directory": "public"
+  },
+
+  "compatibility_date": "2026-05-18",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}

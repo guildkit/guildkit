@@ -1,0 +1,29 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+
+[tasks]
+  [tasks.dev]
+  depends = [ "sync" ]
+  run = "vite"
+
+  [tasks.build]
+  depends = [ "sync" ]
+  run = "vite build"
+  env = { NODE_ENV = "production" }
+
+  [tasks.lint]
+  depends = [ "sync" ]
+  run = "tsc --noEmit"
+
+  [tasks.deploy]
+  depends = [ "build" ]
+  run = "wrangler deploy"
+
+  [tasks.sync]
+  run = "wrangler types --env-interface CloudflareBindings"
+
+  [tasks.setup]
+  depends_post = "sync"
+
+
+[env]
+_.path = "./node_modules/.bin"

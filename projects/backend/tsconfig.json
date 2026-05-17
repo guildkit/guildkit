@@ -1,0 +1,13 @@
+{
+  "extends": "@phanect/configs/ts/nodejs",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    // Better typings for openapi-typescript
+    "noUncheckedIndexedAccess": true
+  },
+}
