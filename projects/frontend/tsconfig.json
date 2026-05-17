@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "@phanect/configs/ts",
+    "@phanect/configs/ts/addons/npm"
+  ],
+
+  "compilerOptions": {
+    "tsBuildInfoFile": "./.tsbuildinfo",
+    // Required to be set in `references.path`
+    "composite": true,
+    "declaration": true,
+    "noEmit": null,
+    "emitDeclarationOnly": true
+  },
+
+  "references": [{
+    "path": "../shared"
+  }],
+
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**"
+  ]
+}

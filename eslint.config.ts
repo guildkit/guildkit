@@ -6,6 +6,7 @@ const configs = defineConfig([
   globalIgnores([
     "./**/dist/**",
     "./**/worker-configuration.d.ts",
+    "./projects/cli/templates/**",
     "./projects/guildkit/src/intermediate/**",
     "./projects/guildkit/src/lib/prisma/**",
   ]),

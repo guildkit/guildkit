@@ -1,0 +1,43 @@
+{
+  "name": "@guildkit/shared",
+  "version": "0.0.1-prealpha",
+  "description": "GuildKit's internal shared library for backend & frontend",
+  "author": {
+    "name": "tenkumo, Inc.",
+    "url": "https://tenkumogroup.com"
+  },
+  "contributors": [
+    {
+      "name": "Jumpei Ogawa",
+      "url": "https://phanective.org"
+    }
+  ],
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./zod": "./dist/zod.mjs"
+  },
+  "dependencies": {
+    "zod": "^4.1.13"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-s3": "^3.1053.0"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.1053.0",
+    "@phanect/configs": "2026.5.19",
+    "@phanect/utils": "^3.0.0",
+    "@types/node": "^24.12.4",
+    "auth": "1.6.11",
+    "dayjs": "^1.11.20",
+    "fast-xml-parser": "^5.3.1",
+    "nushell": "^0.113.1",
+    "tsdown": "0.22.2",
+    "typescript": "^6.0.0"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}
