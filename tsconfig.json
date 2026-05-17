@@ -6,6 +6,19 @@
     "incremental": true
   },
 
+  "tsBuildInfoFile": "./.tsbuildinfo",
+  "references": [
+    {
+      "path": "projects/backend"
+    },
+    {
+      "path": "projects/guildkit"
+    },
+    {
+      "path": "projects/shared"
+    }
+  ],
+
   "include": [
     "**/*.ts",
     "**/*.tsx",

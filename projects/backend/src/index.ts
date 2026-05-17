@@ -1,0 +1,20 @@
+import { auth } from "@guildkit/shared/auth";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { jobs } from "./routes/jobs.ts";
+import { organizations } from "./routes/organizations.ts";
+import type { HonoEnv } from "./lib/env.ts";
+
+const app = new Hono<HonoEnv>()
+  .use("/api/auth/*", cors({
+    origin: "http://localhost:3001", // TODO replace with the origin
+    allowHeaders: [ "Content-Type", "Authorization" ],
+    allowMethods: [ "POST", "GET", "OPTIONS" ],
+    exposeHeaders: [ "Content-Length" ],
+    maxAge: 600,
+    credentials: true,
+  })).on([ "POST", "GET" ], "/api/auth/*", (c) => auth.handler(c.req.raw))
+  .route("/organizations", organizations)
+  .route("/jobs", jobs);
+
+export default app;

@@ -1,8 +1,8 @@
+import { auth } from "@guildkit/shared/auth";
 import { headers } from "next/headers";
 import { forbidden } from "next/navigation";
 import { OrgEditor } from "@/components/OrgEditor.tsx";
 import { requireAuthAs } from "@/lib/auth/server.ts";
-import { auth } from "@/lib/auth.ts";
 import type { ReactElement } from "react";
 
 export default async function EditOrgPage(): Promise<ReactElement> {

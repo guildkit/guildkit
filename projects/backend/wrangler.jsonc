@@ -3,6 +3,7 @@
 
   "name": "guildkit-backend",
 
+  "main": "./src/index.ts",
   "assets": {
     "directory": "public"
   },

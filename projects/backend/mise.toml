@@ -2,28 +2,32 @@
 
 [tasks]
   [tasks.dev]
-  depends = [ "sync" ]
+  wait_for = [ "//:sync" ]
   run = "vite"
 
   [tasks.build]
-  depends = [ "sync" ]
+  wait_for = [ "//:sync" ]
   run = "vite build"
   env = { NODE_ENV = "production" }
 
   [tasks.lint]
-  depends = [ "sync" ]
+  wait_for = [ "//:sync" ]
   run = "tsc --noEmit"
+
+  [tasks.fix]
+  wait_for = [ "//:sync" ]
+  run = "prisma format"
 
   [tasks.deploy]
   depends = [ "build" ]
   run = "wrangler deploy"
 
   [tasks.sync]
+  wait_for = [ "//projects/shared:build" ]
   run = "wrangler types --env-interface CloudflareBindings"
 
   [tasks.setup]
-  depends_post = "sync"
-
+  run = [{ tasks = [ "setup:*" ]}]
 
 [env]
 _.path = "./node_modules/.bin"

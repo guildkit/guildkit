@@ -7,7 +7,28 @@
       "node",
       "vite/client"
     ],
+    "tsBuildInfoFile": "./.tsbuildinfo",
+
+    // Required to use `references`
+    "composite": true,
+    "declaration": true,
+    "noEmit": null,
+    "emitDeclarationOnly": true,
+
     // Better typings for openapi-typescript
     "noUncheckedIndexedAccess": true
   },
+  "references": [{
+    "path": "../shared"
+  }],
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.js",
+    "./**/*.jsx",
+  ],
+  "exclude": [
+    "./**/node_modules/**",
+    "./**/dist/**"
+  ]
 }
