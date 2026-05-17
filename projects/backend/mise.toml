@@ -1,0 +1,30 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+
+[tasks]
+  [tasks.dev]
+  run = "vite dev --port 3001"
+
+  [tasks.build]
+  wait_for = [
+    "//projects/shared:build",
+    "//projects/db:build",
+  ]
+  run = [
+    "vite build",
+    "tsdown", # Run after `vite build`, which empties dist/
+  ]
+  env = { NODE_ENV = "production" }
+
+  [tasks.lint]
+  wait_for = [ "//projects/shared:build" ]
+  run = [
+    "vinext typegen",
+    "tsc --noEmit",
+  ]
+
+  [tasks.deploy]
+  depends = [ "build" ]
+  run = "wrangler deploy"
+
+[env]
+_.path = "./node_modules/.bin"
