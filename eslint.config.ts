@@ -6,8 +6,11 @@ const configs = defineConfig([
   globalIgnores([
     "./**/node_modules/**",
     "./**/.next/**",
-    "./projects/guildkit/src/intermediate/**",
-    "./projects/guildkit/src/lib/prisma/**",
+    "./**/dist/**",
+    "./**/worker-configuration.d.ts",
+    "./**/.wrangler/**",
+    "./projects/backend/src/lib/prisma/**",
+    "./projects/shared/src/intermediate/**",
   ]),
 
   ...core,
