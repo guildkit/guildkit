@@ -4,6 +4,8 @@ import { defineConfig, globalIgnores } from "eslint/config";
 
 const configs = defineConfig([
   globalIgnores([
+    "./**/dist/**",
+    "./**/worker-configuration.d.ts",
     "./projects/guildkit/src/intermediate/**",
     "./projects/guildkit/src/lib/prisma/**",
   ]),
@@ -27,6 +29,13 @@ const configs = defineConfig([
     },
     rules: {
       "import/extensions": "off",
+    },
+  },
+
+  {
+    files: [ "projects/backend/**/*.tsx" ],
+    rules: {
+      "@next/next/no-head-element": "off",
     },
   },
 ]);
