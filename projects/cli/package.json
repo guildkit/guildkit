@@ -1,0 +1,51 @@
+{
+  "name": "guildkit",
+  "version": "0.0.1-prealpha",
+  "author": {
+    "name": "tenkumo, Inc.",
+    "url": "https://tenkumogroup.com"
+  },
+  "contributors": [
+    {
+      "name": "Jumpei Ogawa",
+      "url": "https://phanective.org"
+    }
+  ],
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": [
+    "./bin/**"
+  ],
+  "bin": {
+    "guildkit": "./bin/guildkit.mjs"
+  },
+  "exports": {
+    ".": "./dist/index.mjs"
+  },
+  "dependencies": {
+    "@cloudflare/vite-plugin": "^1.38.0",
+    "@drizzle-team/brocli": "^0.12.0",
+    "astro": "^6.4.4",
+    "c12": "4.0.0-beta.5",
+    "rolldown": "^1.1.0",
+    "rolldown-plugin-wasm": "^0.2.1",
+    "vite": "^8.0.14",
+    "vite-ssr-components": "^0.6.1",
+    "wrangler": "^4.17.0"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-s3": "^3.1053.0",
+    "@guildkit/backend": "workspace:*",
+    "@guildkit/frontend": "workspace:*",
+    "@guildkit/shared": "workspace:*",
+    "@types/node": "^24.0.0 || ^26.0.0",
+    "tsdown": "0.22.2",
+    "typescript": "^6.0.0"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.1053.0",
+    "@hono/node-server": "^2.0.4",
+    "@phanect/configs": "2026.5.19",
+    "@types/node": "^24.0.0"
+  }
+}

@@ -1,0 +1,17 @@
+generator nodejs {
+  provider      = "prisma-client"
+  compilerBuild = "fast"
+  output        = "../src/prisma/clients/nodejs"
+  runtime       = "nodejs"
+}
+
+generator cloudflare {
+  provider      = "prisma-client"
+  compilerBuild = "fast"
+  output        = "../src/prisma/clients/cloudflare"
+  runtime       = "cloudflare"
+}
+
+datasource db {
+  provider = "postgresql"
+}

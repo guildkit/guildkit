@@ -1,5 +1,16 @@
 "use client";
 
+import { currencies, maxLogoSizeMiB } from "@guildkit/shared";
+import {
+  orgAboutSchema,
+  orgAddressSchema,
+  orgEmailSchema,
+  orgLogoSchema,
+  orgNameSchema,
+  orgSlugSchema,
+  orgUrlSchema,
+  type Organization as OrgFormData,
+} from "@guildkit/shared/zod";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import {
@@ -13,21 +24,9 @@ import { ArrayField } from "@/components/generic/fields/ArrayField.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
 import { ImageField } from "@/components/generic/fields/ImageField.tsx";
 import { TagField } from "@/components/generic/fields/TagField.tsx";
-import { currencies } from "@/intermediate/currencies.ts";
-import publicConfigs from "@/intermediate/public-configs.json";
-import {
-  orgAboutSchema,
-  orgAddressSchema,
-  orgEmailSchema,
-  orgLogoSchema,
-  orgNameSchema,
-  orgSlugSchema,
-  orgUrlSchema,
-} from "@/lib/validations/organization.ts";
+import type { Organization } from "@guildkit/db/auth";
 import type { Tag } from "react-tag-input";
-import type { Organization } from "@/lib/auth/types.ts";
 import type { ActionState } from "@/lib/types.ts";
-import type { Organization as OrgFormData } from "@/lib/validations/organization.ts";
 
 type Props = {
   org?: Organization;
@@ -126,7 +125,7 @@ export const OrgEditorClient = ({ org, initialLogoBase64 }: Props): ReactElement
         description="Logo should be a square."
         name="logo"
         initialImageBase64={initialLogoBase64}
-        maxSizeMiB={publicConfigs.maxLogoSizeMiB}
+        maxSizeMiB={maxLogoSizeMiB}
         validator={orgLogoSchema}
         errorMessages={fieldErrors?.logo}
         className="mb-6"

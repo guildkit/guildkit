@@ -1,0 +1,39 @@
+{
+  "name": "@guildkit/frontend",
+  "version": "0.0.1-prealpha",
+  "author": {
+    "name": "tenkumo, Inc.",
+    "url": "https://tenkumogroup.com"
+  },
+  "contributors": [
+    {
+      "name": "Jumpei Ogawa",
+      "url": "https://phanective.org"
+    }
+  ],
+  "license": "Apache-2.0",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^13.5.4",
+    "@astrojs/node": "^10.1.1",
+    "@guildkit/shared": "workspace:*",
+    "astro": "^6.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsdown": "0.22.2",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}

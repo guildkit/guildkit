@@ -1,0 +1,6 @@
+#
+# Project-specific
+#
+
+/src/prisma/clients/
+/prisma/models/enums.prisma

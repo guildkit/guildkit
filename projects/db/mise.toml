@@ -1,0 +1,25 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+
+[tasks]
+  [tasks.dev]
+  run = [
+    { task = ":build:enums" },
+    { task = ":build:db" },
+    "tsdown --watch --no-clean",
+  ]
+
+  [tasks.build]
+  wait_for = [ "//projects/shared:build" ]
+  run = [
+    { task = ":build:enums" },
+    { task = ":build:db" },
+    "tsdown",
+  ]
+  env = { NODE_ENV = "production" }
+
+  [tasks.lint]
+  wait_for = [ "//projects/shared:build" ]
+  run = "tsc --noEmit"
+
+[env]
+_.path = "./node_modules/.bin"

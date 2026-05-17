@@ -1,5 +1,6 @@
 "use client";
 
+import { maxLogoSizeMiB } from "@guildkit/shared";
 import Image from "next/image";
 import {
   useRef,
@@ -10,7 +11,6 @@ import {
   type ReactElement,
   type RefObject,
 } from "react";
-import publicConfigs from "@/intermediate/public-configs.json";
 import {
   commonClasses,
   errorClasses,
@@ -37,7 +37,7 @@ export const ImageField = ({
   initialImageBase64,
   validator,
   accept = "image/*",
-  maxSizeMiB = publicConfigs.maxLogoSizeMiB,
+  maxSizeMiB = maxLogoSizeMiB,
   errorMessages: serverSideErrorMessages,
   className,
   ...formProps
