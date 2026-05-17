@@ -12,7 +12,7 @@ rm --force --permanent $pnpmLockPath
 
 # Create placeholder for ./bin/guildkit
 const missingCliDirPath = path self "../../projects/cli/bin"
-const missingCliPath = $missingCliDirPath | path join "cli.mjs"
+const missingCliPath = $missingCliDirPath | path join "guildkit.mjs"
 mkdir $missingCliDirPath
 touch $missingCliPath
 

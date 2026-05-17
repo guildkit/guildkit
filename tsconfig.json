@@ -6,6 +6,28 @@
     "incremental": true
   },
 
+  "tsBuildInfoFile": "./.tsbuildinfo",
+  "references": [
+    {
+      "path": "projects/backend"
+    },
+    {
+      "path": "projects/db"
+    },
+    {
+      "path": "projects/frontend"
+    },
+    {
+      "path": "projects/guildkit"
+    },
+    {
+      "path": "projects/shared"
+    },
+    {
+      "path": "demo"
+    }
+  ],
+
   "include": [
     "**/*.ts",
     "**/*.tsx",
@@ -14,6 +36,8 @@
   ],
   "exclude": [
     "**/node_modules/**",
-    "projects/*/**" // These files should be lint by each project's mise tasks
+    // These files should be lint by each project's mise tasks
+    "projects/*/**",
+    "demo/**"
   ]
 }

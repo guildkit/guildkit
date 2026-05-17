@@ -1,5 +1,5 @@
 import "@/lib/styles/globals.css";
-import config from "../../../../guildkit.config.ts";
+import config from "../../../backend/src/guildkit.config.ts";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
