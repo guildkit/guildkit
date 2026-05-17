@@ -97,5 +97,7 @@ vite.config.ts.timestamp-*
 #
 # AI
 #
-.agents/skills/prisma-*/**
+.agents/skills/hono
+.agents/skills/hono-*
+.agents/skills/prisma-*
 .claude/skills/
