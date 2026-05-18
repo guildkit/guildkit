@@ -1,9 +1,9 @@
 "use client";
 
-import Form from "next/form";
+import { useRouter } from "next/navigation";
 import {
-  startTransition,
-  useActionState,
+  useState,
+  useTransition,
   type FormEvent,
   type ReactElement,
   type ReactNode,
@@ -13,7 +13,6 @@ import { Button } from "@/components/generic/ButtonLink.tsx";
 import { Dialog } from "@/components/generic/Dialog.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
 import { Modal } from "@/components/generic/Modal.tsx";
-import { createJob } from "@/lib/actions/jobs.ts";
 import {
   jobApplicationUrlSchema,
   jobDescriptionSchema,
@@ -23,6 +22,7 @@ import {
   jobTitleSchema,
   type Job,
 } from "@/lib/validations/job.ts";
+import type { ActionState } from "@/lib/types.ts";
 
 type Props = {
   job: Job | "new";
@@ -33,12 +33,41 @@ type Props = {
 };
 
 export const JobEditorClient = ({ job, activeOrg, children }: Props): ReactElement => {
-  const [ state, formAction, isCreatingJob ] = useActionState(createJob, {});
+  const router = useRouter();
+  const [ state, setState ] = useState<ActionState<Job>>({});
+  const [ isCreatingJob, startTransition ] = useTransition();
   const { formErrors, fieldErrors } = state.errors ?? {};
 
   const onSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    startTransition(() => formAction(new FormData(evt.currentTarget)));
+    const formData = new FormData(evt.currentTarget);
+    const values = {
+      title: formData.get("title"),
+      description: formData.get("description"),
+      applicationUrl: formData.get("applicationUrl"),
+      location: formData.get("location"),
+      salary: formData.get("salary"),
+      currency: formData.get("currency"),
+      salaryPer: formData.get("salaryPer"),
+      expiresAt: formData.get("expiresAt"),
+    };
+    startTransition(async () => {
+      const response = await fetch("/api/jobs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      if (response.status === 201) {
+        const { redirectUrl } = await response.json() as { redirectUrl: string; };
+        router.push(redirectUrl);
+      } else if (response.status === 400) {
+        const { errors } = await response.json() as { errors: ActionState<Job>["errors"]; };
+        setState({ errors });
+      } else {
+        setState({ errors: { formErrors: [ "Something went wrong. Please try again." ], fieldErrors: {}}});
+      }
+    });
   };
 
   return (
@@ -58,7 +87,7 @@ export const JobEditorClient = ({ job, activeOrg, children }: Props): ReactEleme
             </div>
           ))}
 
-          <Form action={formAction} onSubmit={onSubmit}>
+          <form onSubmit={onSubmit}>
             <Field
               type="text"
               label="Title"
@@ -139,7 +168,7 @@ export const JobEditorClient = ({ job, activeOrg, children }: Props): ReactEleme
                   : (isCreatingJob ? "Updating..." : "Update this item")
               }
             </Button>
-          </Form>
+          </form>
         </Dialog>
       </Modal>
     </DialogTrigger>
