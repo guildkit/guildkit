@@ -1,8 +1,8 @@
 "use client";
 
-import { useActionState, useEffect, type ReactElement } from "react";
+import { useRouter } from "next/navigation";
+import { useTransition, type ReactElement } from "react";
 import { Button, Link } from "@/components/generic/ButtonLink.tsx";
-import { deleteJob } from "@/lib/actions/jobs.ts";
 import type { Organization } from "better-auth/plugins";
 import type { Job } from "@/lib/prisma/client.ts";
 
@@ -16,13 +16,26 @@ type JobCardProps = {
 };
 
 export const JobCard = ({ job, editable = false }: JobCardProps): ReactElement => {
-  const [ state, formAction, pending ] = useActionState(deleteJob, {});
+  const router = useRouter();
+  const [ isPending, startTransition ] = useTransition();
 
-  useEffect(() => {
-    if (state.error) {
-      alert(state.error);
-    }
-  }, [ state.error ]);
+  const handleDelete = () => {
+    startTransition(async () => {
+      const response = await fetch("/api/jobs", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: job.id }),
+      });
+
+      if (response.ok) {
+        const { redirectUrl } = await response.json() as { redirectUrl: string; };
+        router.push(redirectUrl);
+      } else {
+        const data = await response.json() as { error?: string; };
+        alert(data.error ?? "Something went wrong. Please try again.");
+      }
+    });
+  };
 
   return (
     <div className="flex flex-col gap-3 bg-white shadow-around shadow-gray-200 hover:shadow-gray-300 transition-shadow duration-300 rounded-lg w-full max-w-[32.5rem] p-4">
@@ -48,15 +61,14 @@ export const JobCard = ({ job, editable = false }: JobCardProps): ReactElement =
           </div>
 
           {editable && (
-            <form className="flex items-end gap-2">
+            <div className="flex items-end gap-2">
               <Link href={`/employer/jobs/edit/${ job.id }`} theme="button-pale" prefetch>
                 Edit
               </Link>
-              <input type="hidden" name="id" value={job.id} />
-              <Button formAction={formAction} disabled={pending} theme="button-pale">
+              <Button onClick={handleDelete} disabled={isPending} theme="button-pale">
                 Delete
               </Button>
-            </form>
+            </div>
           )}
         </div>
       </div>
