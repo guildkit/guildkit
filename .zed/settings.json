@@ -95,5 +95,25 @@
   },
   "prettier": {
     "allowed": false
+  },
+  "context_servers": {
+    "better-auth": {
+      "url": "https://mcp.better-auth.com/mcp"
+    },
+    "prisma": {
+      "command": "pnpm",
+      "args": [ "exec", "prisma", "mcp" ]
+    },
+    "eslint": {
+      "command": "pnpm",
+      "args": [ "exec", "eslint", "--mcp" ]
+    },
+    "mise": {
+      "command": "mise",
+      "args": [ "mcp" ],
+      "env": {
+        "MISE_EXPERIMENTAL": "1"
+      }
+    }
   }
 }
