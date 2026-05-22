@@ -18,7 +18,6 @@ Thumbs.db
 #
 
 # Build directory
-build/
 dist/
 
 # tmp files
