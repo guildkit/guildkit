@@ -100,7 +100,7 @@ guildkit/
 
 **After every code modification, the AI agent must:**
 
-1. Run `mise lint` to check for TypeScript and ESLint errors
+1. Run `mise ai-postedit` to check for TypeScript and ESLint errors
 2. If errors are found, fix them either by:
    - Running `mise fix` for auto-fixable issues
    - Manually correcting code issues if auto-fix doesn't resolve them
