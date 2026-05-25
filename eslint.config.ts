@@ -25,6 +25,9 @@ const configs = defineConfig([
         version: "detect",
       },
     },
+    rules: {
+      "import/extensions": "off",
+    },
   },
 
   {
