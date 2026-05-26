@@ -1,27 +1,25 @@
 {
-  "extends": "@phanect/configs/ts",
+  "extends": "@phanect/configs/ts/nodejs", // TODO don't use @phanect's personal tsconfig
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-    "types": [
-      "node",
-      "vite/client"
-    ],
-
     "tsBuildInfoFile": "./.tsbuildinfo",
 
     // Required to use `references`
     "composite": true,
     "declaration": true,
     "noEmit": null,
-    "emitDeclarationOnly": true,
-
-    // Better typings for openapi-typescript
-    "noUncheckedIndexedAccess": true
+    "emitDeclarationOnly": true
   },
-  "references": [{
-    "path": "../shared"
-  }],
+  "references": [
+    {
+      "path": "../projects/backend"
+    },
+    {
+      "path": "../projects/guildkit"
+    },
+    {
+      "path": "../projects/shared"
+    },
+  ],
   "include": [
     "./**/*.ts",
     "./**/*.tsx",

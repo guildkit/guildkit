@@ -16,6 +16,9 @@
     },
     {
       "path": "projects/shared"
+    },
+    {
+      "path": "demo"
     }
   ],
 

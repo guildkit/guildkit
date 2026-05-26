@@ -2,18 +2,22 @@
 
 [tasks]
   [tasks.dev]
+  wait_for = [ "//projects/shared:build" ]
   run = "next dev --inspect"
 
   [tasks.start]
   run = "next start"
 
   [tasks.build]
-  wait_for = [ "//:sync" ]
-  run = "next build"
+  wait_for = [ "//projects/shared:build" ]
+  run = [
+    "tsdown",
+    "next build",
+  ]
   env = { NODE_ENV = "production" }
 
   [tasks.lint]
-  wait_for = [ "//:sync" ]
+  wait_for = [ "//projects/shared:build" ]
   run = "tsc --noEmit"
 
   # TODO disabled until GA

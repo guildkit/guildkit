@@ -2,11 +2,8 @@ import { defineConfig } from "tsdown";
 
 export default defineConfig({
   entry: {
+    cli: "./bin/cli.ts",
     index: "./src/index.ts",
-    auth: "./src/auth.ts",
-    cli: "./src/cli.ts",
-    prisma: "./src/prisma.ts",
-    zod: "./src/zod/index.ts",
   },
   format: [ "esm" ],
 

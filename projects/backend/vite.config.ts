@@ -1,10 +1,15 @@
 import { cloudflare } from "@cloudflare/vite-plugin";
 import { defineConfig } from "vite";
-import ssrPlugin from "vite-ssr-components/plugin";
+import viteSsrPlugin from "vite-ssr-components/plugin";
 
-export default defineConfig({
+const config = defineConfig({
   plugins: [
-    cloudflare(),
-    ssrPlugin(),
+    cloudflare(), // TODO do not add this when the user choose to use Node.js as a backend.
+    viteSsrPlugin(),
   ],
+  server: {
+    port: 3001,
+  },
 });
+
+export default config;

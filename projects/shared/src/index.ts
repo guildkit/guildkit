@@ -1,6 +1,3 @@
-import publicConfigs from "./intermediate/public-configs.json";
-
 export * from "./intermediate/currencies";
+export * from "./config.ts";
 export * from "./utils";
-
-export { publicConfigs };

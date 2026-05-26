@@ -1,16 +1,16 @@
-import { randomUUID } from "node:crypto";
 import { auth } from "@guildkit/shared/auth";
 import { orgSchema } from "@guildkit/shared/zod";
 import { createRoute, OpenAPIHono } from "@hono/zod-openapi";
+import { pseudoRandomString } from "@phanect/utils";
 import { APIError } from "better-auth";
-import { logoDirName, putObject } from "../lib/storage.ts";
+import { logoDirName, StorageClient } from "../lib/storage.ts";
 import { requireAuthAs } from "../middleware/auth.ts";
 import type { HonoEnv } from "../lib/env.ts";
 
-const uploadLogo = async (logoFile: File): Promise<string> => {
+const uploadLogo = async (logoFile: File, storageClient: StorageClient): Promise<string> => {
   const fileExt = logoFile.name.split(".").pop() ?? "";
-  const destPath = `${ logoDirName }/${ randomUUID() }.${ fileExt }`;
-  return putObject(destPath, logoFile);
+  const destPath = `${ logoDirName }/${ pseudoRandomString(32) }.${ fileExt }`;
+  return storageClient.putObject(destPath, logoFile);
 };
 
 export const organizations = new OpenAPIHono<HonoEnv>()
@@ -38,7 +38,10 @@ export const organizations = new OpenAPIHono<HonoEnv>()
       const { logo, ...newOrgData } = c.req.valid("param");
 
       try {
-        const logoURL = logo ? await uploadLogo(logo) : undefined;
+        const storage = new StorageClient(c.get("config").storage);
+
+        // Casting `logo` as `File` due to Zod's bug?
+        const logoURL = logo ? await uploadLogo(logo as File, storage) : undefined;
 
         await auth.api.createOrganization({
           body: {

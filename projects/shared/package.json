@@ -16,6 +16,7 @@
   "type": "module",
   "module": "./dist/index.mjs",
   "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -24,6 +25,10 @@
     "./auth": {
       "types": "./dist/auth.d.mts",
       "default": "./dist/auth.mjs"
+    },
+    "./cli": {
+      "types": "./dist/cli.d.mts",
+      "default": "./dist/cli.mjs"
     },
     "./prisma": {
       "types": "./dist/prisma.d.mts",
@@ -41,7 +46,7 @@
     "zod": "^4.1.13"
   },
   "devDependencies": {
-    "@guildkit/backend": "workspace:*",
+    "@aws-sdk/client-s3": "^3.1053.0",
     "@phanect/configs": "2026.5.19",
     "@phanect/utils": "^3.0.0",
     "@types/pg": "^8.15.6",

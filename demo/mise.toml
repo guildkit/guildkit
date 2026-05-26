@@ -2,21 +2,17 @@
 
 [tasks]
   [tasks.dev]
-  wait_for = [ "//projects/shared:build" ]
-  run = "tsdown --watch"
+  wait_for = [ "//:sync" ]
+  run = "guildkit dev"
 
   [tasks.build]
-  wait_for = [ "//projects/shared:build" ]
-  run = "tsdown"
+  wait_for = [ "//:sync" ]
+  run = "guildkit build"
   env = { NODE_ENV = "production" }
 
   [tasks.lint]
-  wait_for = [ "//projects/shared:build" ]
+  wait_for = [ "//:sync" ]
   run = "tsc --noEmit"
-
-  [tasks.fix]
-  wait_for = [ "//projects/shared:build" ]
-  run = "prisma format"
 
   [tasks.deploy]
   depends = [ "build" ]

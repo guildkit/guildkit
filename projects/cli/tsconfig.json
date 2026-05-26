@@ -1,0 +1,31 @@
+{
+  "extends": "@phanect/configs/ts/nodejs",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./.tsbuildinfo",
+
+    // Required to use `references`
+    "composite": true,
+    "declaration": true,
+    "noEmit": null,
+    "emitDeclarationOnly": true
+  },
+  "references": [
+    {
+      "path": "../backend"
+    },
+    {
+      "path": "../guildkit"
+    },
+  ],
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.js",
+    "./**/*.jsx",
+  ],
+  "exclude": [
+    "./**/node_modules/**",
+    "./**/dist/**",
+    "./templates/**"
+  ]
+}

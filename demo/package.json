@@ -1,0 +1,11 @@
+{
+  "name": "@guildkit/demo",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@phanect/configs": "2026.5.19",
+    "guildkit": "workspace:*",
+    "typescript": "^6.0.0",
+    "wrangler": "^4.17.0"
+  }
+}

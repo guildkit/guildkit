@@ -14,30 +14,30 @@ node = "24"
 
 [tasks]
   [tasks.dev]
-  depends = [ "//:sync" ]
-  run =[{ task = "//projects/...:dev" }]
+  depends = [ "//projects/...:build" ]
+  run =[{ task = "//.../...:dev" }]
 
   [tasks.build]
-  depends = [ "//:sync" ]
-  run =[{ task = "//projects/...:build" }]
+  depends = [ "//projects/...:build" ]
+  run =[{ task = "//.../...:build" }]
 
   [tasks.test]
-  depends = [ "//:sync" ]
-  run =[{ task = "//projects/...:test" }]
+  depends = [ "//projects/...:build" ]
+  run =[{ task = "//.../...:test" }]
 
   [tasks.lint]
-  depends = [ "//:sync" ]
+  depends = [ "//projects/...:build" ]
   run = [
     "tsc --noEmit",
-    { task = "//projects/...:lint" },
+    { task = "//.../...:lint" },
     "eslint",
   ]
 
   [tasks.fix]
-  depends = [ "//:sync" ]
+  depends = [ "//projects/...:build" ]
   run = [
     "eslint --fix",
-    { task = "//projects/...:fix" },
+    { task = "//.../...:fix" },
   ]
 
   [tasks.db]
@@ -61,17 +61,11 @@ node = "24"
   # [tasks.publish]
   # run =[{ task = "//projects/...:publish" }]
 
-  [tasks.sync]
-  run = [
-    { task = "//projects/shared:build" },
-    { task = "//projects/...:sync" },
-  ]
-
   [tasks.setup]
   run = [
     { task = "//:setup:*" },
-    { task = "//projects/...:setup" },
-    { task = "//:sync" },
+    # { task = "//projects/...:setup" },
+    { task = "//projects/...:build" },
   ]
 
   [tasks.ai-postedit]

@@ -1,6 +1,6 @@
 "use client";
 
-import { currencies, publicConfigs } from "@guildkit/shared";
+import { currencies, maxLogoSizeMiB } from "@guildkit/shared";
 import {
   orgAboutSchema,
   orgAddressSchema,
@@ -125,7 +125,7 @@ export const OrgEditorClient = ({ org, initialLogoBase64 }: Props): ReactElement
         description="Logo should be a square."
         name="logo"
         initialImageBase64={initialLogoBase64}
-        maxSizeMiB={publicConfigs.maxLogoSizeMiB}
+        maxSizeMiB={maxLogoSizeMiB}
         validator={orgLogoSchema}
         errorMessages={fieldErrors?.logo}
         className="mb-6"

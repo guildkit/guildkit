@@ -1,15 +1,8 @@
 {
-  "$schema": "./node_modules/wrangler/config-schema.json",
-
-  "name": "guildkit-backend",
-
   "main": "./src/index.ts",
-  "assets": {
-    "directory": "public"
-  },
-
+  // This file is required to generate worker-configuration.d.ts
   "compatibility_date": "2026-05-18",
   "compatibility_flags": [
-    "nodejs_compat"
+    "nodejs_compat",
   ]
 }
