@@ -3,7 +3,10 @@
 experimental_monorepo_root = true
 
 [monorepo]
-config_roots = [ "projects/*" ]
+config_roots = [
+  "projects/*",
+  "demo"
+]
 
 [tools]
 node = "24"
