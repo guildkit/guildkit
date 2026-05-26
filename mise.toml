@@ -3,7 +3,10 @@
 monorepo_root = true
 
 [monorepo]
-config_roots = [ "projects/*" ]
+config_roots = [
+  "projects/*",
+  "demo"
+]
 
 [tools]
 node = { version = "24", corepack = true }
