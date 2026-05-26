@@ -16,7 +16,6 @@
     "@guildkit/shared": "workspace:*",
     "@phanect/configs": "2026.5.19",
     "@phanect/utils": "^3.0.0",
-    "@types/node": "^24.12.4",
     "openapi-typescript": "^7.13.0",
     "typescript": "^6.0.0",
     "vite": "^8.0.14",

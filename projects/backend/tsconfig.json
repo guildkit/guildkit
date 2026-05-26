@@ -1,11 +1,11 @@
 {
-  "extends": "@phanect/configs/ts/nodejs",
+  "extends": "@phanect/configs/ts",
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "types": [
-      "node",
-      "vite/client"
+      "vite/client",
+      "./worker-configuration.d.ts"
     ],
     "tsBuildInfoFile": "./.tsbuildinfo",
 
