@@ -8,3 +8,6 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
 minimumReleaseAge: 4320 # 72 hours
+minimumReleaseAgeExclude:
+  # Renovate security update: next@16.2.6
+  - next@16.2.6
