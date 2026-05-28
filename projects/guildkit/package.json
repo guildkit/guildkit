@@ -31,7 +31,7 @@
   "devDependencies": {
     "@better-auth/cli": "1.4.21",
     "@phanect/configs": "latest",
-    "@phanect/utils": "^3.0.0",
+    "@phanect/utils": "^4.0.0",
     "@tailwindcss/postcss": "^4.1.17",
     "@types/node": "^24.10.0",
     "@types/pg": "^8.15.6",
