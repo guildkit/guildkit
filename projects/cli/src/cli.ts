@@ -2,8 +2,8 @@
 
 import { mkdir, rm } from "node:fs/promises";
 import { command, run } from "@drizzle-team/brocli";
-import { GuildKitBackendTaskRunner } from "@guildkit/backend";
-import { GuildKitFrontendTaskRunner } from "@guildkit/frontend";
+import { GuildKitBackendTaskRunner } from "@guildkit/backend/cli";
+import { GuildKitFrontendTaskRunner } from "@guildkit/frontend/cli";
 import { getPaths } from "@guildkit/shared/cli";
 import { loadConfig } from "c12";
 import type { GuildKitConfig } from "@guildkit/shared";
