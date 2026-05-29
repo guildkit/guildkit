@@ -70,7 +70,7 @@ node = "24"
 
   [tasks.ai-postedit]
   description = "Run tsc and linters to detect and fix the warnings and errors in the codebase"
-  depends = [ "//:sync" ]
+  depends = [ "//projects/...:build" ]
   run = [
     "tsc --noEmit",
     { task = "//projects/...:lint" },

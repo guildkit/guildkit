@@ -2,16 +2,16 @@
 
 [tasks]
   [tasks.dev]
-  wait_for = [ "//:sync" ]
+  depends = [ "//projects/...:build" ]
   run = "guildkit dev"
 
   [tasks.build]
-  wait_for = [ "//:sync" ]
+  depends = [ "//projects/...:build" ]
   run = "guildkit build"
   env = { NODE_ENV = "production" }
 
   [tasks.lint]
-  wait_for = [ "//:sync" ]
+  depends = [ "//projects/...:build" ]
   run = "tsc --noEmit"
 
   [tasks.deploy]
