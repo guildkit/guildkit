@@ -1,19 +1,37 @@
 import { defineConfig } from "tsdown";
 
-export default defineConfig({
-  entry: {
-    "bin/cli": "./src/cli.ts",
-    "dist/index": "./src/index.ts",
-  },
-  //outDir: "bin",
+const commonConfig = defineConfig({
   format: [ "esm" ],
-  target: "node24",
+  platform: "node",
 
-  dts: true,
-  sourcemap: true,
-
-  treeshake: false,
   minify: false,
   exports: true,
   clean: true,
+
+  publint: {
+    level: "suggestion",
+  },
 });
+
+export default defineConfig([
+  {
+    ...commonConfig,
+
+    entry: "./src/index.ts",
+    outDir: "dist",
+    dts: true,
+    sourcemap: true,
+    treeshake: false,
+  },
+  {
+    ...commonConfig,
+
+    entry: {
+      cli: "./src/cli.ts",
+    },
+    outDir: "bin",
+    dts: false,
+    sourcemap: false,
+    treeshake: true,
+  },
+]);
