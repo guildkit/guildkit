@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { mkdir, rm } from "node:fs/promises";
 import { command, run } from "@drizzle-team/brocli";
 import { GuildKitBackendTaskRunner } from "@guildkit/backend";
