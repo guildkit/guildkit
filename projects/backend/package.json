@@ -1,5 +1,6 @@
 {
   "name": "@guildkit/backend",
+  "version": "0.0.1-prealpha",
   "type": "module",
   "module": "./dist/index.mjs",
   "main": "./dist/index.mjs",

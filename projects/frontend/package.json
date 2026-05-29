@@ -1,7 +1,7 @@
 {
   "name": "@guildkit/frontend-tmp",
+  "version": "0.0.1-prealpha",
   "type": "module",
-  "version": "0.0.1",
   "exports": {
     "./cli": {
       "types": "./dist/cli.d.mts",
