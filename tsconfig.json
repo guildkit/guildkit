@@ -12,6 +12,9 @@
       "path": "projects/backend"
     },
     {
+      "path": "projects/frontend"
+    },
+    {
       "path": "projects/guildkit"
     },
     {

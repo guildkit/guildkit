@@ -1,9 +1,7 @@
 {
   "name": "guildkit",
   "type": "module",
-  "bin": {
-    "guildkit": "./dist/cli.mjs"
-  },
+  "bin": "dist/bin/cli.mjs",
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",

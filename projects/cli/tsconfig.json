@@ -14,7 +14,13 @@
       "path": "../backend"
     },
     {
+      "path": "../frontend"
+    },
+    {
       "path": "../guildkit"
+    },
+    {
+      "path": "../shared"
     },
   ],
   "include": [
