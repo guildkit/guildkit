@@ -2,6 +2,16 @@
   "name": "@guildkit/frontend-tmp",
   "type": "module",
   "version": "0.0.1",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./cli": {
+      "types": "./dist/cli.d.mts",
+      "default": "./dist/cli.mjs"
+    }
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

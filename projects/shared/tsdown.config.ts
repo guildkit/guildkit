@@ -16,4 +16,7 @@ export default defineConfig({
   treeshake: false,
   minify: false,
   clean: true,
+  publint: {
+    level: "suggestion",
+  },
 });
