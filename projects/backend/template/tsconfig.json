@@ -1,0 +1,25 @@
+{
+  "extends": "@phanect/configs/ts", // TODO do not use @phanect's personal config
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "types": [
+      "node",
+      "vite/client"
+    ],
+
+    "tsBuildInfoFile": "./.tsbuildinfo",
+
+    // Better typings for openapi-typescript
+    "noUncheckedIndexedAccess": true
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.js",
+    "./**/*.jsx",
+  ],
+  "exclude": [
+    "./**/node_modules/**"
+  ]
+}

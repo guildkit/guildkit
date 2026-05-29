@@ -3,6 +3,7 @@
   "type": "module",
   "private": true,
   "devDependencies": {
+    "@guildkit/backend": "workspace:*",
     "@phanect/configs": "2026.5.19",
     "guildkit": "workspace:*",
     "typescript": "^6.0.0",

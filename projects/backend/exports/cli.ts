@@ -2,13 +2,13 @@ import { cp, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { getPaths } from "@guildkit/shared/cli";
 import { build as buildWithVite, createServer, type InlineConfig } from "vite";
-// import { experimental_generateTypes as generateCloudflareTypes } from "wrangler";
+import { experimental_generateTypes as generateCloudflareTypes } from "wrangler";
 import type { GuildKitConfig } from "@guildkit/shared";
 
 export class GuildKitBackendTaskRunner {
   #config: GuildKitConfig;
   #cwdPath: string;
-  #srcNpmRootPath = join(import.meta.dirname, "..");
+  #srcAppRootPath = join(import.meta.dirname, "..");
   #backendViteConfig: InlineConfig;
 
   constructor(config: GuildKitConfig, cwdPath: string) {
@@ -21,9 +21,6 @@ export class GuildKitBackendTaskRunner {
       root: intermediateBackendPath,
       build: {
         outDir: distBackendPath,
-        rolldownOptions: {
-          tsconfig: join(intermediateBackendPath, "tsconfig.build.json"),
-        },
       },
       define: {
         __GUILDKIT_CONFIG__: JSON.stringify(this.#config),
@@ -32,34 +29,31 @@ export class GuildKitBackendTaskRunner {
   }
 
   async #copyIntermediateSource() {
-    const { intermediateBackendPath } = getPaths(this.#cwdPath);
-
-    // Copy GuildKit app
     console.info("Setting up GuildKit source code...");
 
-    await cp(this.#srcNpmRootPath, intermediateBackendPath, { recursive: true });
+    const { intermediateBackendPath } = getPaths(this.#cwdPath);
 
-    await writeFile(
-      join(intermediateBackendPath, "wrangler.json"),
-      JSON.stringify({
-        name: `${ this.#config.slug }-backend`,
+    await cp(this.#srcAppRootPath, intermediateBackendPath, { recursive: true });
 
-        main: "./src/index.ts",
-        assets: {
-          directory: "public",
-        },
+    if (this.#config.servers.app === "cloudflare") {
+      await writeFile(
+        join(intermediateBackendPath, "wrangler.json"),
+        JSON.stringify({
+          name: `${ this.#config.slug }-backend`,
+          main: "./src/index.ts",
 
-        compatibility_date: "2026-05-18",
-        compatibility_flags: [
-          "nodejs_compat",
-        ],
-      })
-    );
-    // TODO Check if worker-configuration.d.ts is required to build for Cloudflare
-    // await generateCloudflareTypes({
-    //   config: join(intermediateBackendPath, "wrangler.json"),
-    //   path: join(intermediateBackendPath, "worker-configuration.d.ts"),
-    // });
+          compatibility_date: "2026-05-18",
+          compatibility_flags: [
+            "nodejs_compat",
+          ],
+        })
+      );
+
+      await generateCloudflareTypes({
+        config: join(intermediateBackendPath, "wrangler.json"),
+        path: join(intermediateBackendPath, "worker-configuration.d.ts"),
+      });
+    }
   };
 
   async dev() {

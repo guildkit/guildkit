@@ -1,0 +1,13 @@
+{
+  "name": "guildkit-instance-backend",
+  "type": "module",
+  "dependencies": {
+    "@guildkit/backend": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.0",
+    "vite": "^8.0.14",
+    "vite-ssr-components": "^0.6.1",
+    "wrangler": "^4.17.0"
+  }
+}

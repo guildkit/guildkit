@@ -1,8 +1,0 @@
-{
-  "main": "./src/index.ts",
-  // This file is required to generate worker-configuration.d.ts
-  "compatibility_date": "2026-05-18",
-  "compatibility_flags": [
-    "nodejs_compat",
-  ]
-}
