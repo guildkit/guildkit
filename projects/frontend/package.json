@@ -1,0 +1,26 @@
+{
+  "name": "@guildkit/frontend-tmp",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^13.5.4",
+    "@astrojs/netlify": "^7.0.10",
+    "@astrojs/node": "^10.1.1",
+    "@astrojs/vercel": "^10.0.7",
+    "@guildkit/shared": "workspace:*",
+    "@phanect/utils": "^4.0.0",
+    "astro": "^6.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
