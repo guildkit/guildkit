@@ -5,7 +5,7 @@
   wait_for = [
     "//projects/shared:build",
     "//projects/backend:build",
-    "//projects/guildkit:build",
+    # "//projects/guildkit:build",
   ]
   run = "tsdown --watch"
 
@@ -13,7 +13,7 @@
   wait_for = [
     "//projects/shared:build",
     "//projects/backend:build",
-    "//projects/guildkit:build",
+    # "//projects/guildkit:build",
   ]
   run = "tsdown"
   env = { NODE_ENV = "production" }
@@ -22,7 +22,7 @@
   wait_for = [
     "//projects/shared:build",
     "//projects/backend:build",
-    "//projects/guildkit:build",
+    # "//projects/guildkit:build",
   ]
   run = "tsc --noEmit"
 
