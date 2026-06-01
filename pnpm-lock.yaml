@@ -79,8 +79,8 @@ importers:
         specifier: latest
         version: 2026.5.19(@types/node@24.12.2)(typescript@6.0.3)
       '@phanect/utils':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       '@tailwindcss/postcss':
         specifier: ^4.1.17
         version: 4.2.4
@@ -1040,9 +1040,9 @@ packages:
       typescript:
         optional: true
 
-  '@phanect/utils@3.0.0':
-    resolution: {integrity: sha512-GbiyaN7FYwv4kgZ+22zAXQaxzUdTljFS3hmWHF0gP4PA8r2YbBgjN1r25Wic5jH42Od+pWCUhUP8Sn3oyRXQww==}
-    engines: {node: ^20.11.0 || ^22.16.0 || >=24.0.0, pnpm: '>=10.x'}
+  '@phanect/utils@4.0.0':
+    resolution: {integrity: sha512-ruUOjkdxJDP3P/Ya3v5YUbwDx108r5NR1WwHNfCNaKW86wnk1tsd8K0Awi1TZ+43HVq5EtiDi+jzExjHor/ghA==}
+    engines: {node: ^22.16.0 || ^24.0.0 || ^26.0.0}
 
   '@pkgr/core@0.2.9':
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
@@ -5491,7 +5491,7 @@ snapshots:
       - ts-declaration-location
       - vitest
 
-  '@phanect/utils@3.0.0': {}
+  '@phanect/utils@4.0.0': {}
 
   '@pkgr/core@0.2.9': {}
 
