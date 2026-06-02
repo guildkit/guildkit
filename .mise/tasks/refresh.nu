@@ -10,6 +10,12 @@
 const pnpmLockPath = path self "../../pnpm-lock.yaml"
 rm --force --permanent $pnpmLockPath
 
+# Create placeholder for ./bin/guildkit
+const missingCliDirPath = path self "../../projects/cli/bin"
+const missingCliPath = $missingCliDirPath | path join "cli.mjs"
+mkdir $missingCliDirPath
+touch $missingCliPath
+
 # Install dependencies
 corepack enable
 corepack up
