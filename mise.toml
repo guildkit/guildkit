@@ -36,17 +36,6 @@ node = { version = "24", corepack = true }
   [tasks.clean]
   depends = [ "clean:*" ]
 
-  [tasks.refresh]
-  depends = [ "clean" ]
-  run = [
-    "rm --force ./pnpm-lock.yaml",
-    "corepack enable",
-    "corepack up",
-    "pnpm install",
-    { task = "setup" },
-  ]
-  raw = true # Required for the spinner and interactive UIs
-
   # TODO disabled until GA
   # [tasks.publish]
   # run =[{ task = "//projects/...:publish" }]
