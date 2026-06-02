@@ -7,6 +7,7 @@ const configs = defineConfig([
     "./**/dist/**",
     "./**/worker-configuration.d.ts",
     "./projects/cli/bin/**",
+    "./projects/client/**",
     "./projects/db/src/prisma/**",
     "./projects/shared/src/intermediate/**",
   ]),
