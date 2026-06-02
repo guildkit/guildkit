@@ -2,124 +2,85 @@
 
 This file provides guidance to AI agents when working with code in this repository.
 
-## Project Overview
+## What GuildKit is
 
-GuildKit is a CMS to create job platforms.
-You can create your own job platforms and customize them for their targeted industries and features.
+GuildKit is a CMS for building job platforms. It is being reshaped from a single Next.js app into a **framework distributed as a CLI** (the `guildkit` npm package). A consumer writes a `guildkit.config.ts`, runs `guildkit dev` / `guildkit build`, and the CLI scaffolds and runs the backend + frontend on their behalf. `demo/` is the reference consumer.
 
-## Project Structure
+> The repo is WIP and mid-refactor. The database, auth, and zod schemas have moved into `@guildkit/shared`, and the API has been split into `@guildkit/backend`. When `AGENTS.md` and the actual code disagree, trust the code. Several `mise.toml` tasks (notably in `projects/guildkit` and the `cli` deps) are commented out while the split is in progress.
 
-GuildKit is a Next.js application. It follows the directory structure of Next.js.
+## Monorepo layout
 
-### Technology Stack
+pnpm workspaces under `projects/*` plus `demo`. **The directory name and the package name often differ — this is the single most confusing thing in the repo:**
 
-- **Framework**: Next.js 16 with App Router
-- **Auth**: better-auth with role-based access control
-  - User Types: `administrative`, `recruiter`, `candidate`
-  - Admin Roles: `gkAdmin` (GuildKit admins), `siteAdmin` (site admins), `none`
-  - **IMPORTANT**: Use `requireAuthAs()` function in `projects/guildkit/src/lib/auth/server.ts` instead of betterAuth's `auth.api.getSession()` to check if the user is authenticated and has the required role. **`auth.api.getSession()` is strictly forbidden in any code base of GuildKit**.
-- **Database**: PostgreSQL with Prisma ORM
-- **Storage**: S3-compatible object storage with [`@aws-sdk/client-s3` npm package](https://www.npmjs.com/package/@aws-sdk/client-s3) as a client library.
-- **Local Development**: Podman Compose, which is compatible with Docker Compose, to run the database and object storage server on the local development machines.
-- **Package Manager**: pnpm instead of npm.
-- **Task Runner**: [mise-en-place](https://mise.jdx.dev) instead of npm scripts. The tasks are defined in mise.toml and the files under .mise/tasks/.
+| Directory | Package | Role |
+|---|---|---|
+| `projects/shared` | `@guildkit/shared` | Hub library. Prisma schema + generated client, better-auth setup, zod schemas, config types, CLI path helpers. Everything depends on it. |
+| `projects/backend` | `@guildkit/backend` | Hono API (routes: `organizations`, `jobs`), auth middleware. Deploys to Cloudflare Workers (Wrangler + Vite). Exports `GuildKitBackendTaskRunner` via `./cli`. |
+| `projects/guildkit` | `@guildkit/frontend-legacy` | The legacy Next.js 16 / React 19 app. Exports `GuildKitFrontendTaskRunner` via `./cli`. |
+| `projects/frontend` | `@guildkit/frontend` | An Astro-based frontend. |
+| `projects/cli` | `guildkit` | The published CLI (brocli). Loads `guildkit.config.ts` via c12, orchestrates the two task runners. Binary: `src/cli.ts`. |
+| `demo` | `@guildkit/demo` | Reference consumer that runs the `guildkit` CLI. |
 
-### Directory Structure
+Note: the CLI imports `@guildkit/frontend/cli`, i.e. `projects/frontend` (Astro) — **not** `projects/guildkit` (Next.js).
 
-This project is a monorepo. Sub-projects are stored under `projects/`
+## How the framework works (read these together)
+
+The CLI (`projects/cli/src/cli.ts`) is config-driven:
+
+1. `loadConfig` reads the consumer's `guildkit.config.ts` (shape = `GuildKitConfig` in `projects/shared/src/config.ts`).
+2. It instantiates `GuildKitBackendTaskRunner` (`projects/backend/exports/cli.ts`) and `GuildKitFrontendTaskRunner` (`projects/frontend/exports/cli.ts`).
+3. Each runner **copies its own source into `.guildkit/intermediate/{backend,frontend}`** in the consumer's cwd, writes a generated `wrangler.json` (when targeting Cloudflare), generates Cloudflare types, and runs dev (vite / next) or build, emitting to `dist/{backend,frontend}`. Path layout is centralized in `@guildkit/shared/cli` (`getPaths`).
+
+So the runtime app is assembled at the consumer's machine from copied source + their config injected via `__GUILDKIT_CONFIG__`.
+
+## Auth (hard rules — still valid post-refactor)
+
+better-auth is configured in `projects/shared/src/auth.ts` (Prisma adapter, Google + GitHub OAuth only, no email/password). Roles live in `projects/shared/src/auth/roles.ts`.
+
+- **User types**: `recruiter`, `candidate`, `administrative` (must match the `UserType` enum in `prisma/models/core.prisma`).
+- **Admin roles**: `gkAdmin` (GuildKit-wide), `siteAdmin` (one site), `none`. **Recruiter/org roles**: `recruiterAdmin`, `recruiter`.
+- **Always gate access with `requireAuthAs()`** in `projects/backend/src/middleware/auth.ts`. Calling `auth.api.getSession()` directly is forbidden everywhere — the only sanctioned wrapper is the local `getSession` defined inside that same file.
+
+## Database & code generation
+
+Prisma source of truth: `projects/shared/prisma/models/{core,better-auth,currencies}.prisma`. The build task `projects/shared/.mise/tasks/build/db.nu` runs a specific, order-dependent pipeline:
 
 ```
-guildkit/
-├── projects/                 # Monorepo root
-│   └── guildkit/             # Main GuildKit application
-│       ├── prisma/           # Database schema and migrations
-│       │   ├── schema.prisma
-│       │   ├── migrations/
-│       │   └── models/
-│       │       ├── better-auth.prisma
-│       │       ├── core.prisma
-│       │       └── currencies.prisma
-│       ├── public/           # Static assets
-│       │   └── vendor/
-│       │       ├── octicons/
-│       │       └── tabler/
-│       ├── src/
-│       │   ├── app/          # Next.js app directory
-│       │   │   ├── (public)/ # Public routes (landing, job listing)
-│       │   │   ├── auth/     # Authentication pages
-│       │   │   ├── employer/ # Employer dashboard
-│       │   │   └── api/      # API routes
-│       │   ├── components/   # React components
-│       │   │   ├── generic/  # Reusable UI components
-│       │   │   │   └── fields/
-│       │   │   ├── JobCard.tsx
-│       │   │   ├── JobEditor.tsx
-│       │   │   └── OrgEditor.tsx
-│       │   ├── devkit/       # CLI tools and utilities
-│       │   │   ├── cli.ts
-│       │   │   ├── config.ts
-│       │   │   └── utils.ts
-│       │   ├── intermediate/ # Intermediate build files
-│       │   │   ├── currencies.ts
-│       │   │   └── public-configs.json
-│       │   └── lib/          # Core business logic
-│       │       ├── auth/     # Authentication utilities
-│       │       ├── prisma/   # Prisma database schema and utilities
-│       │       ├── actions/  # Server actions
-│       │       ├── validations/ # Zod schemas
-│       │       ├── utils/    # Helper utilities
-│       │       ├── styles/   # Global CSS
-│       │       └── types.ts  # TypeScript type definitions
-│       ├── next.config.ts
-│       ├── tsconfig.json
-│       ├── package.json
-│       └── prisma.config.ts
-├── compose.yaml             # Docker/Podman compose for dev services
-├── eslint.config.ts         # ESLint configuration
-├── mise.toml                # Mise task configuration
-├── pnpm-workspace.yaml      # pnpm workspace configuration
-└── package.json
+prisma generate           # generates the client into src/prisma/ (committed, DO NOT hand-edit; eslint-ignored)
+auth generate ...         # regenerates prisma/models/better-auth.prisma FROM src/auth.ts
+prisma generate           # again, to pick up the auth-driven schema changes
+prisma migrate dev|deploy # dev when SERVER_ENV=development, else deploy
+prisma db seed            # dev / demo envs only; seeder is .mise/tasks/seed.ts
 ```
 
-### Key Directories
+`better-auth.prisma` is generated from `auth.ts` — edit auth config, not that file. The generated Prisma client under `projects/shared/src/prisma/` is committed and must not be edited by hand.
 
-- **projects/guildkit/src/app** - Next.js pages and API routes using app directory
-- **projects/guildkit/src/lib** - Business logic, type definitions, and utilities
-- **projects/guildkit/src/components** - Reusable React components
-- **projects/guildkit/prisma** - Database schema, migrations, and model definitions
-- **projects/guildkit/public** - Static assets and vendor files
+## Commands
 
-## Quick Start
+Tasks are run with **mise** (a monorepo task runner here — `experimental_monorepo_root`), not npm scripts. Run from repo root:
 
-1. `mise install`
-2. `mise build`
-3. `mise dev`
+- `mise install` — install deps (also runs corepack, `pnpm install`, and `mise setup` via postinstall hook).
+- `mise dev` — build all projects, then start app + Postgres + RustFS dev servers.
+- `mise build` — build all projects.
+- `mise lint` — root `tsc --noEmit`, each project's `lint`, then `eslint`.
+- `mise fix` — `eslint --fix` + per-project fixes.
+- `mise clean` — tear down containers and gitignored files (keeps `.env`, `mise.local.toml`).
+- `mise refresh` — recreate containers and `pnpm-lock.yaml`, update pnpm.
 
-## Dev Commands
+Target one project: `mise //projects/backend:build` (or `:dev`, `:lint`, `:deploy`). Cross-project deps are declared with `wait_for`/`depends` in each `mise.toml`.
 
-- `mise install` - Install all dependencies, including npm dependencies.
-- `mise dev` - Start dev servers including application server, database server, and object storage server.
-- `mise build` - Build application.
-- `mise lint` - Run `tsc --noEmit` and ESLint.
-- `mise fix` - Fix linting issues.
-- `mise clean` - Delete the Docker containers and gitignore'd files except for .env and mise.local.toml.
-- `mise refresh` - Recreate the Docker containers and pnpm-lock.yaml, and update pnpm.
+**After every code edit, run `mise ai-postedit`** (`tsc --noEmit` + per-project lint + `eslint --fix` + per-project fix) and resolve all reported errors before reporting done.
 
-## AI Agent Instructions
+## Local environment
 
-### Post-Modification Linting
+- Prereqs: mise-en-place + Podman. `cp .env.example .env` before first run.
+- `compose.yaml` brings up **Postgres 17** (`:5432`) and **RustFS** S3-compatible storage (`:9000` API, `:9001` console). Storage client is `@aws-sdk/client-s3`; the `guildkit` bucket is created by `.mise/tasks/setup/storage.ts`.
+- App dev port is config-driven (`GuildKitConfig.dev.port`, default 3000; the demo uses 3001). The backend CORS origin in `projects/backend/src/index.ts` is currently hardcoded to the frontend origin.
+- Required env vars (see `.env.example`): `DATABASE_URL`, `BETTER_AUTH_URL`, `BETTER_AUTH_SECRET`, `GOOGLE_CLIENT_ID/SECRET`, `GITHUB_CLIENT_ID/SECRET`, and `SERVER_ENV` (`development` | `demo-preview` | `demo-production` — gates migrate/seed and Neon branch behavior).
 
-**After every code modification, the AI agent must:**
+## Conventions & constraints
 
-1. Run `mise ai-postedit` to check for TypeScript and ESLint errors
-2. If errors are found, fix them either by:
-   - Running `mise fix` for auto-fixable issues
-   - Manually correcting code issues if auto-fix doesn't resolve them
-3. Continue running `mise lint` until all errors are resolved
-4. Report the final lint status to the user
-
-This ensures the codebase remains free of TypeScript and lint errors at all times.
-
-### package blocklist
-
-1. **`@cloudflare/workers-types` npm package is strictly forbidden** since it is deprecated.
+- **Package manager**: pnpm only. **Node**: 24.x. New deps wait 72h after release (renovate `minimumReleaseAge`).
+- **Build tooling**: tsdown (ESM, dual `dist`/`bin` outputs); Cloudflare deploys via wrangler.
+- `@cloudflare/workers-types` is **forbidden** (deprecated).
+- Domain wording (from README): **organization** = the hiring company; **recruiter** = staff belonging to an organization; **employer** = use only when you mean either/both.
