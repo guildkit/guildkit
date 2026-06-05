@@ -3,7 +3,7 @@ import type { guildKitBackend } from "@guildkit/backend";
 
 type BackendApp = ReturnType<typeof guildKitBackend>;
 
-export const client = hc<BackendApp>("http://localhost:3001/");
+export const client = hc<BackendApp>("http://localhost:3001/"); // TODO allow configuring backend URL
 
 // Dates are serialized as ISO `date-time` strings on the wire. The wrappers
 // below convert them back into `Date` objects so consumers receive domain data.
