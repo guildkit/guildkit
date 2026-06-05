@@ -1,0 +1,6 @@
+Hono の部分も Next.js (Vinext) の API Route で実装する?
+→ Hono で env を取得するため、`process.env.*` が使えず、initAuth や initPrisma が必要になっている。Next.js なら process.env を使える?
+
+Admin 画面
+仕事検索
+アイコン類が2つコピーされている
