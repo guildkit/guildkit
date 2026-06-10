@@ -6,7 +6,7 @@ experimental_monorepo_root = true
 config_roots = [ "projects/*" ]
 
 [tools]
-node = "24"
+node = { version = "24", corepack = true }
 "npm:nushell" = "latest"
 
 [tasks]
