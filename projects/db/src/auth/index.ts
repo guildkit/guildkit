@@ -2,7 +2,6 @@ import { currencies, userTypes, type Env, type UserType } from "@guildkit/shared
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { getOAuthState } from "better-auth/api";
-import { nextCookies } from "better-auth/next-js";
 import { admin as adminPlugin, organization } from "better-auth/plugins";
 import { z } from "zod";
 import { adminAc, adminRoles, recruiterAc, recruiterRoles } from "./roles.js";
@@ -171,7 +170,6 @@ class AuthInitializer {
           ac: adminAc,
           roles: adminRoles,
         }),
-        nextCookies(), // this plugin has to be the last plugin in the array
       ],
       socialProviders: {
         google: {
