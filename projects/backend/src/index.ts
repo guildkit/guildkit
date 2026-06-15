@@ -35,5 +35,6 @@ export const guildKitBackend = (config: GuildKitConfig) =>
       const auth = initAuth(c.env, prisma);
       return auth.handler(c.req.raw);
     })
+    .get("/healthcheck", async (c) => c.body("Active!"))
     .route("/", organizations)
     .route("/", jobs);
