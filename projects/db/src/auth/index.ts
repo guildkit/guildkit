@@ -189,6 +189,9 @@ class AuthInitializer {
       emailAndPassword: {
         enabled: false,
       },
+      telemetry: {
+        enabled: false,
+      },
     });
 
     AuthInitializer.instance = this;
