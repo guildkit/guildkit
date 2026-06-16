@@ -1,19 +1,44 @@
 {
   "name": "@guildkit/backend",
+  "version": "0.0.1-prealpha",
+  "author": {
+    "name": "tenkumo, Inc.",
+    "url": "https://tenkumogroup.com"
+  },
+  "contributors": [
+    {
+      "name": "Jumpei Ogawa",
+      "url": "https://phanective.org"
+    }
+  ],
+  "license": "Apache-2.0",
   "type": "module",
-  "private": true,
+  "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.js",
+    "./nodejs": "./dist/nodejs.js"
+  },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1053.0",
+    "@cloudflare/vite-plugin": "^1.2.3",
+    "@guildkit/db": "workspace:*",
+    "@guildkit/shared": "workspace:*",
+    "@hono/node-server": "^2.0.4",
     "@hono/zod-openapi": "^1.4.0",
-    "hono": "^4.12.18"
+    "@phanect/utils": "^3.0.0",
+    "@prisma/adapter-pg": "^7.8.0",
+    "better-auth": "1.6.17",
+    "hono": "^4.12.18",
+    "tsdown": "0.22.2",
+    "vite": "^8.0.14",
+    "vite-ssr-components": "^0.6.1",
+    "wrangler": "^4.17.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.2.3",
     "@phanect/configs": "2026.5.19",
     "@types/node": "^24.12.4",
     "openapi-typescript": "^7.13.0",
-    "typescript": "^6.0.0",
-    "vite": "^8.0.14",
-    "vite-ssr-components": "^0.6.1",
-    "wrangler": "^4.17.0"
+    "typescript": "^6.0.0"
   }
 }
