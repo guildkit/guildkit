@@ -6,6 +6,9 @@
 
 use ./_libs *
 
+# pnpm will not be found in the PATH without this in some cases
+mise reshim
+
 if not ("SERVER_ENV" in $env) {
   print "[ERROR] The environment variable SERVER_ENV is missing. If you are on your local machine, copy .env.example to .env, or set `SERVER_ENV=development` manually."
   exit 1
