@@ -1,5 +1,5 @@
 import { initAuth } from "@guildkit/db/auth";
-import { Hono } from "hono";
+import { OpenAPIHono } from "@hono/zod-openapi";
 import { cors } from "hono/cors";
 import { initPrisma } from "./lib/prisma.ts";
 import { jobs } from "./routes/jobs.ts";
@@ -8,7 +8,14 @@ import type { GuildKitConfig } from "@guildkit/shared";
 import type { HonoEnv } from "./lib/env.ts";
 
 export const guildKitBackend = (config: GuildKitConfig) =>
-  new Hono<HonoEnv>()
+  new OpenAPIHono<HonoEnv>()
+    .doc("/docs", {
+      openapi: "3.0.0",
+      info: {
+        version: "1.0.0",
+        title: "GuildKit API",
+      },
+    })
     .use("/*", async (c, next) => {
       c.set("config", config);
 

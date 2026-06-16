@@ -202,10 +202,4 @@ export const organizations = new OpenAPIHono<HonoEnv>()
         }, 500);
       }
     }
-  ).doc("/doc", {
-    openapi: "3.1.2",
-    info: {
-      version: "1.0.0",
-      title: "GuildKit Organizations API",
-    },
-  });
+  );
