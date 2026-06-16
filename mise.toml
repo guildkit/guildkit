@@ -1,6 +1,6 @@
 #:schema https://mise.jdx.dev/schema/mise.json
 
-experimental_monorepo_root = true
+monorepo_root = true
 
 [monorepo]
 config_roots = [ "projects/*" ]
@@ -53,7 +53,3 @@ _.path = "./node_modules/.bin"
 
 [settings]
 jobs = 8
-
-# Required for hooks as of 2025.10
-# https://mise.jdx.dev/hooks.html
-experimental = true
