@@ -74,6 +74,7 @@ Target one project: `mise //projects/backend:build` (or `:dev`, `:lint`, `:deplo
 ## Local environment
 
 - Prereqs: mise-en-place + Podman. `cp .env.example .env` before first run.
+- Run `eval "$(mise activate bash)"` before running any commands for the each shell sessions.
 - `compose.yaml` brings up **Postgres 17** (`:5432`) and **RustFS** S3-compatible storage (`:9000` API, `:9001` console). Storage client is `@aws-sdk/client-s3`; the `guildkit` bucket is created by `.mise/tasks/setup/storage.ts`.
 - App dev port is config-driven (`GuildKitConfig.dev.port`, default 3000; the demo uses 3001). The backend CORS origin in `projects/backend/src/index.ts` is currently hardcoded to the frontend origin.
 - Required env vars (see `.env.example`): `DATABASE_URL`, `BETTER_AUTH_URL`, `BETTER_AUTH_SECRET`, `GOOGLE_CLIENT_ID/SECRET`, `GITHUB_CLIENT_ID/SECRET`, and `SERVER_ENV` (`development` | `demo-preview` | `demo-production` — gates migrate/seed and Neon branch behavior).
@@ -81,6 +82,8 @@ Target one project: `mise //projects/backend:build` (or `:dev`, `:lint`, `:deplo
 ## Conventions & constraints
 
 - **Package manager**: pnpm only. **Node**: 24.x. New deps wait 72h after release (renovate `minimumReleaseAge`).
+- Always use `mise run lint` command when you want to check TypeScript type with `tsc` and/or lint projects with `eslint`. This command build the project before the checking the errors. Since this project is monorepo-based, you have to build the projects before running type check and the lints.
 - **Build tooling**: tsdown (ESM, dual `dist`/`bin` outputs); Cloudflare deploys via wrangler.
 - `@cloudflare/workers-types` is **forbidden** (deprecated).
 - Domain wording (from README): **organization** = the hiring company; **recruiter** = staff belonging to an organization; **employer** = use only when you mean either/both.
+- If you read command output, make sure to read all the output messages to avoid missing any important messages. Trimming the output using commands like `tail`, `head`, and `grep` is strictly forbidden.
