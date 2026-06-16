@@ -35,4 +35,8 @@ export const astroConfig = (
       }),
     },
   },
+
+  server: {
+    port: 3000,
+  },
 });
