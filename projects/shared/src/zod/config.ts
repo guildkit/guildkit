@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@hono/zod-openapi";
 import type { S3ClientConfig } from "@aws-sdk/client-s3";
 
 export const GuildKitConfigSchema = z.object({
