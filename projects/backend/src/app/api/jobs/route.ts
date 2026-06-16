@@ -21,6 +21,13 @@ const toJobListItem = (job: {
   employer: { name: job.employer.name },
 });
 
+/**
+ * List active job postings
+ * @tag job
+ * @query JobsQuery
+ * @response JobsResponseSchema:A list of active job postings
+ * @add 400:BadRequestResponse:The query is invalid or `?employer=us` is given although the requesting user does not have an active organization.
+ */
 export const GET = async (request: NextRequest): Promise<NextResponse> => {
   const { success, data: query, error } = JobsQuery.safeParse(Object.fromEntries(request.nextUrl.searchParams));
 

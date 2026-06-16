@@ -11,6 +11,7 @@
   ]
   run = [
     { task = ":build:*" },
+    "openapi-gen generate",
     "vite build",
     "tsdown", # Run after `vite build`, which empties dist/
   ]
