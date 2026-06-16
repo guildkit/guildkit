@@ -44,7 +44,7 @@ node = { version = "24", corepack = true }
 postinstall = [
   "corepack enable",
   "pnpm install --frozen-lockfile",
-  "mise setup",
+  { task = "setup" },
 ]
 
 [env]
