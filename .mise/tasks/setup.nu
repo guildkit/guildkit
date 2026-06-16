@@ -1,6 +1,7 @@
 #!/usr/bin/env nu
 
 #MISE description="Setup after `mise install`. Build intermediate files and set up local Docker containers."
+#MISE depends_post = [ "//projects/...:setup" ]
 #MISE raw=true # Required for interactive shell by Prisma
 
 use ./_libs *
