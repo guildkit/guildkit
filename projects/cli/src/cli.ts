@@ -23,6 +23,9 @@ const distRootPath = join(cwdPath, "dist");
 const distBackendPath = join(distRootPath, "backend");
 const distFrontendPath = join(distRootPath, "frontend");
 
+const backendDevPort = 3001;
+const frontendDevPort = 3000;
+
 const prepare = async () => {
   const srcAppRootPath = join(import.meta.dirname, "../template"); // relative to bin/guildkit-helpers.mjs
 
@@ -113,6 +116,7 @@ await run([
             join(intermediateBackendPath, "cloudflare.ts"),
             {
               config: join(intermediateBackendPath, "wrangler.json"),
+              port: backendDevPort,
             }
           );
         } else {
