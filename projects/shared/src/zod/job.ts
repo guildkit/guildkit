@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@hono/zod-openapi";
 import { salaryPer } from "../enums";
 import { currencies } from "../intermediate/currencies";
 
