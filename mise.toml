@@ -51,9 +51,6 @@ node = "24"
   # [tasks.publish]
   # run =[{ task = "//projects/...:publish" }]
 
-  [tasks.setup]
-  depends_post = "//projects/...:setup"
-
 [hooks]
 postinstall = [
   "corepack enable",
