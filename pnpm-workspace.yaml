@@ -11,5 +11,5 @@ minimumReleaseAge: 4320 # 72 hours
 minimumReleaseAgeExclude:
   # Renovate security update: next@16.2.6
   - next@16.2.6
-  # Renovate security update: better-auth@1.6.2
-  - better-auth@1.6.2
+  # Renovate security update: better-auth@1.6.2 || 1.6.11
+  - better-auth@1.6.2 || 1.6.11
