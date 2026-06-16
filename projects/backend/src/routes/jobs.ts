@@ -258,10 +258,4 @@ export const jobs = new OpenAPIHono<HonoEnv>()
 
       return c.json({}, 200);
     }
-  ).doc("/doc", {
-    openapi: "3.1.2",
-    info: {
-      version: "1.0.0",
-      title: "GuildKit Jobs API",
-    },
-  });
+  );
