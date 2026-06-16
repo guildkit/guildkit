@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "@hono/zod-openapi";
 import { maxLogoSizeMiB } from "../config";
 import { currencies } from "../intermediate/currencies";
 import { mibToByte } from "../utils";
