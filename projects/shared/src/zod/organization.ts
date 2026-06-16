@@ -19,6 +19,7 @@ export const orgLogoSchema = z.file()
     "image/gif",
     "image/svg+xml",
   ], "Unsupported file format. Supported file types: PNG, JPEG, WebP, GIF, and SVG.")
+  .openapi({ type: "string", format: "binary" })
   .optional();
 
 export const orgAboutSchema = z.string().trim().optional();
