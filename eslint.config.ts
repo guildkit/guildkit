@@ -26,6 +26,14 @@ const configs = defineConfig([
       },
     },
   },
+
+  {
+    files: [ "**/.mise/**" ],
+    rules: {
+      // To allow `//MISE ...`
+      "@stylistic/spaced-comment": "off",
+    },
+  },
 ]);
 
 export default configs;
