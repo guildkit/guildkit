@@ -1,0 +1,8 @@
+{
+  "enabledMcpjsonServers": [
+    "astro",
+    "prisma",
+    "eslint",
+    "mise"
+  ]
+}
