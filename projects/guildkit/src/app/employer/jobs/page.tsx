@@ -1,4 +1,4 @@
-import { JobEditor } from "@/components/JobEditor.tsx";
+import { JobEditor } from "@/components/JobEditor.client.tsx";
 import { JobList } from "@/components/JobList.tsx";
 import type { JobCardInfo } from "@/components/JobCard.tsx";
 import { getJobs } from "@guildkit/client";

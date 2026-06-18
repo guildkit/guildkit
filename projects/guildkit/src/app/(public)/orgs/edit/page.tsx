@@ -1,8 +1,8 @@
-import { initAuth } from "@guildkit/shared/auth";
 import { headers } from "next/headers";
 import { forbidden } from "next/navigation";
-import { OrgEditor } from "@/components/OrgEditor.tsx";
+import { OrgEditor } from "@/components/OrgEditor.client.tsx";
 import { requireAuthAs } from "@/lib/auth/server.ts";
+import { getBase64FromImageURL } from "@/lib/utils/utils";
 import type { ReactElement } from "react";
 
 export default async function EditOrgPage(): Promise<ReactElement> {
@@ -20,5 +20,7 @@ export default async function EditOrgPage(): Promise<ReactElement> {
     forbidden();
   }
 
-  return <OrgEditor org={org} />;
+  const logoBase64 = org.logo ? await getBase64FromImageURL(org.logo) : undefined;
+
+  return <OrgEditor org={org} initialLogoBase64={logoBase64} />;
 }

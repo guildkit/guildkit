@@ -23,16 +23,14 @@ import { Dialog } from "@/components/generic/Dialog.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
 import { Modal } from "@/components/generic/Modal.tsx";
 import type { ActionState } from "@/lib/types.ts";
+import { authClient } from "@/lib/auth/client";
 
 type Props = {
   job: Job | "new";
-  activeOrg: {
-    name: string;
-  };
   children: ReactNode;
 };
 
-export const JobEditorClient = ({ job, activeOrg, children }: Props): ReactElement => {
+export const JobEditor = ({ job, children }: Props): ReactElement => {
   const router = useRouter();
   const [ state, setState ] = useState<ActionState<Job>>({});
   const [ isCreatingJob, startTransition ] = useTransition();
@@ -69,6 +67,12 @@ export const JobEditorClient = ({ job, activeOrg, children }: Props): ReactEleme
       }
     });
   };
+
+  const { data: activeOrg } = authClient.useActiveOrganization();
+
+  if (!activeOrg) {
+    throw new Error("Your organization was not recognized. Error code: GK-A922R");
+  }
 
   return (
     <DialogTrigger>
