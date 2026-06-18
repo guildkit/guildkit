@@ -1,0 +1,27 @@
+{
+  "extends": "@phanect/configs/ts",
+  "compilerOptions": {
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+
+    "tsBuildInfoFile": "./.tsbuildinfo",
+
+    // Required to use `references`
+    "composite": true,
+    "declaration": true,
+    "noEmit": null,
+    "emitDeclarationOnly": true
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.js",
+    "./**/*.jsx",
+  ],
+  "exclude": [
+    "./**/node_modules/**",
+    "./**/dist/**"
+  ]
+}
