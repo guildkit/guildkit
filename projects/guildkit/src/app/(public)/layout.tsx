@@ -1,6 +1,5 @@
-import { headers } from "next/headers";
 import { Nav } from "@/components/Nav.tsx";
-import { getSession } from "@/lib/auth/server.ts";
+import { getSession } from "@/lib/auth/client.ts";
 import type { ReactElement, ReactNode } from "react";
 
 type Props = {
@@ -8,15 +7,16 @@ type Props = {
 };
 
 export default async function PublicLayout({ children }: Props): Promise<ReactElement> {
-  const { user } = await getSession({
-    headers: await headers(),
-  }) ?? {};
+  const { error, data } = await getSession();
 
-  const userType = user?.type ?? "guest" as const;
+  if (error) {
+    console.error(error);
+    throw new Error();
+  }
 
   return (
     <>
-      <Nav for={userType} />
+      <Nav for={data?.user?.type ?? "guest"} />
       <main className="flex flex-col items-center gap-4 w-full">
         {children}
       </main>

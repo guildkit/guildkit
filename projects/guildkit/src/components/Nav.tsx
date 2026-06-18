@@ -1,11 +1,10 @@
-import { auth } from "@guildkit/shared/auth";
-import { headers } from "next/headers";
 import Image from "next/image";
 import { Link } from "@/components/generic/ButtonLink.tsx";
 import { TopBar } from "@/components/generic/TopBar.tsx";
 import { SignOutButton } from "@/components/SignOutButton.tsx";
+import { organization } from "@/lib/auth/client.ts";
 import config from "../../../backend/src/guildkit.config.ts";
-import type { UserType } from "@guildkit/shared/prisma";
+import type { UserType } from "@guildkit/shared";
 import type { ReactElement } from "react";
 
 type Props = {
@@ -14,12 +13,16 @@ type Props = {
 
 export const Nav = async ({ for: userType }: Props): Promise<ReactElement> => {
   const isRecruiter = userType === "recruiter" || userType === "administrative";
-  const activeOrg = isRecruiter && await auth.api.getFullOrganization({
+  const { error, data: activeOrg } = isRecruiter ? await organization.getFullOrganization({
     query: {
       membersLimit: 0,
     },
-    headers: await headers(),
-  });
+  }) : {};
+
+  if (error) {
+    console.error(error);
+    throw new Error(error.message);
+  }
 
   return (
     <>

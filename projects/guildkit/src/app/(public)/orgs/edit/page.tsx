@@ -1,22 +1,13 @@
-import { headers } from "next/headers";
 import { forbidden } from "next/navigation";
 import { OrgEditor } from "@/components/OrgEditor.client.tsx";
-import { requireAuthAs } from "@/lib/auth/server.ts";
+import { organization } from "@/lib/auth/client";
 import { getBase64FromImageURL } from "@/lib/utils/utils";
 import type { ReactElement } from "react";
 
 export default async function EditOrgPage(): Promise<ReactElement> {
-  const { session } = await requireAuthAs("recruiter");
+  const { error, data: org } = await organization.getFullOrganization();
 
-  const org = await auth.api.getFullOrganization({
-    query: {
-      organizationId: session?.activeOrganizationId ?? undefined,
-      membersLimit: 0,
-    },
-    headers: await headers(),
-  });
-
-  if (!org) {
+  if (error) { // TODO check the error types if we should forbid the access or raise an unecpected error.
     forbidden();
   }
 
