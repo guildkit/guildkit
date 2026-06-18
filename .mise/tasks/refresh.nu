@@ -16,13 +16,6 @@ const missingCliPath = $missingCliDirPath | path join "guildkit.mjs"
 mkdir $missingCliDirPath
 touch $missingCliPath
 
-# Create placeholder for @guildkit/client
-const missingClientDirPath = path self "../../projects/client"
-const missingClientPackageJsonPath = $missingClientDirPath | path join "package.json"
-
-mkdir $missingClientDirPath
-"{ \"name\": \"@guildkit/client\" }" | save $missingClientPackageJsonPath
-
 # Install dependencies
 corepack enable
 corepack up

@@ -1,8 +1,5 @@
 #:schema https://mise.jdx.dev/schema/mise.json
 
-[tools]
-java = "26"
-
 [tasks]
   [tasks.dev]
   run = "tsdown --watch --no-clean"
@@ -12,11 +9,7 @@ java = "26"
     "//projects/shared:build",
     "//projects/db:build",
   ]
-  run = [
-    "tsdown",
-    { task = "build:openapi-docs" },
-    "openapi-generator-cli generate",
-  ]
+  run = "tsdown"
   env = { NODE_ENV = "production" }
 
   [tasks.lint]
