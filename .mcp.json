@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "astro": {
+      "type": "http",
+      "url": "https://mcp.docs.astro.build/mcp"
+    },
+    "prisma": {
+      "command": "pnpm",
+      "args": [ "exec", "prisma", "mcp" ]
+    },
+    "better-auth": {
+      "url": "https://mcp.better-auth.com/mcp"
+    },
+    "eslint": {
+      "command": "pnpm",
+      "args": [ "exec", "eslint", "--mcp" ]
+    },
+    "mise": {
+      "command": "mise",
+      "args": [ "mcp" ],
+      "env": {
+        "MISE_EXPERIMENTAL": "1"
+      }
+    }
+  }
+}
