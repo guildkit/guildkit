@@ -8,7 +8,8 @@ import type { UserType } from "@guildkit/shared";
 
 type Auth = ReturnType<typeof initAuth>;
 
-const { signIn, signOut, organization, useActiveOrganization } = createAuthClient({
+const { signIn, signOut, organization, getSession } = createAuthClient({
+  baseURL: "http://localhost:3001", // TODO don't hard code
   plugins: [
     adminClient({
       ac: adminAc,
@@ -57,5 +58,5 @@ export const useSignOut = () => {
 
 export {
   organization,
-  useActiveOrganization,
+  getSession,
 };
