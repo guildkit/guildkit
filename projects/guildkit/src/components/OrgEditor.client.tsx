@@ -35,7 +35,7 @@ type Props = {
 
 type ApiResponse = ActionState<OrgFormData> & { redirectUrl?: string; };
 
-export const OrgEditorClient = ({ org, initialLogoBase64 }: Props): ReactElement => {
+export const OrgEditor = ({ org, initialLogoBase64 }: Props): ReactElement => {
   const router = useRouter();
   const [ state, setState ] = useState<ActionState<OrgFormData>>({});
   const [ isPending, startTransition ] = useTransition();
