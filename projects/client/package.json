@@ -1,0 +1,38 @@
+{
+  "name": "@guildkit/client",
+  "version": "0.0.1-prealpha",
+  "description": "GuildKit's typed API client for the backend",
+  "author": {
+    "name": "tenkumo, Inc.",
+    "url": "https://tenkumogroup.com"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "*",
+    "!*.log",
+    "!*.tgz",
+    "!.mise/",
+    "!.gitignore",
+    "!mise.toml",
+    "!tsdown.config.ts"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "dependencies": {
+    "hono": "^4.12.18"
+  },
+  "devDependencies": {
+    "@guildkit/backend": "workspace:*",
+    "@phanect/configs": "2026.5.19",
+    "@types/node": "^24.12.4",
+    "publint": "^0.3.21",
+    "tsdown": "0.22.2",
+    "typescript": "^6.0.0"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}
