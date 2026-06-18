@@ -23,14 +23,14 @@ import { Dialog } from "@/components/generic/Dialog.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
 import { Modal } from "@/components/generic/Modal.tsx";
 import type { ActionState } from "@/lib/types.ts";
-import { authClient } from "@/lib/auth/client";
 
 type Props = {
   job: Job | "new";
+  activeOrgName: string;
   children: ReactNode;
 };
 
-export const JobEditor = ({ job, children }: Props): ReactElement => {
+export const JobEditor = ({ job, activeOrgName, children }: Props): ReactElement => {
   const router = useRouter();
   const [ state, setState ] = useState<ActionState<Job>>({});
   const [ isCreatingJob, startTransition ] = useTransition();
@@ -68,12 +68,6 @@ export const JobEditor = ({ job, children }: Props): ReactElement => {
     });
   };
 
-  const { data: activeOrg } = authClient.useActiveOrganization();
-
-  if (!activeOrg) {
-    throw new Error("Your organization was not recognized. Error code: GK-A922R");
-  }
-
   return (
     <DialogTrigger>
       <Button theme="button-deep">
@@ -82,7 +76,7 @@ export const JobEditor = ({ job, children }: Props): ReactElement => {
       <Modal>
         <Dialog className="w-full max-w-3xl px-4 py-8">
           <h1 className="text-2xl font-bold flex justify-center mb-5">
-            {job === "new" ? `Create a new job for ${ activeOrg.name }` : `Update job: ${ job.title }` }
+            {job === "new" ? `Create a new job for ${ activeOrgName }` : `Update job: ${ job.title }` }
           </h1>
 
           {formErrors?.map((formError) => (
