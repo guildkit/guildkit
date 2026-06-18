@@ -1,0 +1,25 @@
+{
+  "extends": "@phanect/configs/ts",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./.tsbuildinfo",
+
+    // Required to use `references`
+    "composite": true,
+    "declaration": true,
+    "noEmit": null,
+    "emitDeclarationOnly": true
+  },
+  "references": [
+    { "path": "../backend" }
+  ],
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.js",
+    "./**/*.jsx",
+  ],
+  "exclude": [
+    "./**/node_modules/**",
+    "./**/dist/**"
+  ]
+}
