@@ -36,7 +36,7 @@
     "@types/pg": "^8.15.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "auth": "1.6.17",
+    "auth": "1.6.18",
     "dayjs": "^1.11.19",
     "dotenv": "^17.2.2",
     "fast-xml-parser": "^5.3.1",
