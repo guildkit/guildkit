@@ -1,0 +1,7 @@
+{
+  "enabledMcpjsonServers": [
+    "prisma",
+    "eslint",
+    "mise"
+  ]
+}
