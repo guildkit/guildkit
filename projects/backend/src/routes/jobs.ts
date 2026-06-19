@@ -3,7 +3,6 @@ import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { requireAuthAs } from "../middleware/auth.ts";
 import type { JobListItem } from "@guildkit/shared/zod";
 import type { HonoEnv } from "../lib/env.ts";
-import { initPrisma } from "../lib/prisma.ts";
 
 const jobIdParam = z.object({
   id: z
@@ -71,8 +70,14 @@ export const jobs = new OpenAPIHono<HonoEnv>()
         : typeof employer === "string" ? employer
         : undefined;
 
-      const appServerName = c.get("config").servers.app;
-      const prisma = await initPrisma(c.env, appServerName);
+      const prisma = c.get("prisma");
+
+      if (!prisma) {
+        c.status(500);
+        return c.json({
+          code: "PRISMA_NOT_INITIATED",
+        });
+      }
 
       const jobs = await prisma.job.findMany({
         select: {
@@ -124,9 +129,14 @@ export const jobs = new OpenAPIHono<HonoEnv>()
     }),
     async (c) => {
       const { id } = c.req.valid("param");
+      const prisma = c.get("prisma");
 
-      const appServerName = c.get("config").servers.app;
-      const prisma = await initPrisma(c.env, appServerName);
+      if (!prisma) {
+        c.status(500);
+        return c.json({
+          code: "PRISMA_NOT_INITIATED",
+        });
+      }
 
       const job = await prisma.job.findFirst({
         where: { id },
@@ -197,10 +207,14 @@ export const jobs = new OpenAPIHono<HonoEnv>()
       }
 
       const validatedNewJob = c.req.valid("json");
+      const prisma = c.get("prisma");
 
-      const appServerName = c.get("config").servers.app;
-      const prisma = await initPrisma(c.env, appServerName);
-
+      if (!prisma) {
+        c.status(500);
+        return c.json({
+          code: "PRISMA_NOT_INITIATED",
+        });
+      }
       const createdJob = await prisma.job.create({
         data: {
           ...validatedNewJob,
@@ -245,9 +259,14 @@ export const jobs = new OpenAPIHono<HonoEnv>()
       }
 
       const { id } = c.req.valid("param");
+      const prisma = c.get("prisma");
 
-      const appServerName = c.get("config").servers.app;
-      const prisma = await initPrisma(c.env, appServerName);
+      if (!prisma) {
+        c.status(500);
+        return c.json({
+          code: "PRISMA_NOT_INITIATED",
+        });
+      }
 
       await prisma.job.deleteMany({
         where: {

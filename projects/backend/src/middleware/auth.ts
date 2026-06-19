@@ -1,5 +1,4 @@
-import { initAuth, type Organization, type User } from "@guildkit/db/auth";
-import { initPrisma } from "../lib/prisma";
+import type { Organization, User } from "@guildkit/db/auth";
 import type { MiddlewareHandler } from "hono";
 import type { HonoEnv } from "../lib/env";
 
@@ -25,9 +24,14 @@ export const requireAuthAs = <ExpectedType extends User["type"] | "any">(
   options: RequireAuthAsOptions = {},
 ): MiddlewareHandler<HonoEnv> =>
   async (c, next) => {
-    const appServerName = c.get("config").servers.app;
-    const prisma = await initPrisma(c.env, appServerName);
-    const auth = initAuth(c.env, prisma);
+    const auth = c.get("auth");
+
+    if (!auth) {
+      c.status(500);
+      return c.json({
+        code: "AUTH_SYSTEM_NOT_INITIATED",
+      });
+    }
 
     const getFirstOrganization = async (user: User, headers: Headers): Promise<Organization | undefined> => {
       if (user.type !== "recruiter") {

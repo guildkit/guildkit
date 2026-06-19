@@ -19,6 +19,10 @@ export const guildKitBackend = (config: GuildKitConfig) =>
     .use("/*", async (c, next) => {
       c.set("config", config);
 
+      const prisma = await initPrisma(c.env, config.servers.app)
+      c.set("prisma", prisma);
+      c.set("auth", initAuth(c.env, prisma));
+
       return next();
     })
     .use("/api/auth/*", cors({
@@ -29,12 +33,7 @@ export const guildKitBackend = (config: GuildKitConfig) =>
       maxAge: 600,
       credentials: true,
     }))
-    .on([ "POST", "GET" ], "/api/auth/*", async (c) => {
-      const appServerName = c.get("config").servers.app;
-      const prisma = await initPrisma(c.env, appServerName);
-      const auth = initAuth(c.env, prisma);
-      return auth.handler(c.req.raw);
-    })
+    .on(["POST", "GET"], "/api/auth/*", async (c) => c.get("auth")?.handler(c.req.raw))
     .get("/healthcheck", async (c) => c.body("Active!"))
     .route("/", organizations)
     .route("/", jobs);
