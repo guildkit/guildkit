@@ -27,7 +27,7 @@
     "@hono/zod-openapi": "^1.4.0",
     "@phanect/utils": "^3.0.0",
     "@prisma/adapter-pg": "^7.8.0",
-    "better-auth": "1.6.17",
+    "better-auth": "1.6.19",
     "hono": "^4.12.18",
     "tsdown": "0.22.2",
     "vite": "^8.0.14",
