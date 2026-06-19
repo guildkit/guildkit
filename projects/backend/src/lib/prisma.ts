@@ -5,42 +5,7 @@ import type { Env, GuildKitConfig } from "@guildkit/shared";
 
 type Platform = GuildKitConfig["servers"]["app"];
 
-export class PrismaInitializer {
-  private static instance: PrismaInitializer;
-  #prisma: PrismaClientNodeJs | PrismaClientCloudflare | undefined;
-
-  constructor() {
-    if (PrismaInitializer.instance) {
-      return PrismaInitializer.instance;
-    }
-
-    PrismaInitializer.instance = this;
-  }
-
-  async getPrismaClient(env: Env, platform: Platform): Promise<PrismaClientNodeJs | PrismaClientCloudflare> {
-    if (!this.#prisma) {
-      if (platform === "cloudflare") {
-        const { PrismaClient } = await import("@guildkit/db/prisma/cloudflare");
-
-        this.#prisma = new PrismaClient({
-          adapter: new PrismaPg({
-            connectionString: env.DATABASE_URL,
-          }),
-        });
-      } else {
-        const { PrismaClient } = await import("@guildkit/db/prisma/nodejs");
-
-        this.#prisma = new PrismaClient({
-          adapter: new PrismaPg({
-            connectionString: env.DATABASE_URL,
-          }),
-        });
-      }
-    }
-
-    return this.#prisma;
-  }
-}
+export type PrismaClient = PrismaClientNodeJs | PrismaClientCloudflare;
 
 /**
  * Initialize PrismaClient.
@@ -48,5 +13,24 @@ export class PrismaInitializer {
  * @param platform - Platform (Node.js or Cloudflare)
  * @returns BetterAuth's auth object
  */
-export const initPrisma = async (env: Env, platform: Platform) =>
-  new PrismaInitializer().getPrismaClient(env, platform);
+export async function initPrisma(env: Env, platform: "cloudflare"): Promise<PrismaClientCloudflare>;
+export async function initPrisma(env: Env, platform: "nodejs"): Promise<PrismaClientNodeJs>;
+export async function initPrisma(env: Env, platform: Platform): Promise<PrismaClient> {
+  if (platform === "cloudflare") {
+    const { PrismaClient } = await import("@guildkit/db/prisma/cloudflare");
+
+    return new PrismaClient({
+      adapter: new PrismaPg({
+        connectionString: env.DATABASE_URL,
+      }),
+    });
+  } else {
+    const { PrismaClient } = await import("@guildkit/db/prisma/nodejs");
+
+    return new PrismaClient({
+      adapter: new PrismaPg({
+        connectionString: env.DATABASE_URL,
+      }),
+    });
+  }
+}

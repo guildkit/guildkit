@@ -1,4 +1,3 @@
-import { initAuth } from "@guildkit/db/auth";
 import { JobResponseSchema, orgSchema } from "@guildkit/shared/zod";
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { pseudoRandomString } from "@phanect/utils";
@@ -6,7 +5,6 @@ import { APIError } from "better-auth";
 import { logoDirName, StorageClient } from "../lib/storage.ts";
 import { requireAuthAs } from "../middleware/auth.ts";
 import type { HonoEnv } from "../lib/env.ts";
-import { initPrisma } from "../lib/prisma.ts";
 
 const uploadLogo = async (logoFile: File, storageClient: StorageClient): Promise<string> => {
   const fileExt = logoFile.name.split(".").pop() ?? "";
@@ -62,9 +60,14 @@ export const organizations = new OpenAPIHono<HonoEnv>()
     }),
     async (c) => {
       const { slug } = c.req.valid("param");
+      const prisma = c.get("prisma");
 
-      const appServerName = c.get("config").servers.app;
-      const prisma = await initPrisma(c.env, appServerName);
+      if (!prisma) {
+        c.status(500);
+        return c.json({
+          code: "PRISMA_NOT_INITIATED",
+        });
+      }
 
       const org = await prisma.organization.findFirst({
         where: { slug },
@@ -141,7 +144,7 @@ export const organizations = new OpenAPIHono<HonoEnv>()
     }),
     async (c) => {
       const { logo, ...newOrgData } = c.req.valid("form");
-      const { servers: { app: appServerName, storage: storageConfig }} = c.get("config");
+      const { servers: { storage: storageConfig }} = c.get("config");
 
       try {
         const storage = new StorageClient(storageConfig);
@@ -149,8 +152,15 @@ export const organizations = new OpenAPIHono<HonoEnv>()
         // Casting `logo` as `File` due to Zod's bug?
         const logoURL = logo ? await uploadLogo(logo, storage) : undefined;
 
-        const prisma = await initPrisma(c.env, appServerName);
-        const auth = initAuth(c.env, prisma);
+        const auth = c.get("auth");
+
+        if (!auth) {
+          c.status(500);
+          return c.json({
+            code: "AUTH_SYSTEM_NOT_INITIATED",
+          });
+        }
+
         await auth.api.createOrganization({
           body: {
             ...newOrgData,
