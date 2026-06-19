@@ -22,6 +22,10 @@ node = { version = "24", corepack = true }
     ]
   }]
 
+  [tasks.bw]
+  depends = [ "//projects/...:build" ]
+  run = { tasks = [ "//projects/...:dev" ]}
+
   [tasks.build]
   run = [{
     tasks = [
