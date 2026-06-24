@@ -4,4 +4,4 @@
 
 use ../_libs *
 
-container compose down --rmi local --volumes --remove-orphans
+do --ignore-errors { container compose down --rmi local --volumes --remove-orphans }
