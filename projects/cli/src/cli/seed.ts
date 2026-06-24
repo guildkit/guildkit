@@ -1,21 +1,18 @@
-#!/usr/bin/env -S pnpm exec jiti
-
-import { currencies, salaryPer } from "@guildkit/shared";
+import { PrismaClient } from "@guildkit/db/prisma/nodejs";
 import { PrismaPg } from "@prisma/adapter-pg";
 import dayjs from "dayjs";
-import { PrismaClient } from "../../src/prisma/clients/nodejs/client.ts";
 
-const prisma = new PrismaClient({
-  adapter: new PrismaPg({
-    connectionString: process.env.DATABASE_URL,
-  }),
-});
-
-const seed = async () => {
+export const seed = async () => {
   if (process.env.SERVER_ENV !== "development" && process.env.SERVER_ENV !== "demo-production" && process.env.SERVER_ENV !== "demo-preview") {
     console.info("Seeding are only allowed when SERVER_ENV is development, demo-production, or demo-preview. Seeding skipped.");
     return;
   }
+
+  const prisma = new PrismaClient({
+    adapter: new PrismaPg({
+      connectionString: process.env.DATABASE_URL,
+    }),
+  });
 
   const userExists = Boolean(await prisma.user.findFirst());
   const jobExists = Boolean(await prisma.job.findFirst());
@@ -105,8 +102,8 @@ const seed = async () => {
               applicationUrl: "https://phanective.org/job-example-1",
               location: "Remote (any location in Inazuma)",
               salary: 8000000,
-              currency: Currency.JPY,
-              salaryPer: SalaryPer.YEAR,
+              currency: "JPY",
+              salaryPer: "year",
               expiresAt: dayjs().add(1, "month").toDate(),
             },
             {
@@ -133,8 +130,8 @@ const seed = async () => {
               applicationUrl: "https://phanective.org/job-example-2",
               location: "Remote (any location in Inazuma)",
               salary: 8000000,
-              currency: Currency.JPY,
-              salaryPer: SalaryPer.YEAR,
+              currency: "JPY",
+              salaryPer: "year",
               expiresAt: dayjs().add(1, "month").toDate(),
             },
             {
@@ -160,8 +157,8 @@ const seed = async () => {
               applicationUrl: "https://phanective.org/job-example-3",
               location: "Remote (any location in Inazuma)",
               salary: 8000000,
-              currency: Currency.JPY,
-              salaryPer: SalaryPer.YEAR,
+              currency: "JPY",
+              salaryPer: "year",
               expiresAt: dayjs().add(1, "month").toDate(),
             },
           ],
@@ -234,8 +231,8 @@ const seed = async () => {
             applicationUrl: "https://phanective.org/job-example-4",
             location: "The Hiiragi Estate, 4-1-1, Rito, Narukami Island, Inazuma",
             salary: 9000000,
-            currency: Currency.JPY,
-            salaryPer: SalaryPer.YEAR,
+            currency: "JPY",
+            salaryPer: "year",
             expiresAt: dayjs().add(1, "month").toDate(),
           },
         },
@@ -292,8 +289,8 @@ const seed = async () => {
             applicationUrl: "https://phanective.org/job-example-4",
             location: "123456 Feiyun Slope, Liyue Harbor, Liyue",
             salary: 4500000,
-            currency: Currency.CNY,
-            salaryPer: SalaryPer.YEAR,
+            currency: "CNY",
+            salaryPer: "year",
             expiresAt: dayjs().add(1, "month").toDate(),
           },
         },
@@ -305,7 +302,6 @@ const seed = async () => {
   });
 
   console.info("Database seeded successfully.");
-};
 
-await seed();
-await prisma.$disconnect();
+  await prisma.$disconnect();
+};
