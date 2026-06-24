@@ -12,6 +12,7 @@ import { build as buildWithRollDown } from "rolldown";
 import { wasm } from "rolldown-plugin-wasm";
 import { unstable_dev as wranglerDev } from "wrangler";
 import type { GuildKitConfig } from "@guildkit/shared";
+import { seed } from "./cli/seed.ts";
 
 const cwdPath = process.cwd();
 const intermediateRootPath = join(cwdPath, ".guildkit/intermediate");
@@ -190,5 +191,9 @@ await run([
         }),
       ]);
     },
+  }),
+  command({
+    name: "seed",
+    handler: async () => seed(),
   }),
 ]);
