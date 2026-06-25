@@ -11,8 +11,17 @@
   env = { NODE_ENV = "production" }
 
   [tasks.lint]
-  wait_for = [ "//projects/shared:build" ]
-  run = "tsc --noEmit"
+  wait_for = [
+    "//projects/shared:build",
+    "//projects/client:build",
+    "//projects/db:build",
+  ]
+  run = [
+    # The exported astroConfig builder.
+    "tsc --noEmit",
+    # The Astro app (React islands + libs) via its own astro/strict tsconfig.
+    "tsc --noEmit -p app/tsconfig.json",
+  ]
 
   [tasks.deploy]
   depends = [ "build" ]

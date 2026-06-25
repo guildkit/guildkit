@@ -26,7 +26,9 @@ export const guildKitBackend = (config: GuildKitConfig) =>
       return next();
     })
     .use("/api/auth/*", cors({
-      origin: "http://localhost:3001", // TODO replace with the origin
+      // The browser auth client runs on the frontend (BFF) origin and calls the
+      // backend cross-origin with credentials, so CORS must allow that origin.
+      origin: "http://localhost:3000", // TODO derive from config for non-dev origins
       allowHeaders: [ "Content-Type", "Authorization" ],
       allowMethods: [ "POST", "GET", "OPTIONS" ],
       exposeHeaders: [ "Content-Length" ],

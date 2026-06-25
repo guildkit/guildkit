@@ -25,7 +25,6 @@ const distBackendPath = join(distRootPath, "backend");
 const distFrontendPath = join(distRootPath, "frontend");
 
 const backendDevPort = 3001;
-const frontendDevPort = 3000;
 // TODO: derive the deployed backend origin for production builds instead of
 // always pointing the frontend (BFF) at the local backend dev server.
 const backendBaseURL = `http://localhost:${ backendDevPort }`;

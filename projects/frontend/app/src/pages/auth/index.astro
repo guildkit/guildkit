@@ -1,0 +1,19 @@
+---
+import AuthLayout from "@/layouts/AuthLayout.astro";
+import { AuthButtons } from "@/components/AuthButtons.tsx";
+
+const { user } = Astro.locals;
+
+if (user?.type === "candidate") {
+  return Astro.redirect("/");
+} else if (user?.type === "recruiter") {
+  return Astro.redirect("/employer/jobs");
+} else if (user?.type === "administrative") {
+  return Astro.redirect("/"); // TODO redirect to the better path
+}
+---
+
+<AuthLayout>
+  <h1 class="text-3xl mb-6">Sign in or Sign up</h1>
+  <AuthButtons client:load />
+</AuthLayout>

@@ -5,6 +5,12 @@ import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import type { GuildKitConfig } from "@guildkit/shared";
+import type { AstroUserConfig } from "astro";
+
+// `@astrojs/react` v6 depends on Vite 8 while Astro core still ships Vite 7, so
+// `@tailwindcss/vite` is typed against a newer Vite than Astro's config expects.
+// The plugin is runtime-compatible (the build passes); this reconciles the types.
+type AstroVitePlugins = NonNullable<NonNullable<AstroUserConfig["vite"]>["plugins"]>;
 
 type GuildKitAstroOptions = {
   wranglerConfigPath: string;
@@ -37,9 +43,7 @@ export const astroConfig = (
     : undefined,
 
   vite: {
-    plugins: [
-      tailwindcss(),
-    ],
+    plugins: [ tailwindcss() ] as unknown as AstroVitePlugins,
     define: {
       __GUILDKIT_PUBLIC_CONFIG__: JSON.stringify({
         siteName,

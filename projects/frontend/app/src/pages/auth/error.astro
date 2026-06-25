@@ -1,0 +1,17 @@
+---
+import AuthLayout from "@/layouts/AuthLayout.astro";
+
+const errorId = Astro.url.searchParams.get("error");
+
+if (errorId === "signup_disabled") {
+  return Astro.redirect("/auth/signup");
+}
+
+const message = errorId === "unable_to_create_user"
+  ? "Unable to create user. We're sorry, this is probably our bug."
+  : "Unexpected error. We're sorry, this is probably our bug.";
+---
+
+<AuthLayout>
+  <p>{ message }</p>
+</AuthLayout>
