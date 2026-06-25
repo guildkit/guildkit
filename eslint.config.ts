@@ -21,7 +21,8 @@ const configs = defineConfig([
 
     languageOptions: {
       parserOptions: {
-        projectService: true,
+        projectService: false,
+        project: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
