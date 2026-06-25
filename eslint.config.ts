@@ -1,5 +1,6 @@
 import { core } from "@phanect/lint";
-import { nextjs } from "@phanect/lint-react";
+import { astro } from "@phanect/lint-astro";
+import { react } from "@phanect/lint-react";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 const configs = defineConfig([
@@ -12,7 +13,8 @@ const configs = defineConfig([
   ]),
 
   ...core,
-  ...nextjs,
+  ...astro,
+  ...react,
 
   {
     // Do not add `files: [ "*" ],` here.
