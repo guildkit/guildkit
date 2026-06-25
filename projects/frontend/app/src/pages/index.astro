@@ -1,6 +1,11 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import { getJobs } from "@guildkit/client";
+import { JobList } from "@/components/JobList.tsx";
+import PublicLayout from "@/layouts/PublicLayout.astro";
+
+const jobs = await getJobs(undefined);
 ---
 
-<Layout>
-</Layout>
+<PublicLayout>
+  <JobList client:load jobs={jobs} />
+</PublicLayout>

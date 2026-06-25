@@ -1,0 +1,28 @@
+---
+import { getJobs } from "@guildkit/client";
+import EmployerLayout from "@/layouts/EmployerLayout.astro";
+import { JobEditor } from "@/components/JobEditor.tsx";
+import { JobList } from "@/components/JobList.tsx";
+
+const { user, activeOrg } = Astro.locals;
+
+if (!user) {
+  return Astro.redirect("/auth");
+}
+
+const cookie = Astro.request.headers.get("cookie") ?? undefined;
+const jobs = await getJobs({ employer: "us", headers: cookie ? { cookie } : undefined });
+const editable = user.type === "recruiter";
+---
+
+<EmployerLayout>
+  <div class="flex flex-col items-center gap-y-10 w-full">
+    <section class="flex justify-start bg-gray-100 shadow-lg rounded-lg w-[42.5rem] max-w-full p-4">
+      <JobEditor client:load job="new" activeOrgName={activeOrg?.name ?? ""}>
+        Add job
+      </JobEditor>
+    </section>
+
+    <JobList client:load jobs={jobs} editable={editable} />
+  </div>
+</EmployerLayout>

@@ -4,6 +4,12 @@
     "types": [
       "node"
     ],
+    "jsxImportSource": "react",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
   },
   "include": [
     ".astro/types.d.ts",
