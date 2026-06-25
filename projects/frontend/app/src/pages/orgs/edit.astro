@@ -1,0 +1,17 @@
+---
+import PublicLayout from "@/layouts/PublicLayout.astro";
+import { OrgEditor } from "@/components/OrgEditor.tsx";
+import { getBase64FromImageURL } from "@/lib/utils/utils.ts";
+
+const { activeOrg } = Astro.locals;
+
+if (!activeOrg) {
+  return Astro.redirect("/auth");
+}
+
+const logoBase64 = activeOrg.logo ? await getBase64FromImageURL(activeOrg.logo) : undefined;
+---
+
+<PublicLayout>
+  <OrgEditor client:load org={activeOrg} initialLogoBase64={logoBase64} />
+</PublicLayout>

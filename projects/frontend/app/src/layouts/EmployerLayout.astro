@@ -1,0 +1,38 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Nav } from "@/components/Nav.tsx";
+import { Sidebar } from "@/components/Sidebar.tsx";
+
+const { user, activeOrg } = Astro.locals;
+const userType = user?.type;
+
+if (userType !== "recruiter" && userType !== "administrative") {
+  return Astro.redirect("/auth");
+}
+
+const navOrg = activeOrg ? { name: activeOrg.name, slug: activeOrg.slug } : null;
+---
+
+{ activeOrg ? (
+  <Layout>
+    <Nav client:load userType={userType} activeOrg={navOrg} />
+    <div class="flex justify-center w-full">
+      <Sidebar client:load />
+      <main class="flex flex-col items-center gap-4 w-full">
+        <slot />
+      </main>
+    </div>
+  </Layout>
+) : (
+  <Layout>
+    <Nav client:load userType="guest" activeOrg={null} />
+    <div class="flex flex-col items-center mt-16">
+      <p>
+        You do not belong to any organization.<br />
+        <a href="/orgs/new" class="linktext">
+          Create a new organization
+        </a> or ask your organization owner to add you.
+      </p>
+    </div>
+  </Layout>
+) }

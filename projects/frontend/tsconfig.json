@@ -25,6 +25,9 @@
   ],
   "exclude": [
     "**/node_modules/**",
-    "**/dist/**"
+    "**/dist/**",
+    // The Astro app is type-checked via app/tsconfig.json (astro strict + the `@/`
+    // alias + React jsx), driven by its own lint step in mise.toml.
+    "app"
   ]
 }

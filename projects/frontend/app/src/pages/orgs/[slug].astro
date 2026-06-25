@@ -1,0 +1,45 @@
+---
+import { getOrganization } from "@guildkit/client";
+import { JobList } from "@/components/JobList.tsx";
+import PublicLayout from "@/layouts/PublicLayout.astro";
+import GlobeIcon from "@/assets/vendor/octicons/globe.svg";
+
+const { slug } = Astro.params;
+const org = slug ? await getOrganization(slug, undefined) : undefined;
+
+if (!org) {
+  return Astro.rewrite("/404");
+}
+---
+
+<PublicLayout>
+  <div class="w-full max-w-5xl px-9 flex flex-col">
+    <h1 class="text-5xl md:text-6xl font-bold text-left mt-16 mb-4 drop-shadow-lg">
+      { org.name }
+    </h1>
+
+    <a href={ org.url } class="linktext inline-flex gap-1.5 self-end" target="_blank" rel="noopener">
+      <GlobeIcon width={16} height={16} class="flex-shrink-0" aria-hidden="true" />
+      { org.url }
+    </a>
+
+    { org.about && (
+      <section class="mt-10 mb-8 px-4 md:px-0">
+        <h2 class="flex justify-start gap-2 items-center text-4xl text-gray-800 mb-8 relative before:content-[''] before:block before:bg-gray-500 before:rounded-sm before:w-1 before:h-5">
+          About Us
+        </h2>
+        <p class="text-lg leading-relaxed text-gray-600 text-left max-w-3xl mx-auto">
+          { org.about }
+        </p>
+      </section>
+    )}
+
+    <h2 class="flex justify-start gap-2 items-center text-4xl text-gray-800 mb-5 relative before:content-[''] before:block before:bg-gray-500 before:rounded-sm before:w-1 before:h-5">
+      Open Positions
+    </h2>
+  </div>
+
+  <section class="w-full max-w-6xl mb-8 px-4 md:px-0">
+    <JobList client:load jobs={org.jobs} />
+  </section>
+</PublicLayout>

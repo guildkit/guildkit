@@ -1,0 +1,17 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Nav } from "@/components/Nav.tsx";
+
+const { user, activeOrg } = Astro.locals;
+---
+
+<Layout>
+  <Nav
+    client:load
+    userType={user?.type ?? "guest"}
+    activeOrg={activeOrg ? { name: activeOrg.name, slug: activeOrg.slug } : null}
+  />
+  <div class="flex flex-col items-center mt-16 w-full">
+    <slot />
+  </div>
+</Layout>
