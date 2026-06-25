@@ -6,6 +6,7 @@
     "@guildkit/backend": "workspace:*",
     "@phanect/configs": "2026.5.19",
     "guildkit": "workspace:*",
+    "prisma": "^7.6.0",
     "typescript": "^6.0.0",
     "wrangler": "^4.17.0"
   }
