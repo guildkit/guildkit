@@ -1,20 +1,20 @@
 #:schema https://mise.jdx.dev/schema/mise.json
 
 [tasks]
-  # [tasks.dev]
-  # wait_for = [ "//projects/shared:build" ]
-  # run = "next dev --inspect"
+  [tasks.dev]
+  wait_for = [ "//projects/shared:build" ]
+  run = "next dev --inspect"
 
-  # [tasks.start]
-  # run = "next start"
+  [tasks.start]
+  run = "next start"
 
-  # [tasks.build]
-  # wait_for = [ "//projects/shared:build" ]
-  # run = [
-  #   "tsdown",
-  #   "next build",
-  # ]
-  # env = { NODE_ENV = "production" }
+  [tasks.build]
+  wait_for = [ "//projects/shared:build" ]
+  run = [
+    "tsdown",
+    "next build",
+  ]
+  env = { NODE_ENV = "production" }
 
   [tasks.lint]
   wait_for = [ "//projects/shared:build" ]
