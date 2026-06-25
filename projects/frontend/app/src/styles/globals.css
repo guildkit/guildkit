@@ -1,0 +1,67 @@
+@import "tailwindcss";
+@import "tailwindcss/preflight.css" layer(base);
+
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6, p {
+    overflow-wrap: break-word;
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .shadow-around {
+    box-shadow: 2px 2px 5px 5px var(--tw-shadow-color);
+
+    &:hover {
+      box-shadow: 4px 4px 10px 7px var(--tw-shadow-color);
+    }
+  }
+}
+
+@utility button-link-common {
+  @apply cursor-pointer;
+  @apply no-underline;
+}
+
+@utility button-common {
+  @apply button-link-common;
+
+  @apply block;
+  @apply w-fit;
+  @apply rounded-xl;
+  @apply text-center;
+  @apply px-3;
+  @apply py-2;
+  @apply transition-colors;
+  @apply duration-250;
+  @apply disabled:opacity-50;
+  @apply disabled:cursor-not-allowed;
+}
+
+@utility linktext {
+  @apply button-link-common;
+
+  @apply text-gray-500;
+  @apply hover:text-gray-600;
+  @apply hover:underline;
+}
+
+@utility button-deep {
+  @apply button-common;
+
+  @apply text-white;
+  @apply bg-gray-800;
+  @apply hover:bg-gray-600;
+}
+
+@utility button-pale {
+  @apply button-common;
+
+  @apply text-black;
+  @apply bg-gray-300;
+  @apply hover:bg-gray-400;
+}

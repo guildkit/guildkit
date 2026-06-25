@@ -26,6 +26,9 @@ const distFrontendPath = join(distRootPath, "frontend");
 
 const backendDevPort = 3001;
 const frontendDevPort = 3000;
+// TODO: derive the deployed backend origin for production builds instead of
+// always pointing the frontend (BFF) at the local backend dev server.
+const backendBaseURL = `http://localhost:${ backendDevPort }`;
 
 const prepare = async () => {
   const srcAppRootPath = join(import.meta.dirname, "../template"); // relative to bin/guildkit-helpers.mjs
@@ -133,6 +136,7 @@ await run([
       const devFrontend = async (guildKitConfig: GuildKitConfig) => {
         const astroDevConfig = astroConfig(guildKitConfig, {
           wranglerConfigPath: join(intermediateFrontendPath, "wrangler.json"),
+          backendBaseURL,
         });
 
         const {
@@ -186,6 +190,7 @@ await run([
         buildAstro({
           ...astroConfig(config, {
             wranglerConfigPath: join(intermediateFrontendPath, "wrangler.json"),
+            backendBaseURL,
           }),
           outDir: distFrontendPath,
         }),
