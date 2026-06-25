@@ -15,6 +15,13 @@ if not ("SERVER_ENV" in $env) {
 
 if ($env.SERVER_ENV == "development") {
   container compose up -d --wait
+  pnpm exec prisma migrate dev
 } else if ($env.SERVER_ENV == "demo-preview") {
   pnpm neon branches reset $"preview/($env.VERCEL_GIT_COMMIT_REF)" --parent --project-id=($env.NEON_PROJECT_ID)
 }
+
+if ($env.SERVER_ENV != "development") {
+  pnpm exec prisma migrate deploy
+}
+
+pnpm exec guildkit seed
