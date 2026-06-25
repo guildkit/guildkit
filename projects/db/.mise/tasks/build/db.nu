@@ -18,17 +18,3 @@ auth generate --adapter prisma --yes --output="./prisma/models/better-auth.prism
 
 # And generate client again to apply schema changes by `better-auth generate`
 prisma generate
-
-if ($env.SERVER_ENV == "development") {
-  prisma migrate dev
-} else {
-  prisma migrate deploy
-}
-
-if (
-  $env.SERVER_ENV == "development"
-  or $env.SERVER_ENV == "demo-production"
-  or $env.SERVER_ENV == "demo-preview"
-) {
-  prisma db seed
-}
