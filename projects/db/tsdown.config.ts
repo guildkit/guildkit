@@ -6,6 +6,7 @@ export default defineConfig({
     auth: "./src/auth/index.ts",
     "prisma/cloudflare": "./src/prisma/clients/cloudflare/client.ts",
     "prisma/nodejs": "./src/prisma/clients/nodejs/client.ts",
+    "prisma/config": "./src/prisma/config.ts",
   },
   format: [ "esm" ],
 
