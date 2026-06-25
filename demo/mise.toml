@@ -17,5 +17,8 @@
   wait_for = [ "build" ]
   run = "wrangler deploy"
 
+  [tasks.setup]
+  run = { tasks = [ "setup:*" ] }
+
 [env]
 _.path = "./node_modules/.bin"
