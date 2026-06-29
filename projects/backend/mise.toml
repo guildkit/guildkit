@@ -9,7 +9,11 @@
     "//projects/shared:build",
     "//projects/db:build",
   ]
-  run = "tsdown"
+  run = [
+    { task = ":build:enums" },
+    { task = ":build:db" },
+    "tsdown",
+  ]
   env = { NODE_ENV = "production" }
 
   [tasks.lint]

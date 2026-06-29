@@ -10,11 +10,7 @@
 
   [tasks.build]
   wait_for = [ "//projects/shared:build" ]
-  run = [
-    { task = ":build:enums" },
-    { task = ":build:db" },
-    "tsdown",
-  ]
+  run = "tsdown"
   env = { NODE_ENV = "production" }
 
   [tasks.lint]

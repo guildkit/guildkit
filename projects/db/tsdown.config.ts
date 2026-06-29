@@ -1,13 +1,7 @@
-import { wasm } from "rolldown-plugin-wasm";
 import { defineConfig } from "tsdown";
 
 export default defineConfig({
-  entry: {
-    auth: "./src/auth/index.ts",
-    "prisma/cloudflare": "./src/prisma/clients/cloudflare/client.ts",
-    "prisma/nodejs": "./src/prisma/clients/nodejs/client.ts",
-    "prisma/config": "./src/prisma/config.ts",
-  },
+  entry: "./src/auth/index.ts",
   format: [ "esm" ],
 
   dts: true,
@@ -24,7 +18,4 @@ export default defineConfig({
   publint: {
     level: "suggestion",
   },
-  plugins: [
-    wasm(),
-  ],
 });

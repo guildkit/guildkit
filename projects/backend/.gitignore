@@ -2,5 +2,5 @@
 # Project-specific
 #
 
-/src/prisma/clients/
+/src/lib/prisma/
 /prisma/models/enums.prisma

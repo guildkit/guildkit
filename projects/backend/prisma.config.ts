@@ -1,4 +1,4 @@
-import { definePrismaConfig } from "./src/prisma/config.ts";
+import { definePrismaConfig } from "./exports/prisma.ts";
 
 const config = definePrismaConfig();
 

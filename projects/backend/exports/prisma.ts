@@ -3,11 +3,13 @@ import { join } from "node:path";
 import { toMerged } from "es-toolkit";
 import { defineConfig, env, type PrismaConfig } from "prisma/config";
 
+export { initPrisma } from "../src/lib/prisma.ts";
+
 export const definePrismaConfig = (config: PrismaConfig = {}): PrismaConfig => defineConfig(
   toMerged(
     config,
     {
-      schema: join(import.meta.dirname, "../../prisma/"),
+      schema: join(import.meta.dirname, "../prisma/"),
       migrations: {
         path: join(process.cwd(), "prisma/migrations"),
       },
@@ -17,3 +19,5 @@ export const definePrismaConfig = (config: PrismaConfig = {}): PrismaConfig => d
     } satisfies PrismaConfig,
   )
 );
+
+export type { PrismaClient } from "../src/lib/prisma.ts";

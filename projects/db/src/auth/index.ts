@@ -5,10 +5,7 @@ import { getOAuthState } from "better-auth/api";
 import { admin as adminPlugin, organization } from "better-auth/plugins";
 import { z } from "zod";
 import { adminAc, adminRoles, recruiterAc, recruiterRoles } from "./roles.js";
-import type { PrismaClient as CloudflarePrismaClient } from "../prisma/clients/cloudflare/client.ts";
-import type { PrismaClient as NodeJsPrismaClient } from "../prisma/clients/nodejs/client.ts";
-
-type PrismaClient = NodeJsPrismaClient | CloudflarePrismaClient;
+import type { PrismaClient } from "@guildkit/backend/prisma";
 
 /**
  * Initialize BetterAuth's `auth` object.

@@ -1,6 +1,6 @@
 import { PrismaPg } from "@prisma/adapter-pg";
-import { initAuth } from "./src/auth";
-import { PrismaClient } from "./src/prisma/clients/nodejs/client";
+import { initAuth } from "@guildkit/db";
+import { PrismaClient } from "./src/lib/prisma/nodejs/client.ts";
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg({

@@ -1,5 +1,4 @@
-import { PrismaClient } from "@guildkit/db/prisma/nodejs";
-import { PrismaPg } from "@prisma/adapter-pg";
+import { initPrisma } from "@guildkit/backend/prisma";
 import dayjs from "dayjs";
 
 export const seed = async () => {
@@ -8,11 +7,7 @@ export const seed = async () => {
     return;
   }
 
-  const prisma = new PrismaClient({
-    adapter: new PrismaPg({
-      connectionString: process.env.DATABASE_URL,
-    }),
-  });
+  const prisma = await initPrisma({ DATABASE_URL: process.env.DATABASE_URL }, "nodejs");
 
   const userExists = Boolean(await prisma.user.findFirst());
   const jobExists = Boolean(await prisma.job.findFirst());
