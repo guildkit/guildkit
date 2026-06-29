@@ -28,13 +28,13 @@
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1053.0",
-    "@phanect/configs": "2026.5.19",
-    "@phanect/utils": "^3.0.0",
+    "@phanect/configs": "2026.6.17",
+    "@phanect/utils": "^4.0.0",
     "@types/node": "^24.12.4",
     "dayjs": "^1.11.20",
     "fast-xml-parser": "^5.3.1",
     "nushell": "^0.113.1",
-    "tsdown": "0.22.2",
+    "tsdown": "0.22.3",
     "typescript": "^6.0.0"
   },
   "engines": {
