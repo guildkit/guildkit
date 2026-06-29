@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { cp, mkdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, rm, symlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { command, run } from "@drizzle-team/brocli";
 import { guildKitNodeJs } from "@guildkit/backend/nodejs";
@@ -71,6 +71,8 @@ const prepare = async () => {
       `export default ${ JSON.stringify(config) };`
     );
   }
+
+  await symlink("../../../.env", join(intermediateBackendPath, ".env"));
 
   if (config.servers.app === "cloudflare") {
     await mkdir(intermediateFrontendPath);
