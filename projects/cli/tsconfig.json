@@ -17,9 +17,6 @@
       "path": "../frontend"
     },
     {
-      "path": "../guildkit"
-    },
-    {
       "path": "../shared"
     },
   ],
