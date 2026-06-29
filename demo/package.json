@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {
     "@guildkit/backend": "workspace:*",
-    "@phanect/configs": "2026.5.19",
+    "@phanect/configs": "2026.6.17",
     "guildkit": "workspace:*",
     "prisma": "^7.6.0",
     "typescript": "^6.0.0",

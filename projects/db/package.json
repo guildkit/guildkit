@@ -19,7 +19,7 @@
     "@guildkit/shared": "workspace:*",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.6.0",
-    "better-auth": "1.6.19",
+    "better-auth": "1.6.20",
     "es-toolkit": "^1.47.0",
     "zod": "^4.4.3"
   },
@@ -28,18 +28,18 @@
     "prisma": "^7.6.0"
   },
   "devDependencies": {
-    "@phanect/configs": "2026.5.19",
-    "@phanect/utils": "^3.0.0",
+    "@phanect/configs": "2026.6.17",
+    "@phanect/utils": "^4.0.0",
     "@types/node": "^24.12.4",
     "@types/pg": "^8.15.6",
-    "auth": "1.6.19",
+    "auth": "1.6.20",
     "dayjs": "^1.11.20",
     "fast-xml-parser": "^5.3.1",
     "nushell": "^0.113.1",
     "pg": "^8.21.0",
     "prisma": "^7.6.0",
-    "rolldown-plugin-wasm": "^0.2.1",
-    "tsdown": "0.22.2",
+    "rolldown-plugin-wasm": "^0.3.2",
+    "tsdown": "0.22.3",
     "typescript": "^6.0.0"
   },
   "engines": {

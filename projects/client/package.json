@@ -17,9 +17,9 @@
   },
   "devDependencies": {
     "@guildkit/backend": "workspace:*",
-    "@phanect/configs": "2026.5.19",
+    "@phanect/configs": "2026.6.17",
     "@types/node": "^24.12.4",
-    "tsdown": "0.22.2",
+    "tsdown": "0.22.3",
     "typescript": "^6.0.0"
   },
   "engines": {
