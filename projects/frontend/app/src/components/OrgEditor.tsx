@@ -45,18 +45,18 @@ export const OrgEditor = ({ org, initialLogoBase64 }: Props): ReactElement => {
   const onSubmit: SubmitEventHandler<HTMLFormElement> = (evt) => {
     evt.preventDefault();
     const formData = new FormData(evt.currentTarget);
-    const slug = String(formData.get("slug") ?? "");
+    const slug = formData.get("slug");
     const logo = formData.get("logo");
 
     const orgForm = {
-      name: String(formData.get("name") ?? ""),
+      name: formData.get("name"),
       slug,
-      url: String(formData.get("url") ?? ""),
-      about: formData.get("about") ? String(formData.get("about")) : undefined,
-      logo: logo instanceof File && logo.size > 0 ? logo : undefined,
-      emails: formData.getAll("emails").map(String).filter((email) => email.length > 0),
-      addresses: formData.getAll("addresses").map(String),
-      currencies: formData.getAll("currencies").map(String),
+      url: formData.get("url"),
+      about: formData.get("about"),
+      logo: logo,
+      emails: formData.getAll("emails"),
+      addresses: formData.getAll("addresses"),
+      currencies: formData.getAll("currencies"),
     };
 
     startTransition(async () => {
