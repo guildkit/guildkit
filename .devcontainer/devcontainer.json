@@ -1,0 +1,18 @@
+{
+  "name": "GuildKit AI development sandbox",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "TZ": "Asia/Tokyo"
+    },
+    "options": [ "--format=docker" ]
+  },
+  "workspaceMount": "source=${localWorkspaceFolder}/workspace,target=/workspaces/searcha,type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/searcha",
+
+  "customizations": {
+    "zed": {
+      "extensions": []
+    }
+  }
+}

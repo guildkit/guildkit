@@ -1,0 +1,59 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat *)",
+      "Bash(cd *)",
+      "Bash(diff *)",
+      "Bash(echo *)",
+      "Bash(find *)",
+      "Bash(grep *)",
+      "Bash(head *)",
+      "Bash(ls *)",
+      "Bash(sort)",
+      "Bash(tail *)",
+      "Bash(uniq *)",
+      "Bash(wc *)",
+      "Bash(git diff *)",
+      "Bash(git ls-tree *)",
+      "Bash(git log *)",
+      "Bash(git rev-list *)",
+      "Bash(git show *)",
+
+      "Bash(pnpm run *)",
+      "Bash(pnpm exec tsc --noEmit *)",
+
+      "Edit(//dev/null)",
+      "Edit(//tmp/claude/**)",
+      "Edit(/tmp/claude/**)"
+    ],
+    "deny": [
+      "Bash(git push *)",
+      "Bash(git commit *)",
+      "Bash(git reset *)",
+
+      "Edit(/.git/**)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [{
+      "hooks": [
+        {
+          "type": "command",
+          "command": "corepack enable"
+        },
+        {
+          "type": "command",
+          "command": "mkdir -p ./tmp/claude"
+        }
+      ]
+    }],
+    "Stop": [{
+      "hooks": [
+        {
+          "type": "prompt",
+          "prompt": "Update CLAUDE.md and other prompt files if they are outdated by the changes you made this time."
+        }
+      ]
+    }]
+  }
+}
