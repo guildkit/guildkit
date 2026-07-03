@@ -1,4 +1,4 @@
-import type { Organization, User } from "@guildkit/db/auth";
+import type { Organization, User } from "@guildkit/db";
 import type { MiddlewareHandler } from "hono";
 import type { HonoEnv } from "../lib/env";
 

@@ -1,6 +1,6 @@
 /// <reference types="astro/client" />
 
-import type { Organization } from "@guildkit/db/auth";
+import type { Organization } from "@guildkit/db";
 import type { UserType } from "@guildkit/shared";
 
 declare global {

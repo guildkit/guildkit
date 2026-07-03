@@ -1,4 +1,4 @@
-import { initAuth } from "@guildkit/db/auth";
+import { initAuth } from "@guildkit/db";
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { cors } from "hono/cors";
 import { initPrisma } from "./lib/prisma.ts";

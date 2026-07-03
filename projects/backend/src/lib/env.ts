@@ -1,4 +1,4 @@
-import type { Auth, Session, User } from "@guildkit/db/auth";
+import type { Auth, Session, User } from "@guildkit/db";
 import type { Env, GuildKitConfig } from "@guildkit/shared";
 import type { PrismaClient } from "./prisma";
 

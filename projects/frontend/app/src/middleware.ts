@@ -1,6 +1,6 @@
 import { defineMiddleware } from "astro:middleware";
 import { backendBaseURL } from "@/lib/config";
-import type { Organization } from "@guildkit/db/auth";
+import type { Organization } from "@guildkit/db";
 
 type SessionResponse = {
   user?: App.Locals["user"];
