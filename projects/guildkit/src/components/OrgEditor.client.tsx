@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import {
   useState,
   useTransition,
-  type FormEvent,
   type ReactElement,
+  type SubmitEventHandler,
 } from "react";
 import { Button } from "@/components/generic/ButtonLink.tsx";
 import { ArrayField } from "@/components/generic/fields/ArrayField.tsx";
@@ -48,7 +48,7 @@ export const OrgEditorClient = ({ org, initialLogoBase64 }: Props): ReactElement
     className: "",
   }));
 
-  const onSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const onSubmit: SubmitEventHandler<HTMLFormElement> = (evt) => {
     evt.preventDefault();
     startTransition(async () => {
       const res = await fetch("/api/organizations", {
