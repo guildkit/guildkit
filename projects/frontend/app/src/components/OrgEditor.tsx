@@ -1,4 +1,3 @@
-import { createOrganization } from "@guildkit/client";
 import { currencies } from "@guildkit/shared";
 import { maxLogoSizeMiB } from "@guildkit/shared";
 import {
@@ -22,6 +21,7 @@ import { ArrayField } from "@/components/generic/fields/ArrayField.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
 import { ImageField } from "@/components/generic/fields/ImageField.tsx";
 import { TagField } from "@/components/generic/fields/TagField.tsx";
+import { organization } from "@/lib/auth/client";
 import type { Organization } from "@guildkit/db";
 import type { Tag } from "react-tag-input";
 import type { ActionState } from "@/lib/types.ts";
@@ -60,16 +60,13 @@ export const OrgEditor = ({ org, initialLogoBase64 }: Props): ReactElement => {
     };
 
     startTransition(async () => {
-      const result = await createOrganization(
-        orgForm as unknown as Parameters<typeof createOrganization>[0],
-        { init: { credentials: "include" } }
-      );
+      const { error, data: org } = await organization.create(orgForm);
 
-      if (result.ok) {
-        window.location.replace(`/orgs/${ slug }`);
-      } else {
-        setState({ errors: result.errors });
+      if (error) {
+        setState({ errors: error });
       }
+
+      window.location.replace(`/orgs/${ slug }`);
     });
   };
 
