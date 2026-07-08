@@ -23,8 +23,8 @@ export const seed = async () => {
     return;
   }
 
-  await prisma.$transaction(async () => {
-    await prisma.user.createMany({
+  await prisma.$transaction(async (tx) => {
+    await tx.user.createMany({
       data: [
         {
           name: "Heizou Shikanoin",
@@ -51,7 +51,7 @@ export const seed = async () => {
     });
 
     // NOTE: Prisma cannot `createMany()` organizations with many related tables (e.g. members)
-    await prisma.organization.create({
+    await tx.organization.create({
       data: {
         slug: "yaedo",
         name: "Yae Publishing House, K.K.",
@@ -165,7 +165,7 @@ export const seed = async () => {
         },
       },
     });
-    await prisma.organization.create({
+    await tx.organization.create({
       data: {
         slug: "kanjou",
         name: "Kanjou Commission, The Shogunate of Inazuma",
@@ -238,7 +238,7 @@ export const seed = async () => {
         },
       },
     });
-    await prisma.organization.create({
+    await tx.organization.create({
       data: {
         slug: "wangsheng",
         name: "Wangsheng Funeral Parlor",
