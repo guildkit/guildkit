@@ -1,15 +1,16 @@
-import { currencies } from "@guildkit/shared";
-import { maxLogoSizeMiB } from "@guildkit/shared";
+import { currencies, maxLogoSizeMiB } from "@guildkit/shared";
 import {
   orgAboutSchema,
   orgAddressSchema,
   orgEmailSchema,
   orgLogoSchema,
   orgNameSchema,
+  orgSchema,
   orgSlugSchema,
   orgUrlSchema,
   type Organization as OrgFormData,
 } from "@guildkit/shared/zod";
+import { z } from "zod";
 import {
   useState,
   useTransition,
@@ -48,25 +49,41 @@ export const OrgEditor = ({ org, initialLogoBase64 }: Props): ReactElement => {
     const slug = formData.get("slug");
     const logo = formData.get("logo");
 
-    const orgForm = {
+    const { success, error: validationError, data: org } = orgSchema.safeParse({
       name: formData.get("name"),
       slug,
       url: formData.get("url"),
       about: formData.get("about"),
-      logo: logo,
+      // An unselected <input type="file"> still yields an empty File (size 0), and
+      // orgLogoSchema is .file().min(1).optional() — optional only accepts undefined,
+      // so normalize an empty/missing logo to undefined.
+      logo: logo instanceof File && logo.size > 0 ? logo : undefined,
       emails: formData.getAll("emails"),
       addresses: formData.getAll("addresses"),
       currencies: formData.getAll("currencies"),
-    };
+    });
+
+    if (!success) {
+      setState({ errors: z.flattenError(validationError) });
+      return;
+    }
 
     startTransition(async () => {
-      const { error } = await organization.create(orgForm);
+      // better-auth's client-side `organization.create` posts JSON and its native `logo`
+      // field is a URL string, so the validated File logo can't be sent through it.
+      // File-based logo upload is served by the backend multipart route
+      // (projects/backend/src/routes/organizations.ts) and is not wired into this call yet.
+      const { error: serverError } = await organization.create({
+        ...org,
+        logo: undefined,
+      });
 
-      if (error) {
-        setState({ errors: error });
+      if (serverError) {
+        setState({ errors: { formErrors: [ serverError.message ?? "Failed to create the organization." ], fieldErrors: {}}});
+        return;
       }
 
-      window.location.replace(`/orgs/${ slug }`);
+      window.location.replace(`/orgs/${ org.slug }`);
     });
   };
 
