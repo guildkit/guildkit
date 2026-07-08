@@ -1,13 +1,17 @@
-export const getBase64FromImageURL = async (url: string) => {
+/**
+ * Fetch an image by URL and return it as a `data:` URL.
+ *
+ * This runs server-side during SSR (e.g. on the org edit page), where the
+ * browser-only `FileReader` is unavailable, so it builds the base64 payload
+ * from the response bytes via `Buffer` instead.
+ * @param url - image URL
+ * @returns Base64-encoded image
+ */
+export const getBase64FromImageURL = async (url: string): Promise<string> => {
   const res = await fetch(url);
-  const blob = await res.blob();
+  const arrayBuffer = await res.arrayBuffer();
+  const base64 = Buffer.from(arrayBuffer).toString("base64");
+  const contentType = res.headers.get("content-type") ?? "application/octet-stream";
 
-  const base64Image = await new Promise<string | ArrayBuffer | undefined>((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result ?? undefined);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-
-  return base64Image instanceof ArrayBuffer ? new TextDecoder("utf-8").decode(base64Image) : base64Image;
+  return `data:${ contentType };base64,${ base64 }`;
 };
