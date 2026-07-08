@@ -60,7 +60,7 @@ export const OrgEditor = ({ org, initialLogoBase64 }: Props): ReactElement => {
     };
 
     startTransition(async () => {
-      const { error, data: org } = await organization.create(orgForm);
+      const { error } = await organization.create(orgForm);
 
       if (error) {
         setState({ errors: error });
