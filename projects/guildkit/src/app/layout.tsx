@@ -14,7 +14,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode;
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="https://brand.guildkit.net/generated/logo-light.svg" />
         <meta name="viewport" content="width=device-width" />
       </head>
       <body>
