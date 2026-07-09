@@ -16,6 +16,4 @@ if not ("SERVER_ENV" in $env) {
 
 if ($env.SERVER_ENV == "development") {
   container compose up -d --wait
-} else if ($env.SERVER_ENV == "demo-preview") {
-  pnpm neon branches reset $"preview/($env.VERCEL_GIT_COMMIT_REF)" --parent --project-id=($env.NEON_PROJECT_ID)
 }
