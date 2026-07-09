@@ -32,13 +32,12 @@ export const Nav = async ({ for: userType }: Props): Promise<ReactElement> => {
       <nav className="flex items-center justify-between flex-wrap py-6 px-20">
         <Link href="/" className="flex items-center gap-3 text-gray-900 text-xl font-semibold">
           <Image
-            src="/logo.png"
-            width={64}
-            height={64}
-            alt=""
+            src="https://brand.guildkit.net/generated/text-light.svg"
+            width={384}
+            height={96}
+            alt={config.siteName}
             decoding="async"
           />
-          <span>{ config.siteName }</span>
         </Link>
         <div className="flex items-center gap-4">
           { isRecruiter && (
