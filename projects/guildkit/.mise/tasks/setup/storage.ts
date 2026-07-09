@@ -36,4 +36,6 @@ const createBucketIfNotExists = async (client: S3Client, bucketName: string) => 
   }
 };
 
-await createBucketIfNotExists(storage, bucketName);
+if (process.env.SERVER_ENV === "development") {
+  await createBucketIfNotExists(storage, bucketName);
+}
