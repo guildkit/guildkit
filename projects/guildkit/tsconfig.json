@@ -16,7 +16,9 @@
     }],
     "paths": {
       "@/*": [ "./src/*" ]
-    }
+    },
+    // Required to avoid checking .js files under .open-next/.build/ during `next build`.
+    "checkJs": false
   },
 
   "include": [
@@ -30,6 +32,8 @@
   "exclude": [
     "**/node_modules/**",
     "**/build/**",
-    "**/out/**"
+    "**/out/**",
+    ".open-next/**",
+    ".wrangler/**"
   ]
 }
