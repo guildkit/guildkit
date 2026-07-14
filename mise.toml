@@ -11,24 +11,30 @@ node = { version = "24", corepack = true }
 
 [tasks]
   [tasks.dev]
+  depends = [ "//projects/...:build" ]
   run =[{ task = "//projects/...:dev" }]
 
   [tasks.build]
   run =[{ task = "//projects/...:build" }]
 
   [tasks.test]
+  depends = [ "//projects/...:build" ]
   run =[{ task = "//projects/...:test" }]
 
   [tasks.lint]
-  depends = [ "//projects/...:lint" ]
+  depends = [ "//projects/...:build" ]
   run = [
     "tsc --noEmit",
+    { task = "//projects/...:lint" },
     "eslint",
   ]
 
   [tasks.fix]
-  depends = [ "//projects/...:fix" ]
-  run = "eslint --fix"
+  depends = [ "//projects/...:build" ]
+  run = [
+    "eslint --fix",
+    { task = "//projects/...:fix" },
+  ]
 
   [tasks.db]
   run = "psql --username=guildkit --dbname=guildkit --host=localhost --port=5432"
@@ -49,7 +55,7 @@ node = { version = "24", corepack = true }
 
   [tasks.ai-postedit]
   description = "Run tsc and linters to detect and fix the warnings and errors in the codebase"
-  depends = [ "//:sync" ]
+  depends = [ "//projects/...:build" ]
   run = [
     "tsc --noEmit",
     { task = "//projects/...:lint" },
