@@ -2,7 +2,7 @@ import { JobEditor } from "@/components/JobEditor.tsx";
 import { JobList } from "@/components/JobList.tsx";
 import { requireAuthAs } from "@/lib/auth/server.ts";
 import { prisma } from "@/lib/prisma.ts";
-import { GuildKitError } from "@/lib/utils/errors.ts";
+import { GuildKitError } from "@guildkit/shared";
 import type { JobCardInfo } from "@/components/JobCard.tsx";
 
 export default async function EmployerJobsPage() {

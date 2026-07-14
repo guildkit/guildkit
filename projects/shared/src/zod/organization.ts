@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { maxLogoSizeMiB } from "../config";
 import { Currency } from "@/lib/prisma/enums.ts";
-import { mibToByte } from "@/lib/utils/utils.ts";
+import { mibToByte } from "../utils";
 
 export const orgNameSchema = z.string().trim().min(2, "Organization name must be at least 2 characters.");
 export const orgSlugSchema = z.string()
