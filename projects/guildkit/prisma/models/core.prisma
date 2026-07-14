@@ -1,16 +1,3 @@
-enum UserType {
-  administrative
-  recruiter
-  candidate
-}
-
-enum SalaryPer {
-  YEAR
-  MONTH
-  DAY
-  HOUR
-}
-
 model Job {
   id             String       @id @default(uuid())
   title          String
