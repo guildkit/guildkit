@@ -15,9 +15,9 @@
   "license": "Apache-2.0",
   "type": "module",
   "dependencies": {
+    "@guildkit/client": "workspace:*",
     "@guildkit/db": "workspace:*",
     "@guildkit/shared": "workspace:*",
-    "@prisma/client": "^7.6.0",
     "better-auth": "1.6.22",
     "next": "^16.2.2",
     "react": "^19.1.1",
@@ -41,7 +41,6 @@
     "dotenv": "^17.2.2",
     "jiti": "^2.4.2",
     "postcss": "^8.4.23",
-    "prisma": "^7.6.0",
     "tailwindcss": "^4.1.17",
     "typescript": "^6.0.0",
     "zod": "^4.1.13"

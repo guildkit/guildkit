@@ -2,8 +2,7 @@
 
 [tasks]
   [tasks.dev]
-  depends = [ "sync" ]
-  run = "vite"
+  run = "tsdown --watch --no-clean"
 
   [tasks.build]
   wait_for = [
@@ -17,19 +16,12 @@
   env = { NODE_ENV = "production" }
 
   [tasks.lint]
-  depends = [ "sync" ]
+  wait_for = [ "//projects/shared:build" ]
   run = "tsc --noEmit"
 
   [tasks.deploy]
   depends = [ "build" ]
   run = "wrangler deploy"
-
-  [tasks.sync]
-  run = "wrangler types --env-interface CloudflareBindings"
-
-  [tasks.setup]
-  depends_post = "sync"
-
 
 [env]
 _.path = "./node_modules/.bin"
