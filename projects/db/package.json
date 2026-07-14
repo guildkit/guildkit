@@ -1,0 +1,50 @@
+{
+  "name": "@guildkit/db",
+  "version": "0.0.1-prealpha",
+  "description": "GuildKit's internal shared library for database operations",
+  "author": {
+    "name": "tenkumo, Inc.",
+    "url": "https://tenkumogroup.com"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "*",
+    "!*.log",
+    "!*.tgz",
+    "!.mise/",
+    "!.gitignore",
+    "!mise.toml",
+    "!tsdown.config.ts"
+  ],
+  "exports": {
+    ".": "./dist/index.mjs"
+  },
+  "dependencies": {
+    "@guildkit/backend": "workspace:*",
+    "@guildkit/shared": "workspace:*",
+    "@prisma/adapter-pg": "^7.8.0",
+    "better-auth": "1.6.17",
+    "zod": "^4.4.3"
+  },
+  "peerDependencies": {
+    "nushell": "^0.113.1",
+    "prisma": "^7.6.0"
+  },
+  "devDependencies": {
+    "@phanect/configs": "2026.5.19",
+    "@phanect/utils": "^3.0.0",
+    "@types/node": "^24.12.4",
+    "@types/pg": "^8.15.6",
+    "auth": "1.6.17",
+    "dayjs": "^1.11.20",
+    "fast-xml-parser": "^5.3.1",
+    "nushell": "^0.113.1",
+    "tsdown": "0.22.2",
+    "typescript": "^6.0.0"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}
