@@ -35,7 +35,7 @@ export const orgSchema = z.object({
   url: orgUrlSchema,
   emails: z.array(orgEmailSchema).optional(),
   addresses: z.array(orgAddressSchema).min(1, "At least one address is required."),
-  currencies: z.array(z.enum(currencies)).min(1, "At least one currency is required."),
+  currencies: z.array(orgCurrencySchema).min(1, "At least one currency is required."),
 });
 
 export type Organization = z.infer<typeof orgSchema>;
