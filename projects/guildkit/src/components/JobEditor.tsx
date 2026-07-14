@@ -1,5 +1,5 @@
+import { auth } from "@guildkit/shared/auth";
 import { headers } from "next/headers";
-import { auth } from "@/lib/auth.ts";
 import { JobEditorClient } from "./JobEditor.client.tsx";
 import type { Job } from "@guildkit/shared/zod";
 import type { ReactElement, ReactNode } from "react";
