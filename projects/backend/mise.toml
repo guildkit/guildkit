@@ -10,7 +10,10 @@
     "//projects/shared:build",
     "//projects/db:build",
   ]
-  run = "tsdown"
+  run = [
+    { task = ":build:*" },
+    "tsdown",
+  ]
   env = { NODE_ENV = "production" }
 
   [tasks.lint]
