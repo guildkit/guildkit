@@ -40,6 +40,13 @@ node = { version = "24", corepack = true }
   # [tasks.publish]
   # run =[{ task = "//projects/...:publish" }]
 
+  [tasks.setup]
+  run = [
+    { task = "//:setup:*" },
+    # { task = "//projects/...:setup" },
+    { task = "//projects/...:build" },
+  ]
+
   [tasks.ai-postedit]
   description = "Run tsc and linters to detect and fix the warnings and errors in the codebase"
   depends = [ "//:sync" ]

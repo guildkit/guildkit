@@ -25,12 +25,5 @@
   #[tasks.publish]
   #run = "npm publish --access public --non-interactive"
 
-  [tasks.sync]
-  run = [{ tasks = [ "sync:*" ]}]
-
-  [tasks.setup]
-  run = [{ tasks = [ "setup:*" ]}]
-  depends_post = "sync"
-
 [env]
 _.path = "./node_modules/.bin"
