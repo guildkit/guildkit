@@ -24,8 +24,8 @@ import { ArrayField } from "@/components/generic/fields/ArrayField.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
 import { ImageField } from "@/components/generic/fields/ImageField.tsx";
 import { TagField } from "@/components/generic/fields/TagField.tsx";
+import type { Organization } from "@guildkit/db/auth";
 import type { Tag } from "react-tag-input";
-import type { Organization } from "@/lib/auth/types.ts";
 import type { ActionState } from "@/lib/types.ts";
 
 type Props = {
