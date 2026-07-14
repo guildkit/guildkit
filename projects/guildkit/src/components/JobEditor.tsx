@@ -1,8 +1,8 @@
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth.ts";
 import { JobEditorClient } from "./JobEditor.client.tsx";
+import type { Job } from "@guildkit/shared/zod";
 import type { ReactElement, ReactNode } from "react";
-import type { Job } from "@/lib/validations/job.ts";
 
 type Props = {
   job: Job | "new";

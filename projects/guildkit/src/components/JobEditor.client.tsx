@@ -1,5 +1,14 @@
 "use client";
 
+import {
+  jobApplicationUrlSchema,
+  jobDescriptionSchema,
+  jobExpiresAtSchema,
+  jobLocationSchema,
+  jobSalarySchema,
+  jobTitleSchema,
+  type Job,
+} from "@guildkit/shared/zod";
 import { useRouter } from "next/navigation";
 import {
   useState,
@@ -13,15 +22,6 @@ import { Button } from "@/components/generic/ButtonLink.tsx";
 import { Dialog } from "@/components/generic/Dialog.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
 import { Modal } from "@/components/generic/Modal.tsx";
-import {
-  jobApplicationUrlSchema,
-  jobDescriptionSchema,
-  jobExpiresAtSchema,
-  jobLocationSchema,
-  jobSalarySchema,
-  jobTitleSchema,
-  type Job,
-} from "@/lib/validations/job.ts";
 import type { ActionState } from "@/lib/types.ts";
 
 type Props = {
