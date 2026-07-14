@@ -70,6 +70,7 @@ npm-shrinkwrap.json
 
 # Frameworks
 .next/
+.open-next/
 next-env.d.ts
 .nuxt/
 out/
@@ -78,6 +79,7 @@ out/
 
 # Platforms
 .wrangler/
+cloudflare-env.d.ts
 worker-configuration.d.ts
 
 .vercel/

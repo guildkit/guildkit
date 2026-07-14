@@ -13,6 +13,9 @@ node = { version = "24", corepack = true }
   [tasks.dev]
   run =[{ task = "//projects/...:dev" }]
 
+  [tasks.preview]
+  run =[{ task = "//projects/...:preview" }]
+
   [tasks.build]
   run =[{ task = "//projects/...:build" }]
 
@@ -49,6 +52,12 @@ node = { version = "24", corepack = true }
     "eslint --fix",
     { task = "//projects/...:fix" },
   ]
+
+  [tasks.deploy]
+  run =[{ task = "//projects/...:deploy" }]
+
+  [tasks.upload]
+  run =[{ task = "//projects/...:upload" }]
 
 [hooks]
 postinstall = [
