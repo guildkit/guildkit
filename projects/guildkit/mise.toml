@@ -2,19 +2,19 @@
 
 [tasks]
   [tasks.dev]
-  depends = [ "sync" ]
+  wait_for = [ "//projects/shared:build" ]
   run = "next dev --inspect"
 
   [tasks.start]
   run = "next start"
 
   [tasks.build]
-  depends = [ "sync" ]
+  wait_for = [ "//projects/shared:build" ]
   run = "next build"
   env = { NODE_ENV = "production" }
 
   [tasks.lint]
-  depends = [ "sync" ]
+  wait_for = [ "//projects/shared:build" ]
   run = "tsc --noEmit"
 
   [tasks.fix]
