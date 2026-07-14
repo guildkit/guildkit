@@ -6,6 +6,7 @@
 
   [tasks.build]
   run = [
+    { tasks = [ "build:*" ] },
     "tsdown",
   ]
   env = { NODE_ENV = "production" }
