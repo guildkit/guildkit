@@ -1,43 +1,19 @@
 import { JobEditor } from "@/components/JobEditor.tsx";
 import { JobList } from "@/components/JobList.tsx";
-import { requireAuthAs } from "@/lib/auth/server.ts";
-import { prisma } from "@/lib/prisma.ts";
-import { GuildKitError } from "@guildkit/shared";
 import type { JobCardInfo } from "@/components/JobCard.tsx";
+import { getJobs } from "@guildkit/client";
+import { authClient } from "@/lib/auth/client";
+import { redirect } from "next/navigation";
 
 export default async function EmployerJobsPage() {
-  // TODO Do not run `requireAuthAs()` twice in src/app/employer/layout.tsx and here
-  const { err, user, session } = await requireAuthAs("recruiter");
+  const { error, data } = await authClient.getSession();
+  const { user } = data ?? {};
 
-  if (err) {
-    if (err instanceof GuildKitError && err.code === "RECRUITER_WITHOUT_ORGS") {
-      return null; // The error would be processed in the layout
-    } else {
-      throw err;
-    }
+  if (error || !user) {
+    redirect("/auth");
   }
 
-  const jobs: JobCardInfo[] = await prisma.job.findMany({
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      createdAt: true,
-      updatedAt: true,
-      employer: {
-        select: {
-          name: true,
-        },
-      },
-    },
-    where: {
-      employerId: session.activeOrganizationId,
-    },
-    orderBy: {
-      updatedAt: "desc",
-    },
-  });
-
+  const jobs: JobCardInfo[] = await getJobs({ employer: "us" });
   const editable = user.type === "recruiter";
 
   return (
