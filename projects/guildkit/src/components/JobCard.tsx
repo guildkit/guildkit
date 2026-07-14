@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useTransition, type ReactElement } from "react";
 import { Button, Link } from "@/components/generic/ButtonLink.tsx";
 import type { Organization } from "better-auth/plugins";
-import type { Job } from "@/lib/prisma/client.ts";
+import type { Job } from "@guildkit/shared/zod";
 
 export type JobCardInfo = Pick<Job, "id" | "title" | "description" | "createdAt" | "updatedAt"> & {
   employer: Pick<Organization, "name">;

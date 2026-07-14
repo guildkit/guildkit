@@ -28,6 +28,9 @@
     ".": "./dist/index.mjs",
     "./zod": "./dist/zod.mjs"
   },
+  "dependencies": {
+    "zod": "^4.1.13"
+  },
   "devDependencies": {
     "@phanect/configs": "2026.6.17",
     "@types/node": "^24.12.4",
