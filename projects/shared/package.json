@@ -32,6 +32,7 @@
     "zod": "^4.1.13"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.1053.0",
     "@phanect/configs": "2026.6.17",
     "@types/node": "^24.12.4",
     "publint": "^0.3.21",
