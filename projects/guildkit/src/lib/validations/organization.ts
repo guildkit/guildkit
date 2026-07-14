@@ -1,5 +1,5 @@
 import { z } from "zod";
-import publicConfigs from "@/intermediate/public-configs.json";
+import { maxLogoSizeMiB } from "../config";
 import { Currency } from "@/lib/prisma/enums.ts";
 import { mibToByte } from "@/lib/utils/utils.ts";
 
@@ -10,7 +10,7 @@ export const orgSlugSchema = z.string()
   .regex(/^[a-z0-9-]+$/, "Slug can only contain lowercase letters, numbers, and hyphens.");
 export const orgLogoSchema = z.file()
   .min(1, "Empty file was given.")
-  .max(mibToByte(publicConfigs.maxLogoSizeMiB), `File size has to be less than ${ publicConfigs.maxLogoSizeMiB } MiB.`)
+  .max(mibToByte(maxLogoSizeMiB), `File size has to be less than ${ maxLogoSizeMiB } MiB.`)
   .mime([
     "image/jpeg",
     "image/jpg",

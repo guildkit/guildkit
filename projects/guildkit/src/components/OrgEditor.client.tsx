@@ -1,5 +1,6 @@
 "use client";
 
+import { maxLogoSizeMiB } from "@guildkit/shared";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 import {
@@ -14,7 +15,6 @@ import { Field } from "@/components/generic/fields/Field.tsx";
 import { ImageField } from "@/components/generic/fields/ImageField.tsx";
 import { TagField } from "@/components/generic/fields/TagField.tsx";
 import { currencies } from "@/intermediate/currencies.ts";
-import publicConfigs from "@/intermediate/public-configs.json";
 import {
   orgAboutSchema,
   orgAddressSchema,
@@ -126,7 +126,7 @@ export const OrgEditorClient = ({ org, initialLogoBase64 }: Props): ReactElement
         description="Logo should be a square."
         name="logo"
         initialImageBase64={initialLogoBase64}
-        maxSizeMiB={publicConfigs.maxLogoSizeMiB}
+        maxSizeMiB={maxLogoSizeMiB}
         validator={orgLogoSchema}
         errorMessages={fieldErrors?.logo}
         className="mb-6"
