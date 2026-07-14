@@ -1,10 +1,9 @@
 #!/usr/bin/env nu
 
 #MISE description="Setup after `mise install`. Build intermediate files and set up local Docker containers."
-#MISE depends_post = [ "//projects/...:setup" ]
 #MISE raw=true # Required for interactive shell by Prisma
 
-use ./_libs *
+use ../_libs *
 
 # pnpm will not be found in the PATH without this in some cases
 mise reshim
