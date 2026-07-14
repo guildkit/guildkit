@@ -5,6 +5,7 @@ export default defineConfig({
   entry: {
     index: "./src/index.ts",
     nodejs: "./src/node.ts",
+    prisma: "./exports/prisma.ts",
   },
   platform: "node",
   format: [ "esm" ],
