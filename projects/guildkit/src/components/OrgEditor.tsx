@@ -1,7 +1,7 @@
 import { getBase64FromImageURL } from "@/lib/utils/utils.ts";
 import { OrgEditorClient } from "./OrgEditor.client.tsx";
+import type { Organization } from "@guildkit/shared/auth";
 import type { ReactElement } from "react";
-import type { Organization } from "@/lib/auth/types.ts";
 
 type Props = {
   org: Organization | "new";
