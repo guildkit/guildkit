@@ -1,8 +1,8 @@
-import { createAccessControl } from "better-auth/plugins/access";
+import { createAccessControl, type AccessControl } from "better-auth/plugins/access";
 
-export const recruiterAc = createAccessControl({
+export const recruiterAc: AccessControl = createAccessControl({
   project: [ "create", "share", "update", "delete" ],
-} as const);
+});
 
 export const recruiterRoles = {
   /** Role for the owners of the each organizations. They can control everything in their organization(s). */
@@ -15,9 +15,9 @@ export const recruiterRoles = {
   }),
 };
 
-export const adminAc = createAccessControl({
+export const adminAc: AccessControl = createAccessControl({
   project: [ "create", "share", "update", "delete" ],
-} as const);
+});
 
 export const adminRoles = {
   /** Role for the GuildKit admins. They can control everything of every job search websites. */
