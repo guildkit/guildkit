@@ -10,6 +10,7 @@
     "//projects/db:build",
   ]
   run = [
+    { task = ":build:*" },
     "vite build",
     "tsdown", # Run after `vite build`, which empties dist/
   ]
