@@ -1,6 +1,6 @@
 "use client";
 
-import { maxLogoSizeMiB } from "@guildkit/shared";
+import { currencies, maxLogoSizeMiB } from "@guildkit/shared";
 import {
   orgAboutSchema,
   orgAddressSchema,
@@ -24,7 +24,6 @@ import { ArrayField } from "@/components/generic/fields/ArrayField.tsx";
 import { Field } from "@/components/generic/fields/Field.tsx";
 import { ImageField } from "@/components/generic/fields/ImageField.tsx";
 import { TagField } from "@/components/generic/fields/TagField.tsx";
-import { currencies } from "@/intermediate/currencies.ts";
 import type { Tag } from "react-tag-input";
 import type { Organization } from "@/lib/auth/types.ts";
 import type { ActionState } from "@/lib/types.ts";
