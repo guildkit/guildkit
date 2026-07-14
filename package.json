@@ -28,6 +28,7 @@
     "clean": "podman compose down --rmi local --volumes --remove-orphans; git clean -dX --exclude=\"!.env\" --exclude=\"!mise.local.toml\" --force"
   },
   "devDependencies": {
+    "@guildkit/shared": "workspace:*",
     "@phanect/configs": "2026.8.29",
     "@phanect/lint": "latest",
     "@phanect/lint-react": "latest",
