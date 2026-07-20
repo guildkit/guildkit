@@ -4,9 +4,10 @@ generator nodejs {
 }
 
 generator cloudflare {
-  provider = "prisma-client"
-  output   = "../src/lib/prisma"
-  runtime  = "cloudflare"
+  provider      = "prisma-client"
+  compilerBuild = "fast"
+  output        = "../src/lib/prisma/cloudflare"
+  runtime       = "cloudflare"
 }
 
 datasource db {
