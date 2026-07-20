@@ -1,6 +1,0 @@
-#
-# Project-specific
-#
-
-/src/lib/prisma/
-/src/lib/prisma-node/

@@ -1,5 +1,7 @@
 #
 # Project-specific
 #
+/src/lib/prisma/
+/src/lib/prisma-node/
 /prisma/models/enums.prisma
 /openapi/
