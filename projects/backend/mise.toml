@@ -23,6 +23,10 @@
     "tsc --noEmit",
   ]
 
+  [tasks.fix]
+  depends = [ "sync" ]
+  run = "prisma format"
+
   [tasks.deploy]
   depends = [ "build" ]
   run = "wrangler deploy"

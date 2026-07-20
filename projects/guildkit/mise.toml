@@ -17,10 +17,6 @@
   wait_for = [ "//projects/shared:build" ]
   run = "tsc --noEmit"
 
-  [tasks.fix]
-  depends = [ "sync" ]
-  run = "prisma format"
-
   # TODO disabled until GA
   #[tasks.publish]
   #run = "npm publish --access public --non-interactive"
