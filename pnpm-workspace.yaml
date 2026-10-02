@@ -13,6 +13,7 @@ allowBuilds:
   unrs-resolver: true
   workerd: true
 minimumReleaseAge: 4320 # 72 hours
+minimumReleaseAgeExcludePrune: true
 minimumReleaseAgeExclude:
   # Renovate security update: next@16.2.6
   - next@16.2.6
