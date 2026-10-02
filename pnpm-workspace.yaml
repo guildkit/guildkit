@@ -14,8 +14,3 @@ allowBuilds:
   workerd: true
 minimumReleaseAge: 4320 # 72 hours
 minimumReleaseAgeExcludePrune: true
-minimumReleaseAgeExclude:
-  # Renovate security update: next@16.2.6
-  - next@16.2.6
-  # Renovate security update: better-auth@1.6.2
-  - better-auth@1.6.2
