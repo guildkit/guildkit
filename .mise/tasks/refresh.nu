@@ -14,3 +14,6 @@ rm --force --permanent $pnpmLockPath
 corepack enable
 corepack up
 pnpm install
+
+# Install Agent Skills
+pnpm exec skills update --project

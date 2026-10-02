@@ -93,3 +93,9 @@ vite.config.ts.timestamp-*
 
 # ESLint
 .eslintcache
+
+#
+# AI
+#
+.agents/skills/prisma-*/**
+.claude/skills/
