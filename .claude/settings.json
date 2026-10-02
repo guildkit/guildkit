@@ -1,5 +1,7 @@
 {
   "enabledMcpjsonServers": [
+    "mdn",
+    "astro",
     "prisma",
     "eslint",
     "mise"

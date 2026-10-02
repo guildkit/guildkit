@@ -1,5 +1,13 @@
 {
   "mcpServers": {
+    "mdn": {
+      "type": "http",
+      "url": "https://mcp.mdn.mozilla.net/"
+    },
+    "astro": {
+      "type": "http",
+      "url": "https://mcp.docs.astro.build/mcp"
+    },
     "prisma": {
       "command": "pnpm",
       "args": [ "exec", "prisma", "mcp" ]
