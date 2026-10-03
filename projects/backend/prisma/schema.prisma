@@ -1,0 +1,10 @@
+generator cloudflare {
+  provider      = "prisma-client"
+  compilerBuild = "fast"
+  output        = "../src/lib/prisma/cloudflare"
+  runtime       = "cloudflare"
+}
+
+datasource db {
+  provider = "postgresql"
+}

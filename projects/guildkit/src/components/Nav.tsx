@@ -1,9 +1,9 @@
+import { auth } from "@guildkit/shared/auth";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { Link } from "@/components/generic/ButtonLink.tsx";
 import { TopBar } from "@/components/generic/TopBar.tsx";
 import { SignOutButton } from "@/components/SignOutButton.tsx";
-import { auth } from "@/lib/auth.ts";
 import config from "../../../../guildkit.config.ts";
 import type { ReactElement } from "react";
 import type { UserType } from "@/lib/prisma/enums.ts";

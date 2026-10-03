@@ -75,6 +75,8 @@ next-env.d.ts
 out/
 .svelte-kit/
 .astro/
+## Hono
+dist-server/
 
 # Platforms
 .wrangler/
@@ -97,5 +99,7 @@ vite.config.ts.timestamp-*
 #
 # AI
 #
-.agents/skills/prisma-*/**
+.agents/skills/hono
+.agents/skills/hono-*
+.agents/skills/prisma-*
 .claude/skills/

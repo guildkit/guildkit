@@ -1,0 +1,35 @@
+{
+  "extends": "@phanect/configs/ts",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "types": [
+      "node"
+    ],
+
+    "tsBuildInfoFile": "./.tsbuildinfo",
+
+    // Required to use `references`
+    "composite": true,
+    "declaration": true,
+    "noEmit": null,
+    "emitDeclarationOnly": true,
+
+    // Better typings for openapi-typescript
+    "noUncheckedIndexedAccess": true
+  },
+  "references": [
+    { "path": "../db" },
+    { "path": "../shared" }
+  ],
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.js",
+    "./**/*.jsx",
+  ],
+  "exclude": [
+    "./**/node_modules/**",
+    "./**/dist/**"
+  ]
+}
