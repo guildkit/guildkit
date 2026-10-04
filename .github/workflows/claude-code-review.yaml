@@ -10,9 +10,7 @@ on:
 
 jobs:
   claude-review:
-    if: |
-      github.event.pull_request.user.login != 'renovate'
-      && github.event.pull_request.user.login != 'dependabot'
+    if: github.event.pull_request.user.type != 'Bot'
 
     runs-on: ubuntu-latest
     permissions:
