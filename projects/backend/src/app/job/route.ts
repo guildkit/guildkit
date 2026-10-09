@@ -4,6 +4,15 @@ import { flattenError } from "zod";
 import { requireAuthAs } from "../../lib/auth-guard.ts";
 import { prisma } from "../../lib/prisma.ts";
 
+/**
+ * Create a job
+ * @tag job
+ * @body JobCreateSchema
+ * @response 201:CreatedJobResponse:Successfully created a job
+ * @add 400:BadRequestResponse:The request body is invalid or the recruiter who is requesting to create a job does not belong to any organizations.
+ * @add 401:ErrorResponse:The user is not logged in or is not a recruiter.
+ * @add 500:ErrorResponse:Failed to create a job (Unexpected error)
+ */
 export const POST = async (request: NextRequest): Promise<NextResponse> => {
   const authResult = await requireAuthAs(request, "recruiter");
 

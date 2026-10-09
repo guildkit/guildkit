@@ -1,6 +1,13 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { prisma } from "../../../lib/prisma.ts";
 
+/**
+ * Get a single job posting
+ * @tag job
+ * @path JobIdParams
+ * @response jobDetailSchema:The requested job posting
+ * @add 404:ErrorResponse:No job posting was found for the given id.
+ */
 export const GET = async (_request: NextRequest, { params }: RouteContext<"/job/[id]">): Promise<NextResponse> => {
   const { id } = await params;
 

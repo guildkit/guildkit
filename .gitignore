@@ -75,6 +75,8 @@ next-env.d.ts
 out/
 .svelte-kit/
 .astro/
+## next-openapi-gen
+.openapi-gen/
 
 # Platforms
 .wrangler/

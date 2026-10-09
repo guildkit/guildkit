@@ -14,6 +14,17 @@ const uploadLogo = async (logoFile: File, storageClient: StorageClient): Promise
   return storageClient.putObject(destPath, logoFile);
 };
 
+/**
+ * Create an organization
+ * @tag organization
+ * @body orgSchema
+ * @contentType multipart/form-data
+ * @response 201:OrganizationCreatedResponse:Successfully created an organization
+ * @add 400:ValidationErrorResponse:The form data is invalid.
+ * @add 401:ErrorResponse:The user is not logged in or is not a recruiter.
+ * @add 409:ValidationErrorResponse:The slug or the organization already exists.
+ * @add 500:ValidationErrorResponse:Failed to create an organization (Unexpected error)
+ */
 export const POST = async (request: NextRequest): Promise<NextResponse> => {
   const authResult = await requireAuthAs(request, "recruiter", { allowOrphanRecruiter: true });
 

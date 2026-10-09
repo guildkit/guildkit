@@ -3,3 +3,4 @@
 #
 /src/lib/prisma/
 /prisma/models/enums.prisma
+/openapi/
