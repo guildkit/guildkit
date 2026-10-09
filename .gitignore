@@ -75,6 +75,7 @@ next-env.d.ts
 out/
 .svelte-kit/
 .astro/
+.vinext/
 ## next-openapi-gen
 .openapi-gen/
 
