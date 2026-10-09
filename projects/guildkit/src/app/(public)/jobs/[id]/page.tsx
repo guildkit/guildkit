@@ -1,7 +1,7 @@
+import { getJob } from "@guildkit/client";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Link } from "@/components/generic/ButtonLink.tsx";
-import { prisma } from "@/lib/prisma.ts";
 import type { ReactElement } from "react";
 
 type Props = {
@@ -12,28 +12,7 @@ type Props = {
 
 export default async function JobPage({ params }: Props): Promise<ReactElement> {
   const { id: jobId } = await params;
-
-  const job = await prisma.job.findFirst({
-    where: { id: jobId },
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      location: true,
-      salary: true,
-      salaryPer: true,
-      currency: true,
-      applicationUrl: true,
-      createdAt: true,
-      updatedAt: true,
-      employer: {
-        select: {
-          slug: true,
-          name: true,
-        },
-      },
-    },
-  });
+  const job = await getJob(jobId, undefined);
 
   if (!job) {
     notFound();
