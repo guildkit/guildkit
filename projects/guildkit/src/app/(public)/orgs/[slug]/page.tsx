@@ -1,8 +1,8 @@
+import { getOrganization } from "@guildkit/client";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Link } from "@/components/generic/ButtonLink.tsx";
 import { JobList } from "@/components/JobList.tsx";
-import { prisma } from "@/lib/prisma.ts";
 import type { ReactElement } from "react";
 
 type Props = {
@@ -14,34 +14,11 @@ type Props = {
 export default async function OrganizationPage({ params }: Props): Promise<ReactElement> {
   const { slug } = await params;
 
-  const orgWithJobs = await prisma.organization.findFirst({
-    where: { slug },
-    include: {
-      jobs: {
-        take: 6,
-        select: {
-          id: true,
-          title: true,
-          description: true,
-          createdAt: true,
-          updatedAt: true,
-        },
-      },
-    },
-  });
+  const org = await getOrganization(slug, undefined);
 
-  if (!orgWithJobs) {
+  if (!org) {
     notFound();
   }
-
-  const { jobs, ...org } = orgWithJobs;
-
-  const jobsWithEmployer = jobs.map((job) => ({
-    ...job,
-    employer: {
-      name: org.name,
-    },
-  }));
 
   return (
     <>
@@ -76,7 +53,7 @@ export default async function OrganizationPage({ params }: Props): Promise<React
       </div>
 
       <section className="w-full max-w-6xl mb-8 px-4 md:px-0">
-        <JobList jobs={jobsWithEmployer} />
+        <JobList jobs={org.jobs} />
       </section>
     </>
   );
