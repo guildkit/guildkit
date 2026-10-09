@@ -1,5 +1,5 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import type { GuildKitConfig } from "@guildkit/shared";
+import type { GuildKitConfig } from "@guildkit/shared/zod";
 
 export class StorageClient {
   private storage: S3Client;

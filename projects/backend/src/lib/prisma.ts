@@ -1,17 +1,31 @@
 import { PrismaPg } from "@prisma/adapter-pg";
+import { cacheForRequest } from "vinext/cache";
 import { PrismaClient } from "./prisma/cloudflare/client.ts";
-import type { Env } from "@guildkit/shared";
 
 /**
- * Initialize PrismaClient.
- * @param env - Environmental variables
- * @param platform - Platform (Node.js or Cloudflare)
- * @returns BetterAuth's auth object
+ * Get PrismaClient for the current request.
+ * Cloudflare Workers do not allow to reuse the DB connection opened in another request,
+ * so PrismaClient (and its connection pool) is created for each request.
  */
-export async function initPrisma(env: Env): Promise<PrismaClient> {
-  return new PrismaClient({
-    adapter: new PrismaPg({
-      connectionString: env.DATABASE_URL,
-    }),
-  });
-}
+const getRequestPrisma = cacheForRequest(() => new PrismaClient({
+  adapter: new PrismaPg({
+    connectionString: process.env.DATABASE_URL,
+  }),
+}));
+
+/**
+ * PrismaClient that can be used as a module-level variable.
+ * Every property access is forwarded to the PrismaClient for the current request.
+ */
+export const prisma = new Proxy({} as PrismaClient, {
+  get: (_target, property) => {
+    const client = getRequestPrisma();
+    const value: unknown = Reflect.get(client, property, client);
+
+    return typeof value === "function"
+      ? (value as (...args: unknown[]) => unknown).bind(client)
+      : value;
+  },
+});
+
+export type { PrismaClient };
