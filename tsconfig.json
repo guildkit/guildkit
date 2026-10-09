@@ -28,6 +28,8 @@
   "exclude": [
     "**/node_modules/**",
     // These files should be lint by each project's lint script
-    "projects/*/**"
+    "projects/*/**",
+    // Type-checked as a part of projects/backend
+    "guildkit.config.ts"
   ]
 }

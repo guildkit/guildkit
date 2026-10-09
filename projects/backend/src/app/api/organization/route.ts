@@ -1,32 +1,33 @@
-import { randomUUID } from "node:crypto";
+import { orgSchema } from "@guildkit/shared/zod";
+import { pseudoRandomString } from "@phanect/utils";
 import { APIError } from "better-auth";
 import { NextResponse, type NextRequest } from "next/server";
 import { flattenError } from "zod";
-import { requireAuthAs } from "@/lib/auth/server.ts";
 import { auth } from "@/lib/auth.ts";
-import { logoDirName, putObject } from "@/lib/storage.ts";
-import { orgSchema } from "@/lib/validations/organization.ts";
+import { requireAuthAs } from "@/lib/auth-guard.ts";
+import { config } from "@/lib/config.ts";
+import { logoDirName, StorageClient } from "@/lib/storage.ts";
 
-const uploadLogo = async (logoFile: File) => {
+const uploadLogo = async (logoFile: File, storageClient: StorageClient): Promise<string> => {
   const fileExt = logoFile.name.split(".").pop() ?? "";
-  const destPath = `${ logoDirName }/${ randomUUID() }.${ fileExt }`;
-  return putObject(destPath, logoFile);
+  const destPath = `${ logoDirName }/${ pseudoRandomString(32) }.${ fileExt }`;
+  return storageClient.putObject(destPath, logoFile);
 };
 
 export const POST = async (request: NextRequest): Promise<NextResponse> => {
-  const { err } = await requireAuthAs("recruiter", { allowOrphanRecruiter: true });
+  const authResult = await requireAuthAs(request, "recruiter", { allowOrphanRecruiter: true });
 
-  if (err) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (authResult instanceof NextResponse) {
+    return authResult;
   }
 
-  const formData = await request.formData();
+  const formData = await request.formData().catch(() => new FormData());
 
-  const { success, error, data } = orgSchema.safeParse({
+  const { success, data, error } = orgSchema.safeParse({
     name: formData.get("name"),
     slug: formData.get("slug"),
-    logo: formData.get("logo"),
-    about: formData.get("about"),
+    logo: formData.get("logo") ?? undefined,
+    about: formData.get("about") ?? undefined,
     url: formData.get("url"),
     emails: formData.getAll("emails"),
     addresses: formData.getAll("addresses"),
@@ -34,14 +35,14 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
   });
 
   if (!success) {
-    return NextResponse.json({
-      errors: flattenError(error),
-    }, { status: 400 });
+    return NextResponse.json({ errors: flattenError(error) }, { status: 400 });
   }
 
+  const { logo, ...newOrgData } = data;
+
   try {
-    const { logo, ...newOrgData } = data;
-    const logoURL = logo ? await uploadLogo(logo) : undefined;
+    const storage = new StorageClient(config.servers.storage);
+    const logoURL = logo ? await uploadLogo(logo, storage) : undefined;
 
     await auth.api.createOrganization({
       body: {
@@ -50,6 +51,8 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
       },
       headers: request.headers,
     });
+
+    return NextResponse.json({ success: true }, { status: 201 });
   } catch (err) {
     if (err instanceof APIError) {
       if (err.body?.code === "SLUG_IS_TAKEN") {
@@ -58,7 +61,7 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
             formErrors: [],
             fieldErrors: { slug: [ "This slug is already taken." ]},
           },
-        }, {status: 409 });
+        }, { status: 409 });
       } else if (err.body?.code === "ORGANIZATION_ALREADY_EXISTS") {
         return NextResponse.json({
           errors: {
@@ -81,8 +84,4 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
       },
     }, { status: 500 });
   }
-
-  // You cannot redirect in the `try` & `catch` blocks
-  // See: https://nextjs.org/docs/app/guides/redirecting#redirect-function
-  return NextResponse.json({ redirectUrl: "/employer/jobs" }, { status: 201 });
 };
