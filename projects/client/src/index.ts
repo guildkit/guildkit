@@ -25,7 +25,7 @@ export const getJobs = async (
     employer?: string;
   } & RequestOptions
 ) => {
-  const { data: rawJobs, response } = await client.GET("/jobs", {
+  const { data: rawJobs, response } = await client.GET("/api/jobs", {
     params: { query: { employer: options?.employer }},
     headers: options?.headers,
   });
@@ -41,7 +41,7 @@ export const getJob = async (
   jobId: string,
   options?: RequestOptions
 ) => {
-  const { data: rawJob, response } = await client.GET("/job/{id}", {
+  const { data: rawJob, response } = await client.GET("/api/job/{id}", {
     params: { path: { id: jobId }},
     headers: options?.headers,
   });
@@ -61,7 +61,7 @@ export const createJob = async (
   job: components["schemas"]["JobCreateSchema"],
   options?: RequestOptions
 ): Promise<{ newJobId: string; }> => {
-  const { data, response } = await client.POST("/job", {
+  const { data, response } = await client.POST("/api/job", {
     body: job,
     headers: options?.headers,
   });
@@ -77,7 +77,7 @@ export const deleteJob = async (
   jobId: string,
   options?: RequestOptions
 ): Promise<void> => {
-  const { response } = await client.DELETE("/jobs/{id}", {
+  const { response } = await client.DELETE("/api/jobs/{id}", {
     params: { path: { id: jobId }},
     headers: options?.headers,
   });
@@ -93,7 +93,7 @@ export const getOrganization = async (
   slug: string,
   options?: RequestOptions
 ) => {
-  const { data: rawOrg, response } = await client.GET("/organizations/{slug}", {
+  const { data: rawOrg, response } = await client.GET("/api/organizations/{slug}", {
     params: { path: { slug }},
     headers: options?.headers,
   });
