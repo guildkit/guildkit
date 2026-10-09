@@ -75,6 +75,9 @@ next-env.d.ts
 out/
 .svelte-kit/
 .astro/
+.vinext/
+## next-openapi-gen
+.openapi-gen/
 
 # Platforms
 .wrangler/
@@ -97,5 +100,5 @@ vite.config.ts.timestamp-*
 #
 # AI
 #
-.agents/skills/prisma-*/**
+.agents/skills/prisma-*
 .claude/skills/

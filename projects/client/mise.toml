@@ -1,0 +1,22 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+
+[tasks]
+  [tasks.dev]
+  run = "tsdown --watch --no-clean"
+
+  [tasks.build]
+  wait_for = [
+    "//projects/backend:build",
+  ]
+  run = [
+    "openapi-typescript ../backend/openapi/openapi.json --output ./src/generated/openapi.ts",
+    "tsdown",
+  ]
+  env = { NODE_ENV = "production" }
+
+  [tasks.lint]
+  wait_for = [ "//projects/backend:build" ]
+  run = "tsc --noEmit"
+
+[env]
+_.path = "./node_modules/.bin"

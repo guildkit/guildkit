@@ -6,6 +6,14 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "incremental": true,
+    "tsBuildInfoFile": "./.tsbuildinfo",
+
+    // Required to use `references`
+    "composite": true,
+    "declaration": true,
+    "noEmit": null,
+    "emitDeclarationOnly": true,
+
     "lib": [
       "esnext",
       "dom",
@@ -18,6 +26,9 @@
       "@/*": [ "./src/*" ]
     }
   },
+  "references": [{
+    "path": "../shared"
+  }],
 
   "include": [
     "**/*.ts",

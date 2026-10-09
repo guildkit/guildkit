@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "guildkit-backend",
+  "compatibility_date": "2026-10-01",
+  // `nodejs_compat` also populates `process.env` with the vars and secrets
+  "compatibility_flags": [ "nodejs_compat" ],
+  "main": "vinext/server/fetch-handler",
+  "assets": {
+    "directory": "dist/client",
+    "not_found_handling": "none",
+    "binding": "ASSETS"
+  }
+}

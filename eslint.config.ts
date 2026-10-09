@@ -6,8 +6,14 @@ const configs = defineConfig([
   globalIgnores([
     "./**/node_modules/**",
     "./**/.next/**",
-    "./projects/guildkit/src/intermediate/**",
-    "./projects/guildkit/src/lib/prisma/**",
+    "./**/dist/**",
+    "./**/worker-configuration.d.ts",
+    "./**/.wrangler/**",
+    "./**/.openapi-gen/**",
+    "./projects/backend/openapi/**",
+    "./projects/backend/src/lib/prisma/**",
+    "./projects/client/src/generated/**",
+    "./projects/shared/src/intermediate/**",
   ]),
 
   ...core,
@@ -48,6 +54,18 @@ const configs = defineConfig([
     rules: {
       // To allow `//MISE ...`
       "@stylistic/spaced-comment": "off",
+    },
+  },
+
+  {
+    // JSDoc of the Route Handlers is for next-openapi-gen
+    files: [ "projects/backend/src/app/**/route.ts" ],
+    rules: {
+      "jsdoc/check-tag-names": [ "warn", {
+        definedTags: [ "add", "body", "contentType", "path", "query", "response", "responseDescription", "tag" ],
+      }],
+      "jsdoc/require-param": "off",
+      "jsdoc/require-returns": "off",
     },
   },
 ]);
