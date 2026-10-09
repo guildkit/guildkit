@@ -3,10 +3,10 @@ import { pseudoRandomString } from "@phanect/utils";
 import { APIError } from "better-auth";
 import { NextResponse, type NextRequest } from "next/server";
 import { flattenError } from "zod";
-import { auth } from "../../lib/auth.ts";
-import { requireAuthAs } from "../../lib/auth-guard.ts";
-import { config } from "../../lib/config.ts";
-import { logoDirName, StorageClient } from "../../lib/storage.ts";
+import { auth } from "@/lib/auth.ts";
+import { requireAuthAs } from "@/lib/auth-guard.ts";
+import { config } from "@/lib/config.ts";
+import { logoDirName, StorageClient } from "@/lib/storage.ts";
 
 const uploadLogo = async (logoFile: File, storageClient: StorageClient): Promise<string> => {
   const fileExt = logoFile.name.split(".").pop() ?? "";

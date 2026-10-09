@@ -1,8 +1,8 @@
 import { JobCreateSchema } from "@guildkit/shared/zod";
 import { NextResponse, type NextRequest } from "next/server";
 import { flattenError } from "zod";
-import { requireAuthAs } from "../../lib/auth-guard.ts";
-import { prisma } from "../../lib/prisma.ts";
+import { requireAuthAs } from "@/lib/auth-guard.ts";
+import { prisma } from "@/lib/prisma.ts";
 
 /**
  * Create a job

@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { prisma } from "../../../lib/prisma.ts";
+import { prisma } from "@/lib/prisma.ts";
 
 /**
  * Get an organization and its job postings
@@ -8,7 +8,7 @@ import { prisma } from "../../../lib/prisma.ts";
  * @response OrganizationWithJobsSchema:The requested organization and its recent job postings
  * @add 404:ErrorResponse:No organization was found for the given slug.
  */
-export const GET = async (_request: NextRequest, { params }: RouteContext<"/organizations/[slug]">): Promise<NextResponse> => {
+export const GET = async (_request: NextRequest, { params }: RouteContext<"/api/organizations/[slug]">): Promise<NextResponse> => {
   const { slug } = await params;
 
   const org = await prisma.organization.findFirst({

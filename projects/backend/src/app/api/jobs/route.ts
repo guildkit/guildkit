@@ -1,8 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { flattenError } from "zod";
-import { auth } from "../../lib/auth.ts";
-import { prisma } from "../../lib/prisma.ts";
-import { JobsQuery } from "../../schemas/job.ts";
+import { auth } from "@/lib/auth.ts";
+import { prisma } from "@/lib/prisma.ts";
+import { JobsQuery } from "@/schemas/job.ts";
 import type { JobListItem } from "@guildkit/shared/zod";
 
 const toJobListItem = (job: {
