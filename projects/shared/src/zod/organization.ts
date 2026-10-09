@@ -1,4 +1,4 @@
-import { z } from "@hono/zod-openapi";
+import { z } from "zod";
 import { maxLogoSizeMiB } from "../config";
 import { currencies } from "../intermediate/currencies";
 import { mibToByte } from "../utils";
@@ -19,7 +19,6 @@ export const orgLogoSchema = z.file()
     "image/gif",
     "image/svg+xml",
   ], "Unsupported file format. Supported file types: PNG, JPEG, WebP, GIF, and SVG.")
-  .openapi({ type: "string", format: "binary" })
   .optional();
 
 export const orgAboutSchema = z.string().trim().optional();

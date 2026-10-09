@@ -1,4 +1,4 @@
-import { z } from "@hono/zod-openapi";
+import { z } from "zod";
 import { salaryPer } from "../enums";
 import { currencies } from "../intermediate/currencies";
 import { orgSchema } from "./organization";
@@ -61,11 +61,11 @@ export const JobResponseSchema = JobSchema.pick({
   employer: orgSchema.pick({
     name: true,
   }),
-}).openapi("JobResponse");
+});
 
 export type JobListItem = z.infer<typeof JobResponseSchema>;
 
-export const JobsResponseSchema = z.array(JobResponseSchema).openapi("JobsResponse");
+export const JobsResponseSchema = z.array(JobResponseSchema);
 
 /** Full job detail as shown on the public job page. */
 export const jobDetailSchema = JobSchema.pick({
@@ -84,6 +84,6 @@ export const jobDetailSchema = JobSchema.pick({
     slug: true,
     name: true,
   }),
-}).openapi("JobDetail");
+});
 
 export type JobDetail = z.infer<typeof jobDetailSchema>;
