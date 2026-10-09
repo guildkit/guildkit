@@ -12,6 +12,7 @@ const configs = defineConfig([
     "./**/.openapi-gen/**",
     "./projects/backend/openapi/**",
     "./projects/backend/src/lib/prisma/**",
+    "./projects/client/src/generated/**",
     "./projects/shared/src/intermediate/**",
   ]),
 

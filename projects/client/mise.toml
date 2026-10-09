@@ -8,7 +8,10 @@
   wait_for = [
     "//projects/backend:build",
   ]
-  run = "tsdown"
+  run = [
+    "openapi-typescript ../backend/openapi/openapi.json --output ./src/generated/openapi.ts",
+    "tsdown",
+  ]
   env = { NODE_ENV = "production" }
 
   [tasks.lint]

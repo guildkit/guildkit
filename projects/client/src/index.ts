@@ -1,9 +1,14 @@
-import { hc } from "hono/client";
-import type { guildKitBackend } from "@guildkit/backend";
+import createClient, { type HeadersOptions } from "openapi-fetch";
+import type { components, paths } from "./generated/openapi.ts";
 
-type BackendApp = ReturnType<typeof guildKitBackend>;
+export const client = createClient<paths>({
+  baseUrl: "http://localhost:3001", // TODO allow configuring backend URL
+});
 
-export const client = hc<BackendApp>("http://localhost:3001/"); // TODO allow configuring backend URL
+type RequestOptions = {
+  /** Request headers, e.g. `cookie` to call the API on behalf of the user */
+  headers?: HeadersOptions;
+};
 
 // Dates are serialized as ISO `date-time` strings on the wire. The wrappers
 // below convert them back into `Date` objects so consumers receive domain data.
@@ -18,61 +23,92 @@ const withJobDates = <Job extends { createdAt: string; updatedAt: string; }>(job
 export const getJobs = async (
   options?: {
     employer?: string;
-  } & Parameters<typeof client["jobs"]["$get"]>[1]
+  } & RequestOptions
 ) => {
-  const res = await client.jobs.$get({ query: { employer: options?.employer }}, options);
+  const { data: rawJobs, response } = await client.GET("/jobs", {
+    params: { query: { employer: options?.employer }},
+    headers: options?.headers,
+  });
 
-  if (!res.ok) {
-    throw new Error(`Failed to fetch jobs: ${ res.status }`);
+  if (!rawJobs) {
+    throw new Error(`Failed to fetch jobs: ${ response.status }`);
   }
-
-  const rawJobs = await res.json();
 
   return rawJobs.map(withJobDates);
 };
 
 export const getJob = async (
-  jobId: Parameters<typeof client["job"][":id"]["$get"]>[0]["param"]["id"],
-  options?: Parameters<typeof client["job"][":id"]["$get"]>[1]
+  jobId: string,
+  options?: RequestOptions
 ) => {
-  const res = await client.job[":id"].$get({ param: { id: jobId }}, options);
+  const { data: rawJob, response } = await client.GET("/job/{id}", {
+    params: { path: { id: jobId }},
+    headers: options?.headers,
+  });
 
-  if (res.status === 404) {
+  if (response.status === 404) {
     return undefined;
   }
 
-  if (!res.ok) {
+  if (!rawJob) {
     throw new Error(`Failed to fetch job ${ jobId }.`);
   }
-
-  const rawJob = await res.json();
 
   return withJobDates(rawJob);
 };
 
 export const createJob = async (
-  job: Parameters<typeof client["job"]["$post"]>[0]["json"],
-  options?: Parameters<typeof client["job"]["$post"]>[1]
+  job: components["schemas"]["JobCreateSchema"],
+  options?: RequestOptions
 ): Promise<{ newJobId: string; }> => {
-  const res = await client.job.$post({ json: job }, options);
+  const { data, response } = await client.POST("/job", {
+    body: job,
+    headers: options?.headers,
+  });
 
-  if (!res.ok) {
-    throw new Error(`Failed to create a job: ${ res.status }`);
+  if (!data) {
+    throw new Error(`Failed to create a job: ${ response.status }`);
   }
 
-  // The backend returns `{ newJobId }` on 201, but does not declare the response
-  // body in its OpenAPI route, so it is typed as `{}` on the client. Cast to the
-  // documented runtime shape.
-  return await res.json() as { newJobId: string; };
+  return data;
 };
 
 export const deleteJob = async (
-  jobId: Parameters<typeof client["jobs"][":id"]["$delete"]>[0]["param"]["id"],
-  options?: Parameters<typeof client["jobs"][":id"]["$delete"]>[1]
+  jobId: string,
+  options?: RequestOptions
 ): Promise<void> => {
-  const res = await client.jobs[":id"].$delete({ param: { id: jobId }}, options);
+  const { response } = await client.DELETE("/jobs/{id}", {
+    params: { path: { id: jobId }},
+    headers: options?.headers,
+  });
 
-  if (!res.ok) {
+  if (!response.ok) {
     throw new Error(`Failed to delete job ${ jobId }.`);
   }
+};
+
+// Organizations
+
+export const getOrganization = async (
+  slug: string,
+  options?: RequestOptions
+) => {
+  const { data: rawOrg, response } = await client.GET("/organizations/{slug}", {
+    params: { path: { slug }},
+    headers: options?.headers,
+  });
+
+  if (response.status === 404) {
+    return undefined;
+  }
+
+  if (!rawOrg) {
+    throw new Error(`Failed to fetch organization ${ slug }.`);
+  }
+
+  return {
+    ...rawOrg,
+    createdAt: new Date(rawOrg.createdAt),
+    jobs: rawOrg.jobs.map(withJobDates),
+  };
 };

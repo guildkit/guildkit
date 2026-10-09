@@ -22,12 +22,12 @@
     ".": "./dist/index.js"
   },
   "dependencies": {
-    "hono": "^4.12.18"
+    "openapi-fetch": "^0.17.0"
   },
   "devDependencies": {
-    "@guildkit/backend": "workspace:*",
     "@phanect/configs": "2026.5.19",
     "@types/node": "^24.12.4",
+    "openapi-typescript": "^7.13.0",
     "publint": "^0.3.21",
     "tsdown": "0.22.2",
     "typescript": "^6.0.0"

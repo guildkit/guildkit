@@ -1,6 +1,11 @@
 {
   "extends": "@phanect/configs/ts",
   "compilerOptions": {
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+
     "tsBuildInfoFile": "./.tsbuildinfo",
 
     // Required to use `references`
@@ -9,9 +14,6 @@
     "noEmit": null,
     "emitDeclarationOnly": true
   },
-  "references": [
-    { "path": "../backend" }
-  ],
   "include": [
     "./**/*.ts",
     "./**/*.tsx",
