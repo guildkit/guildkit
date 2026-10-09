@@ -1,6 +1,9 @@
 #:schema https://mise.jdx.dev/schema/mise.json
 
 [tasks]
+  [tasks.dev]
+  run = "tsdown --watch --no-clean"
+
   [tasks.build]
   wait_for = [
     "//projects/shared:build",
