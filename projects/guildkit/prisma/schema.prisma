@@ -1,6 +1,12 @@
-generator client {
+generator nodejs {
+  provider = "prisma-client"
+  output   = "../src/lib/prisma-node"
+}
+
+generator cloudflare {
   provider = "prisma-client"
   output   = "../src/lib/prisma"
+  runtime  = "cloudflare"
 }
 
 datasource db {
