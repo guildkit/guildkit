@@ -21,7 +21,7 @@
     "eslint": "^10.0.0",
     "neonctl": "^8.0.0",
     "skills": "^1.7.0",
-    "typescript": "^6.0.0",
+    "typescript": "^7.0.0",
     "vercel": "^62.0.0"
   },
   "engines": {
