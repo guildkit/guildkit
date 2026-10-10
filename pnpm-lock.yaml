@@ -27,8 +27,8 @@ importers:
         specifier: ^10.0.0
         version: 10.11.0(jiti@2.7.0)
       neonctl:
-        specifier: ^7.0.0
-        version: 7.0.5(hono@4.13.12)
+        specifier: ^8.0.0
+        version: 8.0.11(hono@4.13.12)
       skills:
         specifier: ^1.7.0
         version: 1.7.0
@@ -1343,16 +1343,16 @@ packages:
       '@emnapi/core': ^1.7.1 || ^2.0.0-alpha.4
       '@emnapi/runtime': ^1.7.1 || ^2.0.0-alpha.4
 
-  '@neon/config-runtime@1.7.3':
-    resolution: {integrity: sha512-pkMF3FBLd+jhOyZd837GHHVaU+Zkl5PhNveL0dM4CsFt8aLzK/ArDd/boJTYBO7A4sE/9656nn63pREYUwPGKQ==}
+  '@neon/config-runtime@1.7.6':
+    resolution: {integrity: sha512-SBMzH0N+ystWAu06Cze8O49+EZRfJyceklMBYFdsRwPpR5strsJ5bWFH9f4v5Won/LA0Zgk54WAMsgjfx9kF3A==}
     engines: {node: '>=20.19.0'}
 
-  '@neon/config@1.8.3':
-    resolution: {integrity: sha512-/UmkgmHrm9tTOoFd7g3DttqlFFA3KG+d6JULLk7JzhvU2CwHrUaKiRmE1OmhOQAqJ3Mm49c/G5nDVbSefyFCrw==}
+  '@neon/config@1.8.4':
+    resolution: {integrity: sha512-N4J8XxFicf6XoGNceAAAGfzZGedZjV/iOGnbpPAQV2qkIP4oLnkvumdR5kstEmoVgktJV7DfqVd9I6923JZGtg==}
     engines: {node: '>=20.19.0'}
 
-  '@neon/sdk@7.0.0':
-    resolution: {integrity: sha512-hF/Om50SmpKK2PQldcwYxi6b3p7S2wlwW8fX+54jx88xHaEu7hB4dojuuuP8nwQz24qq/p/jxVm0P9DztKPoJA==}
+  '@neon/sdk@7.0.1':
+    resolution: {integrity: sha512-Zyo84tVyK3cO/vkREgFSPZ0llGoWNgcbbz38/UkqyqKN/Ky6huHibTCyvnlnBV1aeWnJhEhg9W0HIylE6sCS0g==}
     engines: {node: '>=20.19.0'}
 
   '@next/env@16.3.8':
@@ -4383,13 +4383,13 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  neon@7.0.5:
-    resolution: {integrity: sha512-eu0lCE6Hl3DParYkC2ueXaBdG1vUjUal7jqgEBkVdsciq/TkQWFa3jhvjWcvyJ52erN+8hM2Y9MD4rQvqdLkIg==}
+  neon@8.0.11:
+    resolution: {integrity: sha512-biQV4gnqKLKNU85YrIhwO9gBl1IP6UkudUlW50z9tb5OBLRRYqqCNpyadloeMmscCMBZ9y32ssqs5tCqnG+Esw==}
     engines: {node: '>=20.19.0'}
     hasBin: true
 
-  neonctl@7.0.5:
-    resolution: {integrity: sha512-8BplSzVJcmQcs1wWN3TbFN3ggYUGmEZk+47gm4GyN/KSLW8AGJ48XZQ6PaNfgpkFtLgxN4iwwtT3vPPi5qZalg==}
+  neonctl@8.0.11:
+    resolution: {integrity: sha512-W+Zdn2WpTuJtasNE8iWgADk856QqPGzi1oGMb7/bRu5MPeRJVu6AFZjxYYeIgZ0CBmIqrw/oMJ7bN1fl5f/ZXA==}
     engines: {node: '>=20.19.0'}
     hasBin: true
 
@@ -5358,6 +5358,7 @@ packages:
   vercel@62.1.0:
     resolution: {integrity: sha512-FuW5MhOfkOxPhyL+tQbAFmx+M4FpmTvqGSDsD2rP9FWYJt7GG2JKIsIbHOfYR5t/fqQqZrVQC3O2ODhwInEGVA==}
     engines: {node: '>= 20'}
+    deprecated: Known CLI self-upgrade bug. Reinstall vercel@latest using your package manager instead of running vc upgrade from this version.
     hasBin: true
 
   verkit@0.3.2:
@@ -6619,9 +6620,9 @@ snapshots:
       '@tybys/wasm-util': 0.10.4
     optional: true
 
-  '@neon/config-runtime@1.7.3':
+  '@neon/config-runtime@1.7.6':
     dependencies:
-      '@neon/config': 1.8.3
+      '@neon/config': 1.8.4
       '@vercel/nft': 1.11.0
       esbuild: 0.28.1
       fflate: 0.8.3
@@ -6630,13 +6631,13 @@ snapshots:
       - rollup
       - supports-color
 
-  '@neon/config@1.8.3':
+  '@neon/config@1.8.4':
     dependencies:
-      '@neon/sdk': 7.0.0
+      '@neon/sdk': 7.0.1
       jiti: 2.7.0
       zod: 4.6.5
 
-  '@neon/sdk@7.0.0': {}
+  '@neon/sdk@7.0.1': {}
 
   '@next/env@16.3.8': {}
 
@@ -9870,14 +9871,14 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  neon@7.0.5(hono@4.13.12):
+  neon@8.0.11(hono@4.13.12):
     dependencies:
       '@clack/core': 0.4.2
       '@clack/prompts': 0.10.1
       '@hono/node-server': 2.0.4(hono@4.13.12)
-      '@neon/config': 1.8.3
-      '@neon/config-runtime': 1.7.3
-      '@neon/sdk': 7.0.0
+      '@neon/config': 1.8.4
+      '@neon/config-runtime': 1.7.6
+      '@neon/sdk': 7.0.1
       '@segment/analytics-node': 1.3.0
       add-mcp: 2.0.0
       chalk: 5.3.0
@@ -9906,9 +9907,9 @@ snapshots:
       - rollup
       - supports-color
 
-  neonctl@7.0.5(hono@4.13.12):
+  neonctl@8.0.11(hono@4.13.12):
     dependencies:
-      neon: 7.0.5(hono@4.13.12)
+      neon: 8.0.11(hono@4.13.12)
     transitivePeerDependencies:
       - encoding
       - hono
