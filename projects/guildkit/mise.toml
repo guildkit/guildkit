@@ -30,6 +30,10 @@
   [tasks.sync]
   run = [{ tasks = [ "sync:*" ]}]
 
+  [tasks."sync:typegen"]
+  description = "Generate type definitions for the Next.js APIs and routes"
+  run = "vinext typegen"
+
   [tasks.setup]
   run = [{ tasks = [ "setup:*" ]}]
   depends_post = "sync"
