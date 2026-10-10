@@ -3,14 +3,16 @@
 [tasks]
   [tasks.dev]
   depends = [ "sync" ]
-  run = "next dev --inspect"
+  run = "vite dev --port 3000"
 
-  [tasks.start]
-  run = "next start"
+  [tasks.preview]
+  description = "Preview the production build on the local workerd runtime"
+  depends = [ "build" ]
+  run = "vite preview --port 3000"
 
   [tasks.build]
   depends = [ "sync" ]
-  run = "next build"
+  run = "vite build"
   env = { NODE_ENV = "production" }
 
   [tasks.lint]

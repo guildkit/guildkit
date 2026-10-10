@@ -13,6 +13,9 @@ node = { version = "24", corepack = true }
   [tasks.dev]
   run =[{ task = "//projects/...:dev" }]
 
+  [tasks.preview]
+  run =[{ task = "//projects/...:preview" }]
+
   [tasks.build]
   run =[{ task = "//projects/...:build" }]
 
