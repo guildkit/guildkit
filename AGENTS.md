@@ -123,3 +123,4 @@ There is no test suite yet. The root `mise test` task exists, but no project def
 - Use the `@/` path alias for `projects/guildkit/src`, and include the `.ts`/`.tsx` extension in import paths.
 - Do not edit gitignored files.
 - After you update the code, check AGENTS.md and find if there is anything outdated. If there is any outdated content, update or delete it.
+- Split Git commits by step. Keep each commit's diff readable: if stylistic changes (formatting, renames, reordering) would make the diff hard to read, put them in separate commits from the functional changes.
