@@ -5,17 +5,12 @@
   depends = [ "sync" ]
   run = "next dev --inspect"
 
-  [tasks.preview]
-  depends = [ "build" ]
-  run = "opennextjs-cloudflare preview"
+  [tasks.start]
+  run = "next start"
 
   [tasks.build]
   depends = [ "sync" ]
-  run = [
-    "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts",
-    "next build",
-    "opennextjs-cloudflare build --skipBuild",
-  ]
+  run = "next build"
   env = { NODE_ENV = "production" }
 
   [tasks.lint]
@@ -36,14 +31,6 @@
   [tasks.setup]
   run = [{ tasks = [ "setup:*" ]}]
   depends_post = "sync"
-
-  [tasks.deploy]
-  description = "Deploy to production"
-  run = "opennextjs-cloudflare deploy"
-
-  [tasks.upload]
-  description = "Deploy to preview"
-  run = "opennextjs-cloudflare upload"
 
 [env]
 _.path = "./node_modules/.bin"
