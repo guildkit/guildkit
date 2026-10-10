@@ -5,6 +5,7 @@
 /prisma/models/currencies.prisma
 /src/intermediate/
 /src/lib/prisma/
+/src/lib/prisma-node/
 /dist/
 .vinext/
 .cloudflare/

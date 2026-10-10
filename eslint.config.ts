@@ -8,6 +8,7 @@ const configs = defineConfig([
     "./**/.next/**",
     "./projects/guildkit/src/intermediate/**",
     "./projects/guildkit/src/lib/prisma/**",
+    "./projects/guildkit/src/lib/prisma-node/**",
   ]),
 
   ...core,

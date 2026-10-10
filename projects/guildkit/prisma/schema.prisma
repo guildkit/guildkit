@@ -1,6 +1,13 @@
 generator client {
   provider = "prisma-client"
   output   = "../src/lib/prisma"
+  runtime  = "cloudflare"
+}
+
+// Prisma Client for the scripts running on Node.js, e.g. seeding
+generator nodeClient {
+  provider = "prisma-client"
+  output   = "../src/lib/prisma-node"
 }
 
 datasource db {
