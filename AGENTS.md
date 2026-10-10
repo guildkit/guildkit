@@ -4,7 +4,7 @@ This file provides guidance to AI agents when working with code in this reposito
 
 ## Developer Documentation
 
-GuildKit is a Next.js application. It follows the directory structure of Next.js.
+GuildKit is a Next.js App Router application built and served by [vinext](https://vinext.dev), a reimplementation of the Next.js APIs on Vite. It follows the directory structure of Next.js, but the `next` package is not installed.
 
 ### Project Structure
 
@@ -27,7 +27,7 @@ guildkit/
 │       │       ├── octicons/
 │       │       └── tabler/
 │       ├── src/
-│       │   ├── app/          # Next.js app directory
+│       │   ├── app/          # Next.js App Router directory
 │       │   │   ├── (public)/ # Public routes (landing, job listing)
 │       │   │   ├── auth/     # Authentication pages
 │       │   │   ├── employer/ # Employer dashboard
@@ -45,13 +45,16 @@ guildkit/
 │       │   │   └── public-configs.json
 │       │   └── lib/          # Core business logic
 │       │       ├── auth/     # Authentication utilities
-│       │       ├── prisma/   # Generated Prisma client (gitignored)
+│       │       ├── prisma/   # Generated Prisma client for Cloudflare Workers (gitignored)
+│       │       ├── prisma-node/ # Generated Prisma client for Node.js scripts (gitignored)
 │       │       ├── actions/  # Server actions
 │       │       ├── validations/ # Zod schemas
 │       │       ├── utils/    # Helper utilities
 │       │       ├── styles/   # Global CSS
 │       │       └── types.ts  # TypeScript type definitions
-│       ├── next.config.ts
+│       ├── cloudflare.config.ts # Cloudflare Workers config (bindings, secrets)
+│       ├── next.config.ts    # Next.js config loaded by vinext
+│       ├── vite.config.ts
 │       ├── tsconfig.json
 │       ├── package.json
 │       └── prisma.config.ts
@@ -73,7 +76,9 @@ guildkit/
 
 ### Architecture
 
-- GuildKit is built as a Next.js-based web application.
+- GuildKit is built as a Next.js-based web application. It uses vinext instead of Next.js to build and serve the app. `next/*` imports are provided by vinext, and the types come from `vinext typegen` (`next-env.d.ts`).
+- **Runtime**: The app runs on Cloudflare Workers (workerd), including `mise dev` and `mise preview` on local machines through `@cloudflare/vite-plugin`. Server code reads environment variables via `process.env`, and each variable must be declared as a secret binding in `cloudflare.config.ts`. Workers do not allow reusing an I/O object (e.g. a DB connection) across requests, so `src/lib/prisma.ts` does not keep connections in the pool.
+- **Prisma clients**: `src/lib/prisma/` is generated for the Workers runtime and used by the app. `src/lib/prisma-node/` is generated for Node.js and used by the mise tasks such as seeding.
 - GuildKit uses [Prisma](https://www.prisma.io/docs/) as the ORM.
 - GuildKit uses an S3-compatible object storage. It uses [`@aws-sdk/client-s3` npm package](https://www.npmjs.com/package/@aws-sdk/client-s3).
 - GuildKit uses Podman Compose, which is compatible with Docker Compose, to run the database and object storage server on the local development machines.
@@ -101,13 +106,16 @@ Run tasks via mise, never npm scripts. Root tasks (`mise dev`, `mise build`, `mi
 
 - `mise install` - Install all dependencies, including npm dependencies.
 - `mise dev` - Start dev servers including application server, database server, and object storage server.
-- `mise build` - Build application.
+- `mise build` - Build application with `vite build`.
+- `mise preview` - Build application and serve the build output on the local workerd runtime.
+- `mise deploy` - Deploy the build output to Cloudflare Workers (production). Run `mise build` first.
+- `mise upload` - Upload the build output to Cloudflare Workers as a preview version without promoting it to production. Run `mise build` first.
 - `mise lint` - Run `tsc --noEmit` and ESLint.
 - `mise fix` - Fix linting issues.
 - `mise clean` - Delete the Docker containers and gitignore'd files except for .env and mise.local.toml.
 - `mise refresh` - Recreate the Docker containers and pnpm-lock.yaml, and update pnpm.
 - `mise ai-postedit` - Syncs generated files, then runs `tsc --noEmit`, the project lint tasks, and `eslint --fix`. Use it to check your edits.
-- `mise sync` (in `projects/guildkit`) - Regenerates the Prisma client and better-auth schema, applies migrations, and seeds dev data. `dev`, `build`, `lint`, and `fix` all depend on it.
+- `mise sync` (in `projects/guildkit`) - Regenerates the Prisma clients, better-auth schema, and vinext type definitions, applies migrations, and seeds dev data. `dev`, `build`, `lint`, and `fix` all depend on it.
 - `mise seed` (in `projects/guildkit`) - Seeds the DB. It only runs when `SERVER_ENV` is `development`, `demo-production`, or `demo-preview`, and only when the DB is empty.
 
 There is no test suite yet. The root `mise test` task exists, but no project defines a `test` task.
@@ -115,6 +123,7 @@ There is no test suite yet. The root `mise test` task exists, but no project def
 ### Environment variables
 
 - `SERVER_ENV` is required by the setup and sync tasks. Copy `.env.example` to `.env` for local development (`SERVER_ENV=development`). mise loads `.env` automatically.
+- On Cloudflare Workers, set the variables declared in `cloudflare.config.ts` as the Worker's secrets. `mise deploy` and `mise upload` require `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
 - In `development`, `mise setup` starts Postgres and RustFS (an S3-compatible store) with `compose.yaml` and creates the bucket. The RustFS console is at http://localhost:9001.
 
 ## Rules
