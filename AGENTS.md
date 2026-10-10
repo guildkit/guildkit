@@ -106,12 +106,13 @@ guildkit/
 
 ### Commands
 
-Run tasks with `pnpm run <script>` in a shell where mise is activated, or with `mise exec -- pnpm run <script>`, so that the tools and `.env` from `.mise/config.toml` are loaded. Root scripts (`dev`, `build`, `preview`, `deploy-preview`, `test`, `lint`, `fix`, `sync`) run the same-name script in each project with `pnpm run -r --if-present`. pnpm does not install the dependencies before running scripts (`verifyDepsBeforeRun: warn` in `pnpm-workspace.yaml`), so run `pnpm install` when it warns that `node_modules` is out of sync.
+Run tasks with `pnpm run <script>` in a shell where mise is activated, or with `mise exec -- pnpm run <script>`, so that the tools and `.env` from `.mise/config.toml` are loaded. Root scripts (`dev`, `build`, `preview`, `deploy`, `deploy-preview`, `test`, `lint`, `fix`, `sync`) run the same-name script in each project with `pnpm run -r --if-present`. pnpm does not install the dependencies before running scripts (`verifyDepsBeforeRun: warn` in `pnpm-workspace.yaml`), so run `pnpm install` when it warns that `node_modules` is out of sync.
 
 - `mise install` - Install all dependencies, including npm dependencies. `pnpm install` runs the root `prepare` script, which starts the containers and then runs `sync` to create the generated files. pnpm skips `prepare` when `node_modules` is already up to date, so do not rely on it to create the generated files.
 - `pnpm run dev` - Start dev servers including application server, database server, and object storage server.
 - `pnpm run build` - Build application with `vite build`.
 - `pnpm run preview` - Build application in the `development` mode and serve the build output on the local workerd runtime.
+- `pnpm run deploy` - Deploy the build output to Cloudflare Workers (production). Run `pnpm run build` first.
 - `pnpm run deploy-preview` - Run `scripts/deploy-preview.nu` for the preview workflow. It deploys the build output as a Cloudflare Worker Preview named after the PR author's GitHub username in `PR_AUTHOR` (without a trailing `[bot]`), so each user has a fixed Preview URL (`cf previews deploy --prebuilt`). Then it sets the Preview's `DATABASE_URL` and `BETTER_AUTH_URL` secrets (`wrangler preview secret bulk`) and comments the Preview URLs on the PR `PR_NUMBER` (`gh pr comment`). Run `pnpm run build` with `CLOUDFLARE_PREVIEW_BUILD=true` first, so that the build output is a Preview build. It also requires `DATABASE_URL` and `GH_TOKEN`.
 - `pnpm run lint` - Run `tsc --noEmit` and ESLint.
 - `pnpm run fix` - Fix linting issues.
