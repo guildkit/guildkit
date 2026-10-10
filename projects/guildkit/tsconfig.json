@@ -11,9 +11,6 @@
       "dom",
       "dom.iterable"
     ],
-    "plugins": [{
-      "name": "next"
-    }],
     "paths": {
       "@/*": [ "./src/*" ]
     }
@@ -25,6 +22,7 @@
     "**/*.js",
     "**/*.jsx",
     ".next/types/**/*.ts",
+    ".cloudflare/types/**/*.ts",
     "next-env.d.ts",
   ],
   "exclude": [

@@ -6,8 +6,12 @@ const configs = defineConfig([
   globalIgnores([
     "./**/node_modules/**",
     "./**/.next/**",
+    "./**/dist/**",
+    "./**/.vinext/**",
+    "./**/.cloudflare/**",
     "./projects/guildkit/src/intermediate/**",
     "./projects/guildkit/src/lib/prisma/**",
+    "./projects/guildkit/src/lib/prisma-node/**",
   ]),
 
   ...core,

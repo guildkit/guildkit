@@ -3,15 +3,25 @@
 [tasks]
   [tasks.dev]
   depends = [ "sync" ]
-  run = "next dev --inspect"
+  run = "vite dev --port 3000"
 
-  [tasks.start]
-  run = "next start"
+  [tasks.preview]
+  description = "Preview the production build on the local workerd runtime"
+  depends = [ "build" ]
+  run = "vite preview --port 3000"
 
   [tasks.build]
   depends = [ "sync" ]
-  run = "next build"
+  run = "vite build"
   env = { NODE_ENV = "production" }
+
+  [tasks.deploy]
+  description = "Deploy the build output to Cloudflare Workers (production)"
+  run = "vinext-cloudflare deploy --skip-build"
+
+  [tasks.upload]
+  description = "Upload the build output to Cloudflare Workers as a preview version without deploying it to production"
+  run = "vinext-cloudflare deploy --skip-build --no-promote"
 
   [tasks.lint]
   depends = [ "sync" ]
@@ -27,6 +37,10 @@
 
   [tasks.sync]
   run = [{ tasks = [ "sync:*" ]}]
+
+  [tasks."sync:typegen"]
+  description = "Generate type definitions for the Next.js APIs and routes"
+  run = "vinext typegen"
 
   [tasks.setup]
   run = [{ tasks = [ "setup:*" ]}]
