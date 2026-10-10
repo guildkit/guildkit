@@ -15,6 +15,7 @@
   "scripts": {
     "dev": "pnpm run -r --if-present --stream --parallel dev",
     "build": "pnpm run -r --if-present --stream build",
+    "preview": "pnpm run -r --if-present --stream preview",
     "test": "pnpm run -r --if-present --stream test",
     "lint": "pnpm run -r --if-present --stream lint && tsc --noEmit && eslint",
     "fix": "pnpm run -r --if-present --stream fix && eslint --fix",
