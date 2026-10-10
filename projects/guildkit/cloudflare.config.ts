@@ -28,7 +28,7 @@ export default defineConfig(async ({ isPreview, mode }) => ({
     previewUrls: true,
 
     env: {
-      // `preview` on Worker Previews (`cf previews deploy`), and `production` on the other builds.
+      // `demo-preview` on Worker Previews (`cf previews deploy`), and `demo-production` on the other builds.
       // In the `development` mode (`vite dev` and `pnpm run preview`), the value is loaded from .env like the secrets below.
       SERVER_ENV: mode === "development"
         ? bindings.secret()

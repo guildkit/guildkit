@@ -36,8 +36,8 @@ jobs:
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      # The Neon branch has to be ready before `mise install` and `mise run build`
-      # since they run `prisma migrate deploy` and seeding.
+      # The Neon branch has to be ready before `pnpm run deploy-preview`
+      # since it runs `prisma migrate deploy` and seeding.
       - name: "Create Neon Branch"
         uses: neondatabase/create-branch-action@72ed4f69a12b6be9c16aebfad893f6a21e9aba8b # v6
         with:
