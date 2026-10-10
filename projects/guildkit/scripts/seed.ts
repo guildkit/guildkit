@@ -1,7 +1,7 @@
 import { PrismaPg } from "@prisma/adapter-pg";
 import dayjs from "dayjs";
-import { PrismaClient } from "../src/lib/prisma/client.ts";
-import { Currency, SalaryPer } from "../src/lib/prisma/enums.ts";
+import { PrismaClient } from "../src/lib/prisma-node/client.ts";
+import { Currency, SalaryPer } from "../src/lib/prisma-node/enums.ts";
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg({
