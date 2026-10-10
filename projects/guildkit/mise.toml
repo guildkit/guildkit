@@ -15,6 +15,14 @@
   run = "vite build"
   env = { NODE_ENV = "production" }
 
+  [tasks.deploy]
+  description = "Deploy the build output to Cloudflare Workers (production)"
+  run = "vinext-cloudflare deploy --skip-build"
+
+  [tasks.upload]
+  description = "Upload the build output to Cloudflare Workers as a preview version without deploying it to production"
+  run = "vinext-cloudflare deploy --skip-build --no-promote"
+
   [tasks.lint]
   depends = [ "sync" ]
   run = "tsc --noEmit"

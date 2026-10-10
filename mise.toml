@@ -53,6 +53,12 @@ node = { version = "24", corepack = true }
     { task = "//projects/...:fix" },
   ]
 
+  [tasks.deploy]
+  run =[{ task = "//projects/...:deploy" }]
+
+  [tasks.upload]
+  run =[{ task = "//projects/...:upload" }]
+
 [hooks]
 postinstall = [
   "corepack enable",
