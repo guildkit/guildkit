@@ -71,6 +71,7 @@ npm-shrinkwrap.json
 # Frameworks
 .next/
 next-env.d.ts
+.vinext/
 .nuxt/
 out/
 .svelte-kit/

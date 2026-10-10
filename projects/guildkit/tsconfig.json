@@ -11,9 +11,6 @@
       "dom",
       "dom.iterable"
     ],
-    "plugins": [{
-      "name": "next"
-    }],
     "paths": {
       "@/*": [ "./src/*" ]
     }
