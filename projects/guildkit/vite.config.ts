@@ -8,7 +8,7 @@ export default defineConfig({
     cloudflare({
       viteEnvironment: {
         name: "rsc",
-        childEnvironments: ["ssr"],
+        childEnvironments: [ "ssr" ],
       },
     }),
   ],
