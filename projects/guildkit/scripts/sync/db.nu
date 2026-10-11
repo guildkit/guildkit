@@ -1,7 +1,4 @@
-#!/usr/bin/env nu
-
-#MISE description="Initialize DB-related files before build."
-#MISE raw=true # Required for interactive shell by Prisma
+# Initialize DB-related files before build.
 
 if not ("SERVER_ENV" in $env) {
   print "[ERROR] The environment variable SERVER_ENV is missing. If you are on your local machine, copy .env.example to .env, or set `SERVER_ENV=development` manually."

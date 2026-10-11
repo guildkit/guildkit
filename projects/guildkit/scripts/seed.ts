@@ -1,9 +1,7 @@
-#!/usr/bin/env -S pnpm exec jiti
-
 import { PrismaPg } from "@prisma/adapter-pg";
 import dayjs from "dayjs";
-import { PrismaClient } from "../../src/lib/prisma/client.ts";
-import { Currency, SalaryPer } from "../../src/lib/prisma/enums.ts";
+import { PrismaClient } from "../src/lib/prisma/client.ts";
+import { Currency, SalaryPer } from "../src/lib/prisma/enums.ts";
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg({
