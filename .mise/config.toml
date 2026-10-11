@@ -8,10 +8,6 @@ config_roots = [ "projects/*" ]
 [tools]
 node = { version = "24", corepack = true }
 
-[tasks]
-  [tasks.clean]
-  depends = [ "clean:*" ]
-
 [hooks]
 postinstall = [
   "corepack enable",
