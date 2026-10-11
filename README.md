@@ -24,7 +24,7 @@ Then run the following commands:
 cd /path/to/guildkit
 cp ./.env.example ./.env
 mise install
-mise dev
+pnpm run dev
 ```
 
 Now GuildKit will be served via http://localhost:3000.

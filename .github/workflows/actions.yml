@@ -32,7 +32,7 @@ jobs:
           - 24
     env:
       SERVER_ENV: development
-      MISE_NODE_VERSION: ${{ matrix.node-version }} # Override Node.js version over mise.toml
+      MISE_NODE_VERSION: ${{ matrix.node-version }} # Override Node.js version over .mise/config.toml
       DATABASE_URL: "postgresql://guildkit:guildkit@localhost:5432/guildkit?sslmode=disable"
       BETTER_AUTH_URL: "http://localhost:3000"
       # On the build process, the credentials can be dummy
