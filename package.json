@@ -20,7 +20,7 @@
     "fix": "pnpm run -r --if-present --stream fix && eslint --fix",
     "db": "psql --username=guildkit --dbname=guildkit --host=localhost --port=5432",
     "ai-postedit": "pnpm run -r --if-present --stream lint && tsc --noEmit && eslint --fix && pnpm run -r --if-present --stream fix",
-    "setup": "mise run setup",
+    "prepare": "mise run setup",
     "refresh": "mise run refresh",
     "clean": "mise run 'clean:*'"
   },

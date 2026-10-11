@@ -21,7 +21,7 @@
     "lint": "pnpm run sync && tsc --noEmit",
     "fix": "pnpm run sync && prisma format",
     "sync": "mise run 'sync:*'",
-    "setup": "mise run 'setup:*' && pnpm run sync",
+    "prepare": "mise run 'setup:*' && pnpm run sync",
     "seed": "mise run seed"
   },
   "dependencies": {
