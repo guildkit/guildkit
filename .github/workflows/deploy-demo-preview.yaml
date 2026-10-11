@@ -19,7 +19,6 @@ jobs:
       BETTER_AUTH_URL: "https://demo.guildkit.net"
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
 
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
@@ -32,6 +31,33 @@ jobs:
         run: sudo apt-get remove -y podman
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # The Neon branch has to be ready before `mise install` and `mise run build`
+      # since they run `prisma migrate deploy` and seeding.
+      - name: "Create Neon Branch"
+        uses: neondatabase/create-branch-action@34f619c41c6e67b4f2f13f1c6eae90827a5f2cf4 # v5
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          branch_name: preview/pr-${{ github.event.number }}
+          username: neondb_owner
+          api_key: ${{ secrets.NEON_API_KEY }}
+
+      - name: "Reset Neon Branch"
+        id: reset_neon_branch
+        uses: neondatabase/reset-branch-action@470ab8101095ea33737c294d17364a72fd80761b # v1.3.2
+        with:
+          parent: true
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          branch: preview/pr-${{ github.event.number }}
+          cs_role_name: neondb_owner
+          cs_database: neondb
+          api_key: ${{ secrets.NEON_API_KEY }}
+
+      - name: "Set DATABASE_URL"
+        env:
+          DATABASE_URL: ${{ steps.reset_neon_branch.outputs.db_url }}
+        run: echo "DATABASE_URL=${DATABASE_URL}" >> "$GITHUB_ENV"
+
       - uses: jdx/mise-action@2d8d4cafcbd33be2ea37d2b6f5ad595363d1f1ca # v5.1.1
         with:
           install: true
@@ -42,6 +68,11 @@ jobs:
       - name: "Deploy Cloudflare Worker preview"
         id: deployment
         run: pnpm run deploy-preview pr-${{ github.event.number }}
+
+      # `cf` cannot set the secrets of a Worker Preview yet, so use wrangler here,
+      - name: "Set the Neon branch as DATABASE_URL of the Worker Preview"
+        working-directory: projects/guildkit
+        run: printf '%s' "$DATABASE_URL" | pnpm exec wrangler preview secret put DATABASE_URL --name "$PREVIEW_NAME" --worker-name guildkit-demo
 
       - name: "Add comment for preview URLs"
         run: |
