@@ -16,6 +16,10 @@ jobs:
     env:
       SERVER_ENV: preview
 
+      # Build the app as a Cloudflare Worker Preview. `cf previews deploy --prebuilt` requires it,
+      # and cloudflare.config.ts reads it (`isPreview`) to embed SERVER_ENV=preview.
+      CLOUDFLARE_PREVIEW_BUILD: "true"
+
       BETTER_AUTH_URL: "https://demo.guildkit.net"
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
 
@@ -65,14 +69,22 @@ jobs:
 
       - run: pnpm run build
 
+      # Preview URL would be https://<username>-guildkit-demo.<subdomain>.workers.dev
+      - name: "Set Preview name to the PR author's GitHub username"
+        env:
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: echo "PREVIEW_NAME=${PR_AUTHOR%\[bot\]}" >> "$GITHUB_ENV"
+
       - name: "Deploy Cloudflare Worker preview"
         id: deployment
-        run: pnpm run deploy-preview pr-${{ github.event.number }}
+        run: pnpm run deploy-preview "$PREVIEW_NAME"
 
       # `cf` cannot set the secrets of a Worker Preview yet, so use wrangler here,
-      - name: "Set the Neon branch as DATABASE_URL of the Worker Preview"
+      - name: "Set DATABASE_URL and BETTER_AUTH_URL of the Worker Preview"
         working-directory: projects/guildkit
-        run: printf '%s' "$DATABASE_URL" | pnpm exec wrangler preview secret put DATABASE_URL --name "$PREVIEW_NAME" --worker-name guildkit-demo
+        run: |
+          jq -n '{ DATABASE_URL: env.DATABASE_URL, BETTER_AUTH_URL: "https://\(env.PREVIEW_NAME)-guildkit-demo.tenkumo.workers.dev" }' \
+            | pnpm exec wrangler preview secret bulk --name "$PREVIEW_NAME" --worker-name guildkit-demo
 
       - name: "Add comment for preview URLs"
         run: |
