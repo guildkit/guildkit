@@ -22,7 +22,7 @@
     "ai-postedit": "pnpm run -r --if-present --stream lint && tsc --noEmit && eslint --fix && pnpm run -r --if-present --stream fix",
     "prepare": "nu scripts/prepare.nu",
     "refresh": "nu scripts/refresh.nu",
-    "clean": "nu scripts/clean-containers.nu && git clean -dX --exclude=\"!.env\" --exclude=\"!mise.local.toml\" --force"
+    "clean": "podman compose down --rmi local --volumes --remove-orphans; git clean -dX --exclude=\"!.env\" --exclude=\"!mise.local.toml\" --force"
   },
   "devDependencies": {
     "@phanect/configs": "2026.8.29",
