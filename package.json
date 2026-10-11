@@ -22,9 +22,7 @@
     "ai-postedit": "pnpm run -r --if-present --stream lint && tsc --noEmit && eslint --fix && pnpm run -r --if-present --stream fix",
     "setup": "mise run setup",
     "refresh": "mise run refresh",
-    "clean": "mise run clean",
-    "clean:git": "mise run clean:git",
-    "clean:containers": "mise run clean:containers"
+    "clean": "mise run 'clean:*'"
   },
   "devDependencies": {
     "@phanect/configs": "2026.8.29",
