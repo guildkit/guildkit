@@ -14,6 +14,20 @@
   ],
   "license": "Apache-2.0",
   "type": "module",
+  "scripts": {
+    "dev": "pnpm run sync && next dev --inspect",
+    "start": "next start",
+    "build": "pnpm run sync && NODE_ENV=production next build",
+    "lint": "pnpm run sync && tsc --noEmit",
+    "fix": "pnpm run sync && prisma format",
+    "sync": "mise run sync",
+    "sync:config-publicize": "mise run sync:config-publicize",
+    "sync:db": "mise run sync:db",
+    "setup": "mise run setup",
+    "setup:currencies": "mise run setup:currencies",
+    "setup:storage": "mise run setup:storage",
+    "seed": "mise run seed"
+  },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1021.0",
     "@prisma/adapter-pg": "^7.6.0",
