@@ -125,3 +125,8 @@ There is no test suite yet. The root `mise test` task exists, but no project def
 - After you update the code, check AGENTS.md and find if there is anything outdated. If there is any outdated content, update or delete it.
 - Split Git commits by step. Keep each commit's diff readable: if stylistic changes (formatting, renames, reordering) would make the diff hard to read, put them in separate commits from the functional changes.
 - When you rebase onto the `main` branch, do not fold the changes needed to adapt to `main` into the existing commits. Put them in separate new commits so that the user can fixup them into the original commits later.
+- Commit changes to the following files in separate commits from other changes:
+  1. Lock files of the package managers (e.g. `pnpm-lock.yaml`, `skills-lock.json`)
+  2. The `allowBuilds` section of `pnpm-workspace.yaml`
+  3. Database migration files
+  4. Other machine-generated files
