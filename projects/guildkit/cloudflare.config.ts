@@ -1,8 +1,10 @@
 import { bindings, defineConfig, defineWorker } from "cf/config";
 
-export default defineConfig(({ isPreview, mode }) => ({
+const workerName = "guildkit-demo";
+
+export default defineConfig(async ({ isPreview, mode }) => ({
   worker: defineWorker({
-    name: "guildkit-demo",
+    name: workerName,
     entrypoint: "vinext/server/fetch-handler",
     compatibilityDate: "2026-10-11",
     compatibilityFlags: [ "nodejs_compat" ],
@@ -37,7 +39,11 @@ export default defineConfig(({ isPreview, mode }) => ({
       // On local machines, the values are loaded from .env (or the process environment).
       // On Cloudflare, set them as the Worker's secrets.
       DATABASE_URL: bindings.secret(),
-      BETTER_AUTH_URL: bindings.secret(),
+      // On Worker Previews, the preview workflow sets the Preview URL as a secret (`wrangler preview secret put`).
+      // In the `development` mode, the value is loaded from .env.
+      BETTER_AUTH_URL: mode === "production"
+        ? bindings.text("https://demo.guildkit.net")
+        : bindings.secret(),
       BETTER_AUTH_SECRET: bindings.secret(),
       GOOGLE_CLIENT_ID: bindings.secret(),
       GOOGLE_CLIENT_SECRET: bindings.secret(),
