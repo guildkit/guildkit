@@ -16,6 +16,7 @@
     "dev": "pnpm run -r --if-present --stream --parallel dev",
     "build": "pnpm run -r --if-present --stream build",
     "preview": "pnpm run -r --if-present --stream preview",
+    "deploy-preview": "pnpm run -r --if-present --stream deploy-preview",
     "test": "pnpm run -r --if-present --stream test",
     "lint": "pnpm run -r --if-present --stream lint && tsc --noEmit && eslint",
     "fix": "pnpm run -r --if-present --stream fix && eslint --fix",
@@ -36,8 +37,7 @@
     "neonctl": "^8.0.0",
     "nushell": "^0.116.0",
     "skills": "^1.7.0",
-    "typescript": "^6.0.0",
-    "vercel": "^62.0.0"
+    "typescript": "^6.0.0"
   },
   "engines": {
     "node": "24.x"
