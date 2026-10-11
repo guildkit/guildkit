@@ -20,7 +20,8 @@
     "fix": "pnpm run -r --if-present --stream fix && eslint --fix",
     "db": "psql --username=guildkit --dbname=guildkit --host=localhost --port=5432",
     "ai-postedit": "pnpm run -r --if-present --stream lint && tsc --noEmit && eslint --fix && pnpm run -r --if-present --stream fix",
-    "prepare": "nu scripts/prepare.nu",
+    "sync": "pnpm run -r --if-present sync",
+    "prepare": "nu scripts/prepare.nu && pnpm run sync",
     "refresh": "nu scripts/refresh.nu",
     "clean": "podman compose down --rmi local --volumes --remove-orphans; git clean -dX --exclude=\"!.env\" --exclude=\"!mise.local.toml\" --force"
   },
