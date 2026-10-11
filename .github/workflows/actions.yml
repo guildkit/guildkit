@@ -47,8 +47,8 @@ jobs:
           install: true
           cache: true
 
-      - run: mise build
-      # TODO - run: mise test
+      - run: pnpm run build
+      # TODO - run: pnpm run test
 
   lint:
     runs-on: ubuntu-latest
@@ -69,7 +69,7 @@ jobs:
           install: true
           cache: true
 
-      - run: mise lint
+      - run: pnpm run lint
 
   publish:
     needs:
@@ -91,7 +91,7 @@ jobs:
           install: true
           cache: true
 
-      - run: mise build
+      - run: pnpm run build
 
       - name: Set npm auth token
         run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_AUTH_TOKEN}}" > ~/.npmrc
