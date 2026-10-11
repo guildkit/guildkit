@@ -14,3 +14,4 @@ allowBuilds:
   workerd: true
 minimumReleaseAge: 4320 # 72 hours
 minimumReleaseAgeExcludePrune: true
+verifyDepsBeforeRun: warn # for `clean` & `refresh`
