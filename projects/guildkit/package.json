@@ -21,7 +21,6 @@
     "lint": "pnpm run sync && tsc --noEmit",
     "fix": "pnpm run sync && prisma format",
     "sync": "jiti scripts/sync/currencies.ts && jiti scripts/sync/config-publicize.ts && nu scripts/sync/db.nu",
-    "prepare": "pnpm run sync",
     "seed": "jiti scripts/seed.ts"
   },
   "dependencies": {
