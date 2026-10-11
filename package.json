@@ -12,6 +12,20 @@
   ],
   "license": "Apache-2.0",
   "type": "module",
+  "scripts": {
+    "dev": "pnpm run -r --if-present --stream --parallel dev",
+    "build": "pnpm run -r --if-present --stream build",
+    "test": "pnpm run -r --if-present --stream test",
+    "lint": "pnpm run -r --if-present --stream lint && tsc --noEmit && eslint",
+    "fix": "pnpm run -r --if-present --stream fix && eslint --fix",
+    "db": "psql --username=guildkit --dbname=guildkit --host=localhost --port=5432",
+    "ai-postedit": "pnpm run -r --if-present --stream lint && tsc --noEmit && eslint --fix && pnpm run -r --if-present --stream fix",
+    "setup": "mise run setup",
+    "refresh": "mise run refresh",
+    "clean": "mise run clean",
+    "clean:git": "mise run clean:git",
+    "clean:containers": "mise run clean:containers"
+  },
   "devDependencies": {
     "@phanect/configs": "2026.8.29",
     "@phanect/lint": "latest",
