@@ -16,17 +16,19 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm run sync && vite dev --port 3000",
-    "preview": "pnpm run build && vite preview --port 3000",
-    "build": "pnpm run sync && NODE_ENV=production vite build",
+    "preview": "SERVER_ENV=development pnpm run build && vite preview --port 3000",
+    "build": "pnpm run sync && vite build --mode=$SERVER_ENV",
     "lint": "pnpm run sync && tsc --noEmit",
     "fix": "pnpm run sync && prisma format",
     "sync": "vinext typegen && jiti scripts/sync/currencies.ts && jiti scripts/sync/config-publicize.ts && nu scripts/sync/db.nu",
-    "seed": "jiti scripts/seed.ts"
+    "seed": "jiti scripts/seed.ts",
+    "deploy-preview": "cf previews deploy --prebuilt"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1021.0",
     "@prisma/adapter-pg": "^7.6.0",
     "@prisma/client": "^7.6.0",
+    "@vinext/cloudflare": "^1.0.1",
     "better-auth": "1.7.7",
     "pg": "^8.14.1",
     "react": "^19.1.1",
@@ -39,6 +41,7 @@
     "vinext": "^1.0.1"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "2.0.0-beta.sha-805ec1ff3",
     "@phanect/configs": "2026.8.29",
     "@phanect/utils": "^4.0.0",
     "@tailwindcss/postcss": "^4.1.17",
@@ -49,6 +52,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "@vitejs/plugin-rsc": "^0.5.35",
     "auth": "1.7.7",
+    "cf": "1.0.0-beta.12",
     "dayjs": "^1.11.19",
     "dotenv": "^18.0.0",
     "fast-xml-parser": "^5.3.1",

@@ -78,6 +78,7 @@ out/
 .astro/
 
 # Platforms
+.cloudflare/
 .wrangler/
 worker-configuration.d.ts
 
