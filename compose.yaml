@@ -21,7 +21,7 @@ services:
       timeout: 1m
 
   storage:
-    image: rustfs/rustfs:latest
+    build: ./containers/storage
     restart: always
     environment:
       RUSTFS_ACCESS_KEY: guildkit
@@ -31,7 +31,7 @@ services:
       - "9000:9000" # API
       - "9001:9001" # Admin console
     volumes:
-      - guildkit-storage:/data
+      - guildkit-storage:/guildkit-data # Should be the same path as RUSTFS_VOLUMES configured in the Dockerfile
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:9000/health" ]
       interval: 2s
