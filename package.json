@@ -16,6 +16,7 @@
     "dev": "pnpm run -r --if-present --stream --parallel dev",
     "build": "pnpm run -r --if-present --stream build",
     "preview": "pnpm run -r --if-present --stream preview",
+    "deploy": "pnpm run -r --if-present --stream deploy",
     "deploy-preview": "pnpm run -r --if-present --stream deploy-preview",
     "test": "pnpm run -r --if-present --stream test",
     "lint": "pnpm run -r --if-present --stream lint && tsc --noEmit && eslint",
