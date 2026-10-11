@@ -1,10 +1,8 @@
-#!/usr/bin/env -S pnpm exec jiti
-
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { config } from "../../../src/lib/configs.ts";
+import { config } from "../../src/lib/configs.ts";
 
-const intermediateDirPath = join(import.meta.dirname, "../../../src/intermediate");
+const intermediateDirPath = join(import.meta.dirname, "../../src/intermediate");
 
 const publicConfigStr = JSON.stringify({
   maxLogoSizeMiB: config.maxLogoSizeMiB,

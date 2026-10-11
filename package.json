@@ -20,9 +20,9 @@
     "fix": "pnpm run -r --if-present --stream fix && eslint --fix",
     "db": "psql --username=guildkit --dbname=guildkit --host=localhost --port=5432",
     "ai-postedit": "pnpm run -r --if-present --stream lint && tsc --noEmit && eslint --fix && pnpm run -r --if-present --stream fix",
-    "prepare": "mise run setup",
-    "refresh": "mise run refresh",
-    "clean": "mise run 'clean:*'"
+    "prepare": "nu scripts/prepare.nu",
+    "refresh": "nu scripts/refresh.nu",
+    "clean": "nu scripts/clean-containers.nu && git clean -dX --exclude=\"!.env\" --exclude=\"!mise.local.toml\" --force"
   },
   "devDependencies": {
     "@phanect/configs": "2026.8.29",

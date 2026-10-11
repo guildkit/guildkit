@@ -1,5 +1,3 @@
-#!/usr/bin/env -S pnpm exec jiti
-
 import {
   BucketAlreadyExists,
   BucketAlreadyOwnedByYou,
@@ -8,7 +6,7 @@ import {
   waitUntilBucketExists,
   type S3Client,
 } from "@aws-sdk/client-s3";
-import { bucketName, storage } from "../../../src/lib/storage.ts";
+import { bucketName, storage } from "../../src/lib/storage.ts";
 
 const createBucketIfNotExists = async (client: S3Client, bucketName: string) => {
   try {
