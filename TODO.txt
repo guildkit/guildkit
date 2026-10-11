@@ -1,0 +1,4 @@
+Set up `demo-deploy-production` workflow
+Run production `prisma migrate deploy` on `pnpm run deploy`, not on `pnpm sync:db`
+scripts/sync/db.nu から prisma migrate と prisma db seed を外し、プレビューとプロダクションでビルド時にデータベースアクセスをしなくても済むようにする。
+HyperDrive を neon につなぐ設定
