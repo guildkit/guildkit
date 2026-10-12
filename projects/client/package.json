@@ -13,11 +13,15 @@
     "*",
     "!*.log",
     "!*.tgz",
-    "!.mise/",
     "!.gitignore",
-    "!mise.toml",
     "!tsdown.config.ts"
   ],
+  "scripts": {
+    "dev": "tsdown --watch --no-clean",
+    "build": "pnpm run sync && NODE_ENV=production tsdown",
+    "lint": "pnpm run sync && tsc --noEmit",
+    "sync": "openapi-typescript ../backend/openapi/openapi.json --output ./src/generated/openapi.ts && tsdown"
+  },
   "exports": {
     ".": "./dist/index.js"
   },
@@ -25,6 +29,7 @@
     "openapi-fetch": "^0.17.0"
   },
   "devDependencies": {
+    "@guildkit/backend": "workspace:*",
     "@phanect/configs": "2026.5.19",
     "@types/node": "^24.12.4",
     "openapi-typescript": "^7.13.0",
