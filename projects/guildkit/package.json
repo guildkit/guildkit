@@ -19,9 +19,7 @@
     "preview": "SERVER_ENV=development pnpm run build && vite preview --port 3000",
     "build": "pnpm run sync && vite build --mode=$SERVER_ENV",
     "lint": "pnpm run sync && tsc --noEmit",
-    "fix": "pnpm run sync && prisma format",
-    "sync": "vinext typegen && jiti scripts/sync/currencies.ts && jiti scripts/sync/config-publicize.ts && nu scripts/sync/db.nu",
-    "seed": "jiti scripts/seed.ts",
+    "sync": "vinext typegen",
     "deploy-preview": "nu scripts/deploy-preview.nu"
   },
   "dependencies": {
