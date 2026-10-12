@@ -5,6 +5,12 @@ on:
     branches:
       - main
 
+  # ↓↓↓↓↓ DEBUG ONLY:REMOVE BEFORE MERGE TO MAIN ↓↓↓↓↓
+  pull_request:
+    branches:
+      - main
+  # ^^^^^ DEBUG ONLY ^^^^^
+
 permissions:
   contents: read
 
