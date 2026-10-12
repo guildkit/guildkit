@@ -19,11 +19,16 @@
     "*",
     "!*.log",
     "!*.tgz",
-    "!.mise/",
     "!.gitignore",
-    "!mise.toml",
+    "!scripts/",
     "!tsdown.config.ts"
   ],
+  "scripts": {
+    "dev": "pnpm run sync && tsdown --watch --no-clean",
+    "build": "jiti scripts/sync/currencies.ts && NODE_ENV=production tsdown",
+    "lint": "pnpm run sync && tsc --noEmit",
+    "sync": "jiti scripts/sync/currencies.ts && tsdown"
+  },
   "exports": {
     ".": "./dist/index.mjs",
     "./zod": "./dist/zod.mjs"
@@ -40,6 +45,7 @@
     "@phanect/utils": "^4.0.0",
     "@types/node": "^24.12.4",
     "fast-xml-parser": "^5.3.1",
+    "jiti": "^2.4.2",
     "publint": "^0.3.21",
     "tsdown": "0.22.3",
     "typescript": "^6.0.0"
