@@ -69,26 +69,10 @@ jobs:
 
       - run: pnpm run build
 
-      # Preview URL would be https://<username>-guildkit-demo.<subdomain>.workers.dev
-      - name: "Set Preview name to the PR author's GitHub username"
+      # See scripts/deploy-preview.nu in projects/guildkit
+      - name: "Deploy Cloudflare Worker Preview"
+        run: pnpm run deploy-preview
         env:
           PR_AUTHOR: ${{ github.event.pull_request.user.login }}
-        run: echo "PREVIEW_NAME=${PR_AUTHOR%\[bot\]}" >> "$GITHUB_ENV"
-
-      - name: "Deploy Cloudflare Worker preview"
-        id: deployment
-        run: pnpm run deploy-preview "$PREVIEW_NAME"
-
-      # `cf` cannot set the secrets of a Worker Preview yet, so use wrangler here,
-      - name: "Set DATABASE_URL and BETTER_AUTH_URL of the Worker Preview"
-        working-directory: projects/guildkit
-        run: |
-          jq -n '{ DATABASE_URL: env.DATABASE_URL, BETTER_AUTH_URL: "https://\(env.PREVIEW_NAME)-guildkit-demo.tenkumo.workers.dev" }' \
-            | pnpm exec wrangler preview secret bulk --name "$PREVIEW_NAME" --worker-name guildkit-demo
-
-      - name: "Add comment for preview URLs"
-        run: |
-          gh pr comment "${{ github.event.number }}" --edit-last --create-if-none --body "Deployed to preview:
-          ${{ steps.deployment.outputs.url }}"
-        env:
+          PR_NUMBER: ${{ github.event.number }}
           GH_TOKEN: ${{ github.token }}

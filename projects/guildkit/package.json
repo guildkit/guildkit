@@ -22,7 +22,7 @@
     "fix": "pnpm run sync && prisma format",
     "sync": "vinext typegen && jiti scripts/sync/currencies.ts && jiti scripts/sync/config-publicize.ts && nu scripts/sync/db.nu",
     "seed": "jiti scripts/seed.ts",
-    "deploy-preview": "cf previews deploy --prebuilt"
+    "deploy-preview": "nu scripts/deploy-preview.nu"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1021.0",
