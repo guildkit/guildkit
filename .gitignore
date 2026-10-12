@@ -76,6 +76,8 @@ next-env.d.ts
 out/
 .svelte-kit/
 .astro/
+## next-openapi-gen
+.openapi-gen/
 
 # Platforms
 .cloudflare/
@@ -99,5 +101,5 @@ vite.config.ts.timestamp-*
 #
 # AI
 #
-.agents/skills/prisma-*/**
+.agents/skills/prisma-*
 .claude/skills/

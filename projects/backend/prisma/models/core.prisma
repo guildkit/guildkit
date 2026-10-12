@@ -1,0 +1,18 @@
+model Job {
+  id             String       @id @default(uuid())
+  title          String
+  description    String
+  applicationUrl String
+  location       String
+  salary         Int
+  currency       Currency
+  salaryPer      SalaryPer
+  employer       Organization @relation(fields: [employerId], references: [id])
+  employerId     String
+  candidates     User[]
+  expiresAt      DateTime
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([employerId])
+}

@@ -1,0 +1,74 @@
+{
+  "name": "@guildkit/backend",
+  "version": "0.0.1-prealpha",
+  "author": {
+    "name": "tenkumo, Inc.",
+    "url": "https://tenkumogroup.com"
+  },
+  "contributors": [
+    {
+      "name": "Jumpei Ogawa",
+      "url": "https://phanective.org"
+    }
+  ],
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "*",
+    "!*.log",
+    "!*.tgz",
+    "!.gitignore",
+    "!scripts/",
+    "!tsdown.config.ts"
+  ],
+  "scripts": {
+    "dev": "pnpm run sync && vite dev --port 3001",
+    "preview": "SERVER_ENV=development pnpm run build && vite preview --port 3001",
+    "build": "pnpm run sync && vite build --mode=$SERVER_ENV && tsdown",
+    "lint": "pnpm run sync && tsc --noEmit",
+    "fix": "pnpm run sync && prisma format",
+    "sync": "jiti scripts/sync/enums.ts && nu scripts/sync/db.nu && vinext typegen && openapi-gen generate",
+    "seed": "jiti scripts/seed.ts",
+    "deploy": "pnpm run build && cf deploy --prebuilt"
+  },
+  "exports": {
+    "./prisma": {
+      "types": "./exports/prisma.ts",
+      "default": "./dist/lib/prisma.mjs"
+    }
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1053.0",
+    "@cloudflare/vite-plugin": "2.0.0-beta.sha-805ec1ff3",
+    "@guildkit/db": "workspace:*",
+    "@guildkit/shared": "workspace:*",
+    "@phanect/utils": "^3.0.0",
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.6.0",
+    "better-auth": "1.6.17",
+    "es-toolkit": "^1.47.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-server-dom-webpack": "^19.2.6",
+    "tsdown": "0.22.2",
+    "vinext": "^1.0.1",
+    "vite": "^8.0.14",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@phanect/configs": "2026.5.19",
+    "@types/node": "^24.12.4",
+    "@vitejs/plugin-react": "^6.0.0",
+    "@vitejs/plugin-rsc": "^0.5.34",
+    "auth": "1.6.20",
+    "cf": "1.0.0-beta.12",
+    "dayjs": "^1.11.20",
+    "jiti": "^2.4.2",
+    "next-openapi-gen": "^1.9.0",
+    "nushell": "^0.116.0",
+    "pg": "^8.21.0",
+    "prisma": "^7.6.0",
+    "typescript": "^6.0.0"
+  }
+}
