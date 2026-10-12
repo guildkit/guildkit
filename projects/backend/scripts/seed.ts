@@ -1,7 +1,7 @@
-import { currencies, salaryPer } from "@guildkit/shared";
 import { PrismaPg } from "@prisma/adapter-pg";
 import dayjs from "dayjs";
-import { PrismaClient } from "../src/prisma/clients/nodejs/client.ts";
+import { PrismaClient } from "../src/lib/prisma-node/client.ts";
+import { Currency, SalaryPer } from "../src/lib/prisma-node/enums.ts";
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg({
@@ -104,7 +104,7 @@ const seed = async () => {
               location: "Remote (any location in Inazuma)",
               salary: 8000000,
               currency: Currency.JPY,
-              salaryPer: SalaryPer.YEAR,
+              salaryPer: SalaryPer.year,
               expiresAt: dayjs().add(1, "month").toDate(),
             },
             {
@@ -132,7 +132,7 @@ const seed = async () => {
               location: "Remote (any location in Inazuma)",
               salary: 8000000,
               currency: Currency.JPY,
-              salaryPer: SalaryPer.YEAR,
+              salaryPer: SalaryPer.year,
               expiresAt: dayjs().add(1, "month").toDate(),
             },
             {
@@ -159,7 +159,7 @@ const seed = async () => {
               location: "Remote (any location in Inazuma)",
               salary: 8000000,
               currency: Currency.JPY,
-              salaryPer: SalaryPer.YEAR,
+              salaryPer: SalaryPer.year,
               expiresAt: dayjs().add(1, "month").toDate(),
             },
           ],
@@ -233,7 +233,7 @@ const seed = async () => {
             location: "The Hiiragi Estate, 4-1-1, Rito, Narukami Island, Inazuma",
             salary: 9000000,
             currency: Currency.JPY,
-            salaryPer: SalaryPer.YEAR,
+            salaryPer: SalaryPer.year,
             expiresAt: dayjs().add(1, "month").toDate(),
           },
         },
@@ -291,7 +291,7 @@ const seed = async () => {
             location: "123456 Feiyun Slope, Liyue Harbor, Liyue",
             salary: 4500000,
             currency: Currency.CNY,
-            salaryPer: SalaryPer.YEAR,
+            salaryPer: SalaryPer.year,
             expiresAt: dayjs().add(1, "month").toDate(),
           },
         },
