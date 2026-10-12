@@ -14,8 +14,8 @@ const configs = defineConfig([
     "./**/.openapi-gen/**",
     "./projects/backend/openapi/**",
     "./projects/backend/src/lib/prisma/**",
+    "./projects/backend/src/lib/prisma-node/**",
     "./projects/client/src/generated/**",
-    "./projects/guildkit/src/lib/prisma-node/**",
     "./projects/shared/src/intermediate/**",
   ]),
 
