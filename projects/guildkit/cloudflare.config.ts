@@ -23,6 +23,7 @@ export default defineConfig(async ({ isPreview, mode }) => ({
     placement: {
       mode: "smart",
     },
+    domains: isPreview ? undefined : [ "demo.guildkit.net" ],
     // Serve Worker Previews on `<preview name>-guildkit-demo.tenkumo.workers.dev`.
     previewUrls: true,
 
