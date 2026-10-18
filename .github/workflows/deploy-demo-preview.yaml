@@ -39,7 +39,7 @@ jobs:
       # The Neon branch has to be ready before `mise install` and `mise run build`
       # since they run `prisma migrate deploy` and seeding.
       - name: "Create Neon Branch"
-        uses: neondatabase/create-branch-action@34f619c41c6e67b4f2f13f1c6eae90827a5f2cf4 # v5
+        uses: neondatabase/create-branch-action@72ed4f69a12b6be9c16aebfad893f6a21e9aba8b # v6
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           branch_name: preview/pr-${{ github.event.number }}
