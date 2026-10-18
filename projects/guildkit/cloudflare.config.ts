@@ -31,7 +31,7 @@ export default defineConfig(async ({ isPreview, mode }) => ({
       // In the `development` mode (`vite dev` and `pnpm run preview`), the value is loaded from .env like the secrets below.
       SERVER_ENV: mode === "development"
         ? bindings.secret()
-        : bindings.text(isPreview ? "preview" : "production"),
+        : bindings.text(isPreview ? "demo-preview" : "demo-production"),
 
       ASSETS: bindings.assets(),
 

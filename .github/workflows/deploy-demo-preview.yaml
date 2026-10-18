@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     env:
-      SERVER_ENV: preview
+      SERVER_ENV: demo-preview
 
       # Build the app as a Cloudflare Worker Preview. `cf previews deploy --prebuilt` requires it,
       # and cloudflare.config.ts reads it (`isPreview`) to embed SERVER_ENV=preview.
