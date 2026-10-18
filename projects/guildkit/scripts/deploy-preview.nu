@@ -36,6 +36,11 @@ if ($preview.preview_urls | is-empty) {
   | to json
   | wrangler preview secret bulk --name $preview_name --worker-name $WORKER_NAME
 
+# Migrate and seed database
+pnpm exec prisma migrate deploy
+pnpm exec prisma db seed
+
+# Comment to PR
 gh pr comment $env.PR_NUMBER --edit-last --create-if-none --body $"Deployed to Cloudflare Workers:
 - Fixed URL: ($preview.preview_urls | str join ', ')
 - Commit-specific URL: ($preview.deployment_urls | str join ', ')"

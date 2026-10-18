@@ -17,14 +17,5 @@ prisma generate
 
 if ($env.SERVER_ENV == "development") {
   prisma migrate dev
-} else {
-  prisma migrate deploy
-}
-
-if (
-  $env.SERVER_ENV == "development"
-  or $env.SERVER_ENV == "demo-production"
-  or $env.SERVER_ENV == "demo-preview"
-) {
   prisma db seed
 }
