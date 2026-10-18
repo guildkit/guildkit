@@ -41,7 +41,7 @@ jobs:
       - name: "Create Neon Branch"
         uses: neondatabase/create-branch-action@72ed4f69a12b6be9c16aebfad893f6a21e9aba8b # v6
         with:
-          project_id: ${{ vars.NEON_PROJECT_ID }}
+          project_id: ${{ secrets.NEON_PROJECT_ID }}
           branch_name: preview/pr-${{ github.event.number }}
           username: neondb_owner
           api_key: ${{ secrets.NEON_API_KEY }}
@@ -51,7 +51,7 @@ jobs:
         uses: neondatabase/reset-branch-action@470ab8101095ea33737c294d17364a72fd80761b # v1.3.2
         with:
           parent: true
-          project_id: ${{ vars.NEON_PROJECT_ID }}
+          project_id: ${{ secrets.NEON_PROJECT_ID }}
           branch: preview/pr-${{ github.event.number }}
           cs_role_name: neondb_owner
           cs_database: neondb
