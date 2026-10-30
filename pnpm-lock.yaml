@@ -28,7 +28,7 @@ importers:
         version: 10.12.0(jiti@2.7.0)(supports-color@10.2.2)
       neonctl:
         specifier: ^8.0.0
-        version: 8.12.1(hono@4.13.13)(supports-color@10.2.2)
+        version: 8.12.2(hono@4.13.13)(supports-color@10.2.2)
       nushell:
         specifier: ^0.116.0
         version: 0.116.1
@@ -4064,13 +4064,13 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  neon@8.12.1:
-    resolution: {integrity: sha512-YP4gMuMC4kEOrjDM48VK1r2XHBZlVFdHRQEXdTNZJTNjP9aziIdAH9Xmyes8ugbMwOx8T/OmzxBtRKJpgv533w==}
+  neon@8.12.2:
+    resolution: {integrity: sha512-G7Byjo8otVEtd3cFXCijMcOBx/9Ldn5fz+j4geQmttWe4Se+HSa3O5DL6aM0S+i7+AsoGumfjaYDoawM/SvCUw==}
     engines: {node: '>=20.19.0'}
     hasBin: true
 
-  neonctl@8.12.1:
-    resolution: {integrity: sha512-deOnWMLL6uQQbiMobz8vHiSj/QcdGOAwzi5J7Qk4KNx8WW/iNhzo4CJ1joTVHHZxQUvv9qrFK7VQjVZPt0XiSg==}
+  neonctl@8.12.2:
+    resolution: {integrity: sha512-Wd/2xf1CXiVSi9H/MG5HxdpNHAyGrcXiB6a9P20Epit+wFeAWseAjbpYoIU+7eggNkPoiR/p9iBArs25ZIEdEg==}
     engines: {node: '>=20.19.0'}
     hasBin: true
 
@@ -9053,7 +9053,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  neon@8.12.1(hono@4.13.13)(supports-color@10.2.2):
+  neon@8.12.2(hono@4.13.13)(supports-color@10.2.2):
     dependencies:
       '@clack/core': 0.4.2
       '@clack/prompts': 0.10.1
@@ -9101,9 +9101,9 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  neonctl@8.12.1(hono@4.13.13)(supports-color@10.2.2):
+  neonctl@8.12.2(hono@4.13.13)(supports-color@10.2.2):
     dependencies:
-      neon: 8.12.1(hono@4.13.13)(supports-color@10.2.2)
+      neon: 8.12.2(hono@4.13.13)(supports-color@10.2.2)
     transitivePeerDependencies:
       - bufferutil
       - encoding
