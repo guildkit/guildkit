@@ -38,7 +38,7 @@
     "react-server-dom-webpack": "^19.3.0",
     "react-tag-input": "^6.10.6",
     "tailwind-merge": "^3.4.0",
-    "tailwind-variants": "^3.2.2",
+    "tailwind-variants": "^4.0.0",
     "vinext": "^1.0.1"
   },
   "devDependencies": {
