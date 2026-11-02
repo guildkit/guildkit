@@ -38,7 +38,7 @@
     "neonctl": "^8.0.0",
     "nushell": "^0.116.0",
     "skills": "^1.7.0",
-    "typescript": "^6.0.0"
+    "typescript": "^7.0.0"
   },
   "engines": {
     "node": "24.x"
