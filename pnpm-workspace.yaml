@@ -18,3 +18,5 @@ verifyDepsBeforeRun: warn # for `clean` & `refresh`
 minimumReleaseAgeExclude:
   # Renovate security update: vite@8.3.4
   - vite@8.3.4
+  # Renovate security update: fast-xml-parser@5.12.1
+  - fast-xml-parser@5.12.1
