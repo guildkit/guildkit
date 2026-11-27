@@ -39,6 +39,7 @@ jobs:
       # The Neon branch has to be ready before `pnpm run deploy-preview`
       # since it runs `prisma migrate deploy` and seeding.
       - name: "Create Neon Branch"
+        id: create_neon_branch
         uses: neondatabase/create-branch-action@fb620d43d4c565abaf088b848a4e28e5c4ea4d9c # v6
         with:
           project_id: ${{ secrets.NEON_PROJECT_ID }}
@@ -46,20 +47,9 @@ jobs:
           username: neondb_owner
           api_key: ${{ secrets.NEON_API_KEY }}
 
-      - name: "Reset Neon Branch"
-        id: reset_neon_branch
-        uses: neondatabase/reset-branch-action@470ab8101095ea33737c294d17364a72fd80761b # v1.3.2
-        with:
-          parent: true
-          project_id: ${{ secrets.NEON_PROJECT_ID }}
-          branch: preview/pr-${{ github.event.number }}
-          cs_role_name: neondb_owner
-          cs_database: neondb
-          api_key: ${{ secrets.NEON_API_KEY }}
-
       - name: "Set DATABASE_URL"
         env:
-          DATABASE_URL: ${{ steps.reset_neon_branch.outputs.db_url }}
+          DATABASE_URL: ${{ steps.create_neon_branch.outputs.db_url }}
         run: echo "DATABASE_URL=${DATABASE_URL}" >> "$GITHUB_ENV"
 
       - uses: jdx/mise-action@6be3c7ed4c21d4f76b208d351d95aac273ebb76d # v5.2.4
