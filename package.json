@@ -36,7 +36,7 @@
     "dotenv": "^18.0.0",
     "eslint": "^10.0.0",
     "neonctl": "^9.0.0",
-    "nushell": "^0.116.0",
+    "nushell": "^0.117.0",
     "skills": "^1.7.0",
     "typescript": "^6.0.0"
   },
